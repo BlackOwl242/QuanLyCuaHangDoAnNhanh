@@ -52,10 +52,19 @@
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="fMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fMain.Designer.cs">
+      <DependentUpon>fMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fMain.resx">
+      <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -65,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -81,7 +91,40 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\FoodAndDrinks\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Account .png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Category.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Dots.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Food Table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Food.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\OnOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Revenue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\Signout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

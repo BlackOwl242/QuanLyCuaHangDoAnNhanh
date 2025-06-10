@@ -83,6 +83,7 @@
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLogin.Location = new System.Drawing.Point(443, 351);
@@ -201,6 +202,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fLogin";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fLogin_FormClosing);
+            this.Load += new System.EventHandler(this.fLogin_Load);
             this.pnlDangNhap.ResumeLayout(false);
             this.pnlDangNhap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOnOff)).EndInit();
