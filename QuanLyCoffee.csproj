@@ -135,6 +135,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucTable.resx">
       <DependentUpon>ucTable.cs</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucFoodAndDrinks.resx">
       <DependentUpon>ucFoodAndDrinks.cs</DependentUpon>
     </EmbeddedResource>
