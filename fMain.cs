@@ -16,26 +16,12 @@ namespace QuanLyCoffee
     {
         private UserControl currentChildUserControl; // Để theo dõi User Control đang hiển thị
 
-        // Import hàm AnimateWindow từ thư viện user32.dll
-        [DllImport("user32.dll")]
-        static extern bool AnimateWindow(IntPtr hwnd, int time, uint flags);
-
-        // Các cờ (flags) để điều khiển kiểu animation
-        private const uint AW_ACTIVATE = 0x20000; // Kích hoạt cửa sổ
-        private const uint AW_BLEND = 0x80000;    // Hiệu ứng mờ dần (Fade)
-        private const uint AW_CENTER = 0x0010;    // Bung ra/Thu vào từ giữa
-        private const uint AW_HIDE = 0x10000;     // Ẩn cửa sổ
-
         // Khai báo biến toàn cục trong MainForm
         bool isMenuExpanded = true; // Ban đầu menu đang mở rộng
-        private bool isDragging = false;
-        private Point lastLocation;
 
         public fMain()
         {
             InitializeComponent();
-            // Tạm thời ẩn Form đi để chuẩn bị cho animation
-            this.Opacity = 0.0;
         }
 
         private void OpenChildUserControl(UserControl userControl)
@@ -51,12 +37,6 @@ namespace QuanLyCoffee
 
             pnlMain.Controls.Clear();    // Xóa tất cả các controls hiện có trong panel
             pnlMain.Controls.Add(userControl); // Thêm User Control mới vào panel
-        }
-
-        private void fMain_Load(object sender, EventArgs e)
-        {
-            // Gọi AnimateWindow để làm Form hiện ra mờ dần trong 300 mili-giây
-            AnimateWindow(this.Handle, 300, AW_BLEND | AW_ACTIVATE);
         }
 
         private void pbToggleMenu_Click(object sender, EventArgs e)
@@ -88,41 +68,6 @@ namespace QuanLyCoffee
             }
         }
 
-        private void pnlTop_MouseDown(object sender, MouseEventArgs e)
-        {
-            // Nếu người dùng nhấn chuột trái
-            if (e.Button == MouseButtons.Left)
-            {
-                isDragging = true;      // Bắt đầu kéo
-                lastLocation = e.Location; // Lưu lại vị trí ban đầu của con trỏ chuột
-            }
-        }
-
-        private void pnlTop_MouseMove(object sender, MouseEventArgs e)
-        {
-            // Chỉ thực hiện khi đang trong trạng thái kéo
-            if (isDragging)
-            {
-                // Tính toán vị trí mới của Form
-                this.Left += e.X - lastLocation.X;
-                this.Top += e.Y - lastLocation.Y;
-            }
-        }
-
-        private void pnlTop_MouseUp(object sender, MouseEventArgs e)
-        {
-            // Khi người dùng nhả chuột, kết thúc việc kéo
-            isDragging = false;
-        }
-
-        private void pbClose_Click(object sender, EventArgs e)
-        {
-            // Gọi AnimateWindow để làm Form mờ đi trong 300 mili-giây
-            AnimateWindow(this.Handle, 300, AW_BLEND | AW_HIDE);
-
-            this.Close();
-        }
-
         private void btnAccountManager_Click(object sender, EventArgs e)
         {
             OpenChildUserControl(new ucAccountManagement());
@@ -136,6 +81,16 @@ namespace QuanLyCoffee
         private void btnCategory_Click(object sender, EventArgs e)
         {
             OpenChildUserControl(new ucCategory());
+        }
+
+        private void btnRevenue_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucRevenue());
+        }
+
+        private void btnFoodAndDninks_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucFoodAndDrinks());
         }
     }
 }
