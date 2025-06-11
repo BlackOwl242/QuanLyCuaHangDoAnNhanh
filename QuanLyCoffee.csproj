@@ -127,6 +127,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\ucAccountManagement.resx">
+      <DependentUpon>ucAccountManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucCategory.resx">
+      <DependentUpon>ucCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucTable.resx">
+      <DependentUpon>ucTable.cs</DependentUpon>
     <EmbeddedResource Include="UserControls\ucFoodAndDrinks.resx">
       <DependentUpon>ucFoodAndDrinks.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +192,16 @@
     <None Include="Images\Icons\Signout.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\Icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\view.png" />
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>

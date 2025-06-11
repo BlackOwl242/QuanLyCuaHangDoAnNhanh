@@ -33,33 +33,33 @@
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopMenu = new System.Windows.Forms.Panel();
-            this.pbToggleMenu = new System.Windows.Forms.PictureBox();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlTableManagement = new System.Windows.Forms.Panel();
-            this.btnTableManagement = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlAccountManagement = new System.Windows.Forms.Panel();
-            this.btnAccountManager = new System.Windows.Forms.Button();
             this.pnlCategory = new System.Windows.Forms.Panel();
+            this.pnlTable = new System.Windows.Forms.Panel();
+            this.pnlRevenue = new System.Windows.Forms.Panel();
+            this.pnlFoodAndDrinks = new System.Windows.Forms.Panel();
+            this.btnAccountManager = new System.Windows.Forms.Button();
+            this.btnTableManagement = new System.Windows.Forms.Button();
             this.btnCategory = new System.Windows.Forms.Button();
             this.pbSetting = new System.Windows.Forms.PictureBox();
-            this.pnlTable = new System.Windows.Forms.Panel();
             this.btnTable = new System.Windows.Forms.Button();
-            this.pnlRevenue = new System.Windows.Forms.Panel();
             this.btnRevenue = new System.Windows.Forms.Button();
-            this.pnlFoodAndDrinks = new System.Windows.Forms.Panel();
             this.btnFoodAndDninks = new System.Windows.Forms.Button();
+            this.pbToggleMenu = new System.Windows.Forms.PictureBox();
             this.pnlTop.SuspendLayout();
             this.pnlTopMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).BeginInit();
             this.pnlTableManagement.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlAccountManagement.SuspendLayout();
             this.pnlCategory.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).BeginInit();
             this.pnlTable.SuspendLayout();
             this.pnlRevenue.SuspendLayout();
             this.pnlFoodAndDrinks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // timerMenu
@@ -90,18 +90,6 @@
             this.pnlTopMenu.Size = new System.Drawing.Size(239, 73);
             this.pnlTopMenu.TabIndex = 0;
             // 
-            // pbToggleMenu
-            // 
-            this.pbToggleMenu.BackColor = System.Drawing.Color.Transparent;
-            this.pbToggleMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbToggleMenu.BackgroundImage")));
-            this.pbToggleMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbToggleMenu.Location = new System.Drawing.Point(11, 12);
-            this.pbToggleMenu.Name = "pbToggleMenu";
-            this.pbToggleMenu.Size = new System.Drawing.Size(46, 46);
-            this.pbToggleMenu.TabIndex = 0;
-            this.pbToggleMenu.TabStop = false;
-            this.pbToggleMenu.Click += new System.EventHandler(this.pbToggleMenu_Click);
-            // 
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.LavenderBlush;
@@ -120,24 +108,6 @@
             this.pnlTableManagement.Name = "pnlTableManagement";
             this.pnlTableManagement.Size = new System.Drawing.Size(239, 73);
             this.pnlTableManagement.TabIndex = 1;
-            // 
-            // btnTableManagement
-            // 
-            this.btnTableManagement.BackColor = System.Drawing.Color.Transparent;
-            this.btnTableManagement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnTableManagement.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnTableManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnTableManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTableManagement.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnTableManagement.Image = ((System.Drawing.Image)(resources.GetObject("btnTableManagement.Image")));
-            this.btnTableManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTableManagement.Location = new System.Drawing.Point(-10, -10);
-            this.btnTableManagement.Name = "btnTableManagement";
-            this.btnTableManagement.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.btnTableManagement.Size = new System.Drawing.Size(258, 93);
-            this.btnTableManagement.TabIndex = 0;
-            this.btnTableManagement.Text = "    Quản lý bàn";
-            this.btnTableManagement.UseVisualStyleBackColor = false;
             // 
             // pnlMenu
             // 
@@ -165,6 +135,46 @@
             this.pnlAccountManagement.Size = new System.Drawing.Size(239, 73);
             this.pnlAccountManagement.TabIndex = 3;
             // 
+            // pnlCategory
+            // 
+            this.pnlCategory.BackColor = System.Drawing.Color.Transparent;
+            this.pnlCategory.Controls.Add(this.btnCategory);
+            this.pnlCategory.Location = new System.Drawing.Point(1, 292);
+            this.pnlCategory.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlCategory.Name = "pnlCategory";
+            this.pnlCategory.Size = new System.Drawing.Size(239, 73);
+            this.pnlCategory.TabIndex = 2;
+            // 
+            // pnlTable
+            // 
+            this.pnlTable.BackColor = System.Drawing.Color.Transparent;
+            this.pnlTable.Controls.Add(this.btnTable);
+            this.pnlTable.Location = new System.Drawing.Point(1, 219);
+            this.pnlTable.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlTable.Name = "pnlTable";
+            this.pnlTable.Size = new System.Drawing.Size(239, 73);
+            this.pnlTable.TabIndex = 2;
+            // 
+            // pnlRevenue
+            // 
+            this.pnlRevenue.BackColor = System.Drawing.Color.Transparent;
+            this.pnlRevenue.Controls.Add(this.btnRevenue);
+            this.pnlRevenue.Location = new System.Drawing.Point(1, 73);
+            this.pnlRevenue.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlRevenue.Name = "pnlRevenue";
+            this.pnlRevenue.Size = new System.Drawing.Size(239, 73);
+            this.pnlRevenue.TabIndex = 2;
+            // 
+            // pnlFoodAndDrinks
+            // 
+            this.pnlFoodAndDrinks.BackColor = System.Drawing.Color.Transparent;
+            this.pnlFoodAndDrinks.Controls.Add(this.btnFoodAndDninks);
+            this.pnlFoodAndDrinks.Location = new System.Drawing.Point(1, 146);
+            this.pnlFoodAndDrinks.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlFoodAndDrinks.Name = "pnlFoodAndDrinks";
+            this.pnlFoodAndDrinks.Size = new System.Drawing.Size(239, 73);
+            this.pnlFoodAndDrinks.TabIndex = 2;
+            // 
             // btnAccountManager
             // 
             this.btnAccountManager.BackColor = System.Drawing.Color.Transparent;
@@ -183,16 +193,25 @@
             this.btnAccountManager.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAccountManager.UseMnemonic = false;
             this.btnAccountManager.UseVisualStyleBackColor = false;
+            this.btnAccountManager.Click += new System.EventHandler(this.btnAccountManager_Click);
             // 
-            // pnlCategory
+            // btnTableManagement
             // 
-            this.pnlCategory.BackColor = System.Drawing.Color.Transparent;
-            this.pnlCategory.Controls.Add(this.btnCategory);
-            this.pnlCategory.Location = new System.Drawing.Point(1, 292);
-            this.pnlCategory.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlCategory.Name = "pnlCategory";
-            this.pnlCategory.Size = new System.Drawing.Size(239, 73);
-            this.pnlCategory.TabIndex = 2;
+            this.btnTableManagement.BackColor = System.Drawing.Color.Transparent;
+            this.btnTableManagement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnTableManagement.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnTableManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnTableManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTableManagement.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.btnTableManagement.Image = ((System.Drawing.Image)(resources.GetObject("btnTableManagement.Image")));
+            this.btnTableManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTableManagement.Location = new System.Drawing.Point(-10, -10);
+            this.btnTableManagement.Name = "btnTableManagement";
+            this.btnTableManagement.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.btnTableManagement.Size = new System.Drawing.Size(258, 93);
+            this.btnTableManagement.TabIndex = 0;
+            this.btnTableManagement.Text = "    Quản lý bàn";
+            this.btnTableManagement.UseVisualStyleBackColor = false;
             // 
             // btnCategory
             // 
@@ -210,6 +229,7 @@
             this.btnCategory.TabIndex = 0;
             this.btnCategory.Text = "Danh mục";
             this.btnCategory.UseVisualStyleBackColor = false;
+            this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
             // 
             // pbSetting
             // 
@@ -222,16 +242,6 @@
             this.pbSetting.Size = new System.Drawing.Size(46, 46);
             this.pbSetting.TabIndex = 13;
             this.pbSetting.TabStop = false;
-            // 
-            // pnlTable
-            // 
-            this.pnlTable.BackColor = System.Drawing.Color.Transparent;
-            this.pnlTable.Controls.Add(this.btnTable);
-            this.pnlTable.Location = new System.Drawing.Point(1, 219);
-            this.pnlTable.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlTable.Name = "pnlTable";
-            this.pnlTable.Size = new System.Drawing.Size(239, 73);
-            this.pnlTable.TabIndex = 2;
             // 
             // btnTable
             // 
@@ -250,16 +260,7 @@
             this.btnTable.Text = "          Bàn ăn";
             this.btnTable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTable.UseVisualStyleBackColor = false;
-            // 
-            // pnlRevenue
-            // 
-            this.pnlRevenue.BackColor = System.Drawing.Color.Transparent;
-            this.pnlRevenue.Controls.Add(this.btnRevenue);
-            this.pnlRevenue.Location = new System.Drawing.Point(1, 73);
-            this.pnlRevenue.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlRevenue.Name = "pnlRevenue";
-            this.pnlRevenue.Size = new System.Drawing.Size(239, 73);
-            this.pnlRevenue.TabIndex = 2;
+            this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
             // 
             // btnRevenue
             // 
@@ -277,16 +278,6 @@
             this.btnRevenue.TabIndex = 0;
             this.btnRevenue.Text = "  Doanh thu";
             this.btnRevenue.UseVisualStyleBackColor = false;
-            // 
-            // pnlFoodAndDrinks
-            // 
-            this.pnlFoodAndDrinks.BackColor = System.Drawing.Color.Transparent;
-            this.pnlFoodAndDrinks.Controls.Add(this.btnFoodAndDninks);
-            this.pnlFoodAndDrinks.Location = new System.Drawing.Point(1, 146);
-            this.pnlFoodAndDrinks.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlFoodAndDrinks.Name = "pnlFoodAndDrinks";
-            this.pnlFoodAndDrinks.Size = new System.Drawing.Size(239, 73);
-            this.pnlFoodAndDrinks.TabIndex = 2;
             // 
             // btnFoodAndDninks
             // 
@@ -306,6 +297,18 @@
             this.btnFoodAndDninks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFoodAndDninks.UseVisualStyleBackColor = false;
             // 
+            // pbToggleMenu
+            // 
+            this.pbToggleMenu.BackColor = System.Drawing.Color.Transparent;
+            this.pbToggleMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbToggleMenu.BackgroundImage")));
+            this.pbToggleMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbToggleMenu.Location = new System.Drawing.Point(11, 12);
+            this.pbToggleMenu.Name = "pbToggleMenu";
+            this.pbToggleMenu.Size = new System.Drawing.Size(46, 46);
+            this.pbToggleMenu.TabIndex = 0;
+            this.pbToggleMenu.TabStop = false;
+            this.pbToggleMenu.Click += new System.EventHandler(this.pbToggleMenu_Click);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,21 +320,22 @@
             this.Controls.Add(this.pnlTop);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.IsMdiContainer = true;
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý quán cà phê";
             this.Load += new System.EventHandler(this.fMain_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTopMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).EndInit();
             this.pnlTableManagement.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
             this.pnlAccountManagement.ResumeLayout(false);
             this.pnlCategory.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).EndInit();
             this.pnlTable.ResumeLayout(false);
             this.pnlRevenue.ResumeLayout(false);
             this.pnlFoodAndDrinks.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).EndInit();
             this.ResumeLayout(false);
 
         }
