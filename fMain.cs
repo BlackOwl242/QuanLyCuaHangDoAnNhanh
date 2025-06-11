@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using QuanLyCoffee.UserControls;
 
 namespace QuanLyCoffee
 {
     public partial class fMain: Form
     {
+        private UserControl currentChildUserControl; // Để theo dõi User Control đang hiển thị
+
         // Import hàm AnimateWindow từ thư viện user32.dll
         [DllImport("user32.dll")]
         static extern bool AnimateWindow(IntPtr hwnd, int time, uint flags);
@@ -33,6 +36,21 @@ namespace QuanLyCoffee
             InitializeComponent();
             // Tạm thời ẩn Form đi để chuẩn bị cho animation
             this.Opacity = 0.0;
+        }
+
+        private void OpenChildUserControl(UserControl userControl)
+        {
+            // Nếu đã có User Control đang hiển thị, giải phóng nó
+            if (currentChildUserControl != null)
+            {
+                currentChildUserControl.Dispose();
+            }
+
+            currentChildUserControl = userControl;
+            userControl.Dock = DockStyle.Fill; // Đảm bảo User Control lấp đầy Panel
+
+            pnlMain.Controls.Clear();    // Xóa tất cả các controls hiện có trong panel
+            pnlMain.Controls.Add(userControl); // Thêm User Control mới vào panel
         }
 
         private void fMain_Load(object sender, EventArgs e)
@@ -103,6 +121,21 @@ namespace QuanLyCoffee
             AnimateWindow(this.Handle, 300, AW_BLEND | AW_HIDE);
 
             this.Close();
+        }
+
+        private void btnAccountManager_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucAccountManagement());
+        }
+
+        private void btnTable_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucTable());
+        }
+
+        private void btnCategory_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucCategory());
         }
     }
 }

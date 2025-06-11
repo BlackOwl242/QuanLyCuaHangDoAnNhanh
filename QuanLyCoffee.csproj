@@ -60,6 +60,42 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ucAccountManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucAccountManagement.Designer.cs">
+      <DependentUpon>ucAccountManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucCategory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucCategory.Designer.cs">
+      <DependentUpon>ucCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucFoodAndDrinks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucFoodAndDrinks.Designer.cs">
+      <DependentUpon>ucFoodAndDrinks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucRevenue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucRevenue.Designer.cs">
+      <DependentUpon>ucRevenue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucTable.Designer.cs">
+      <DependentUpon>ucTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucTableManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucTableManagement.Designer.cs">
+      <DependentUpon>ucTableManagement.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +112,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\ucAccountManagement.resx">
+      <DependentUpon>ucAccountManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucCategory.resx">
+      <DependentUpon>ucCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucTable.resx">
+      <DependentUpon>ucTable.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -125,6 +170,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\Icons\Signout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Icons\view.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

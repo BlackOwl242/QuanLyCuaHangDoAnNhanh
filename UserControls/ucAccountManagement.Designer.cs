@@ -28,10 +28,266 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.pnlContent = new System.Windows.Forms.Panel();
+            this.pnDgv = new System.Windows.Forms.Panel();
+            this.dgvAccount = new System.Windows.Forms.DataGridView();
+            this.pnButton = new System.Windows.Forms.Panel();
+            this.pnlRight = new System.Windows.Forms.Panel();
+            this.btnViewAccount = new System.Windows.Forms.Button();
+            this.txtType = new System.Windows.Forms.TextBox();
+            this.txtDisplayName = new System.Windows.Forms.TextBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.lbType = new System.Windows.Forms.Label();
+            this.lbDisplayName = new System.Windows.Forms.Label();
+            this.lbUserName = new System.Windows.Forms.Label();
+            this.pnlContent.SuspendLayout();
+            this.pnDgv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
+            this.pnButton.SuspendLayout();
+            this.pnlRight.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // btnView
+            // 
+            this.btnView.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnView.ForeColor = System.Drawing.Color.White;
+            this.btnView.Image = global::QuanLyCoffee.Properties.Resources.view;
+            this.btnView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnView.Location = new System.Drawing.Point(540, 19);
+            this.btnView.Name = "btnView";
+            this.btnView.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnView.Size = new System.Drawing.Size(138, 44);
+            this.btnView.TabIndex = 3;
+            this.btnView.Text = "Xem";
+            this.btnView.UseVisualStyleBackColor = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Image = global::QuanLyCoffee.Properties.Resources.delete;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(368, 19);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnDelete.Size = new System.Drawing.Size(138, 44);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Xoá";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnEdit.ForeColor = System.Drawing.Color.White;
+            this.btnEdit.Image = global::QuanLyCoffee.Properties.Resources.edit;
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEdit.Location = new System.Drawing.Point(196, 19);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnEdit.Size = new System.Drawing.Size(138, 44);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Sửa";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(159)))), ((int)(((byte)(112)))));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.Image = global::QuanLyCoffee.Properties.Resources.add;
+            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdd.Location = new System.Drawing.Point(24, 19);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnAdd.Size = new System.Drawing.Size(138, 44);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Thêm";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            // 
+            // pnlContent
+            // 
+            this.pnlContent.Controls.Add(this.pnDgv);
+            this.pnlContent.Controls.Add(this.pnButton);
+            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Size = new System.Drawing.Size(705, 654);
+            this.pnlContent.TabIndex = 4;
+            // 
+            // pnDgv
+            // 
+            this.pnDgv.Controls.Add(this.dgvAccount);
+            this.pnDgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnDgv.Location = new System.Drawing.Point(0, 0);
+            this.pnDgv.Margin = new System.Windows.Forms.Padding(0);
+            this.pnDgv.Name = "pnDgv";
+            this.pnDgv.Padding = new System.Windows.Forms.Padding(25, 25, 25, 0);
+            this.pnDgv.Size = new System.Drawing.Size(705, 573);
+            this.pnDgv.TabIndex = 7;
+            // 
+            // dgvAccount
+            // 
+            this.dgvAccount.BackgroundColor = System.Drawing.Color.White;
+            this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAccount.Location = new System.Drawing.Point(25, 25);
+            this.dgvAccount.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvAccount.Name = "dgvAccount";
+            this.dgvAccount.Size = new System.Drawing.Size(655, 548);
+            this.dgvAccount.TabIndex = 0;
+            // 
+            // pnButton
+            // 
+            this.pnButton.Controls.Add(this.btnAdd);
+            this.pnButton.Controls.Add(this.btnDelete);
+            this.pnButton.Controls.Add(this.btnEdit);
+            this.pnButton.Controls.Add(this.btnView);
+            this.pnButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnButton.Location = new System.Drawing.Point(0, 573);
+            this.pnButton.Name = "pnButton";
+            this.pnButton.Size = new System.Drawing.Size(705, 81);
+            this.pnButton.TabIndex = 6;
+            // 
+            // pnlRight
+            // 
+            this.pnlRight.Controls.Add(this.btnViewAccount);
+            this.pnlRight.Controls.Add(this.txtType);
+            this.pnlRight.Controls.Add(this.txtDisplayName);
+            this.pnlRight.Controls.Add(this.txtUserName);
+            this.pnlRight.Controls.Add(this.lbType);
+            this.pnlRight.Controls.Add(this.lbDisplayName);
+            this.pnlRight.Controls.Add(this.lbUserName);
+            this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlRight.Location = new System.Drawing.Point(705, 0);
+            this.pnlRight.Name = "pnlRight";
+            this.pnlRight.Size = new System.Drawing.Size(335, 654);
+            this.pnlRight.TabIndex = 5;
+            // 
+            // btnViewAccount
+            // 
+            this.btnViewAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
+            this.btnViewAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewAccount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnViewAccount.ForeColor = System.Drawing.Color.White;
+            this.btnViewAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnViewAccount.Location = new System.Drawing.Point(121, 194);
+            this.btnViewAccount.Name = "btnViewAccount";
+            this.btnViewAccount.Size = new System.Drawing.Size(199, 44);
+            this.btnViewAccount.TabIndex = 6;
+            this.btnViewAccount.Text = "Xem";
+            this.btnViewAccount.UseVisualStyleBackColor = false;
+            // 
+            // txtType
+            // 
+            this.txtType.BackColor = System.Drawing.Color.White;
+            this.txtType.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.txtType.Location = new System.Drawing.Point(121, 137);
+            this.txtType.Name = "txtType";
+            this.txtType.Size = new System.Drawing.Size(199, 32);
+            this.txtType.TabIndex = 5;
+            // 
+            // txtDisplayName
+            // 
+            this.txtDisplayName.BackColor = System.Drawing.Color.White;
+            this.txtDisplayName.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.txtDisplayName.Location = new System.Drawing.Point(121, 81);
+            this.txtDisplayName.Name = "txtDisplayName";
+            this.txtDisplayName.Size = new System.Drawing.Size(199, 32);
+            this.txtDisplayName.TabIndex = 4;
+            // 
+            // txtUserName
+            // 
+            this.txtUserName.BackColor = System.Drawing.Color.White;
+            this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.txtUserName.Location = new System.Drawing.Point(121, 25);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(199, 32);
+            this.txtUserName.TabIndex = 3;
+            // 
+            // lbType
+            // 
+            this.lbType.AutoSize = true;
+            this.lbType.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lbType.Location = new System.Drawing.Point(-4, 143);
+            this.lbType.Margin = new System.Windows.Forms.Padding(0);
+            this.lbType.Name = "lbType";
+            this.lbType.Size = new System.Drawing.Size(114, 21);
+            this.lbType.TabIndex = 2;
+            this.lbType.Text = "Loại tài khoản:";
+            // 
+            // lbDisplayName
+            // 
+            this.lbDisplayName.AutoSize = true;
+            this.lbDisplayName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lbDisplayName.Location = new System.Drawing.Point(-4, 87);
+            this.lbDisplayName.Margin = new System.Windows.Forms.Padding(0);
+            this.lbDisplayName.Name = "lbDisplayName";
+            this.lbDisplayName.Size = new System.Drawing.Size(97, 21);
+            this.lbDisplayName.TabIndex = 1;
+            this.lbDisplayName.Text = "Tên hiển thị:";
+            // 
+            // lbUserName
+            // 
+            this.lbUserName.AutoSize = true;
+            this.lbUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lbUserName.Location = new System.Drawing.Point(-4, 31);
+            this.lbUserName.Margin = new System.Windows.Forms.Padding(0);
+            this.lbUserName.Name = "lbUserName";
+            this.lbUserName.Size = new System.Drawing.Size(109, 21);
+            this.lbUserName.TabIndex = 0;
+            this.lbUserName.Text = "Tên tài khoản:";
+            // 
+            // ucAccountManagement
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LavenderBlush;
+            this.Controls.Add(this.pnlContent);
+            this.Controls.Add(this.pnlRight);
+            this.Name = "ucAccountManagement";
+            this.Size = new System.Drawing.Size(1040, 654);
+            this.Load += new System.EventHandler(this.ucAccountManagement_Load);
+            this.pnlContent.ResumeLayout(false);
+            this.pnDgv.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
+            this.pnButton.ResumeLayout(false);
+            this.pnlRight.ResumeLayout(false);
+            this.pnlRight.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.Panel pnlRight;
+        private System.Windows.Forms.Label lbUserName;
+        private System.Windows.Forms.Label lbType;
+        private System.Windows.Forms.Label lbDisplayName;
+        private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.TextBox txtType;
+        private System.Windows.Forms.TextBox txtDisplayName;
+        private System.Windows.Forms.Button btnViewAccount;
+        private System.Windows.Forms.Panel pnButton;
+        private System.Windows.Forms.Panel pnDgv;
+        private System.Windows.Forms.DataGridView dgvAccount;
     }
 }
