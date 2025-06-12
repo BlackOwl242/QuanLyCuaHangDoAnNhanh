@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.pnlTopMenu = new System.Windows.Forms.Panel();
             this.pbToggleMenu = new System.Windows.Forms.PictureBox();
             this.pnlMain = new System.Windows.Forms.Panel();
@@ -70,12 +71,27 @@
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.pnlTop.Controls.Add(this.lblTitle);
             this.pnlTop.Controls.Add(this.pnlTopMenu);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(1280, 74);
             this.pnlTop.TabIndex = 1;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
+            this.lblTitle.Location = new System.Drawing.Point(633, 21);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(64, 32);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "Title";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTopMenu
             // 
@@ -135,6 +151,7 @@
             this.btnTableManagement.TabIndex = 0;
             this.btnTableManagement.Text = "    Quản lý bàn";
             this.btnTableManagement.UseVisualStyleBackColor = false;
+            this.btnTableManagement.Click += new System.EventHandler(this.btnTableManagement_Click);
             // 
             // pnlMenu
             // 
@@ -324,6 +341,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý quán cà phê";
             this.pnlTop.ResumeLayout(false);
+            this.pnlTop.PerformLayout();
             this.pnlTopMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).EndInit();
             this.pnlTableManagement.ResumeLayout(false);
@@ -358,5 +376,6 @@
         private System.Windows.Forms.Panel pnlCategory;
         private System.Windows.Forms.Button btnCategory;
         private System.Windows.Forms.PictureBox pbSetting;
+        private System.Windows.Forms.Label lblTitle;
     }
 }

@@ -22,10 +22,14 @@ namespace QuanLyCoffee
         public fMain()
         {
             InitializeComponent();
+            OpenChildUserControl(new ucTableManagement(), "Quản lý bàn");
         }
 
-        private void OpenChildUserControl(UserControl userControl)
+        private void OpenChildUserControl(UserControl userControl, string title)
         {
+            // Cập nhật Text của Label tiêu đề
+            lblTitle.Text = title; // lblTitle là tên của Label trên top
+            
             // Nếu đã có User Control đang hiển thị, giải phóng nó
             if (currentChildUserControl != null)
             {
@@ -70,27 +74,32 @@ namespace QuanLyCoffee
 
         private void btnAccountManager_Click(object sender, EventArgs e)
         {
-            OpenChildUserControl(new ucAccountManagement());
+            OpenChildUserControl(new ucAccountManagement(), "Quản lý tài khoản");
         }
 
         private void btnTable_Click(object sender, EventArgs e)
         {
-            OpenChildUserControl(new ucTable());
+            OpenChildUserControl(new ucTable(), "Bàn ăn");
         }
 
         private void btnCategory_Click(object sender, EventArgs e)
         {
-            OpenChildUserControl(new ucCategory());
+            OpenChildUserControl(new ucCategory(), "Danh mục");
         }
 
         private void btnRevenue_Click(object sender, EventArgs e)
         {
-            OpenChildUserControl(new ucRevenue());
+            OpenChildUserControl(new ucRevenue(), "Doanh thu");
         }
 
         private void btnFoodAndDninks_Click(object sender, EventArgs e)
         {
-            OpenChildUserControl(new ucFoodAndDrinks());
+            OpenChildUserControl(new ucFoodAndDrinks(), "Thức ăn và đồ uống");
+        }
+
+        private void btnTableManagement_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucTableManagement(), "Quản lý bàn");
         }
     }
 }
