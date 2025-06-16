@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using QuanLyCoffee.DAO;
 
 namespace QuanLyCoffee.UserControls
 {
@@ -27,6 +28,7 @@ namespace QuanLyCoffee.UserControls
         public ucAccountManagement()
         {
             InitializeComponent();
+            LoadAccountList();
         }
 
         private void ucAccountManagement_Load(object sender, EventArgs e)
@@ -41,6 +43,15 @@ namespace QuanLyCoffee.UserControls
                 (0, 0, btnView.Width, btnView.Height, 15, 15));
             btnViewAccount.Region = Region.FromHrgn(CreateRoundRectRgn
                 (0, 0, btnViewAccount.Width, btnViewAccount.Height, 15, 15));
+        }
+
+        void LoadAccountList()
+        {
+            string query = "EXEC USP_GetAccountByUserName @userName";
+
+            DataProvider provider = new DataProvider();
+
+            dgvAccount.DataSource = provider.ExecuteQuery(query, new object[] { "admin" });
         }
     }
 }

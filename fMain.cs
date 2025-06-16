@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using QuanLyCoffee.UserControls;
+using QuanLyCoffee.DAO;
 
 namespace QuanLyCoffee
 {
