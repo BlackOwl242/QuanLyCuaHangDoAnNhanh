@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using QuanLyCoffee.UserControls;
-using QuanLyCoffee.DAO;
+using QuanLyCuaHangDoAnNhanh.UserControls;
+using QuanLyCuaHangDoAnNhanh.DAO;
 
-namespace QuanLyCoffee
+namespace QuanLyCuaHangDoAnNhanh
 {
     public partial class fMain: Form
     {

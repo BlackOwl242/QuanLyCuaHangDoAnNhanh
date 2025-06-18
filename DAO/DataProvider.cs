@@ -6,9 +6,9 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QuanLyCoffee.UserControls;
+using QuanLyCuaHangDoAnNhanh.UserControls;
 
-namespace QuanLyCoffee.DAO
+namespace QuanLyCuaHangDoAnNhanh.DAO
 {
     class DataProvider
     {

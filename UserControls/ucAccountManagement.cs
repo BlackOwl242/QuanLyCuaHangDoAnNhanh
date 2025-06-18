@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using QuanLyCoffee.DAO;
+using QuanLyCuaHangDoAnNhanh.DAO;
 
-namespace QuanLyCoffee.UserControls
+namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     public partial class ucAccountManagement: UserControl
     {

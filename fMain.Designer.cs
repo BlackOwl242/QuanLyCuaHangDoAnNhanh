@@ -1,4 +1,4 @@
-﻿namespace QuanLyCoffee
+﻿namespace QuanLyCuaHangDoAnNhanh
 {
     partial class fMain
     {
@@ -186,7 +186,7 @@
             this.btnAccountManager.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
             this.btnAccountManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAccountManager.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnAccountManager.Image = global::QuanLyCoffee.Properties.Resources.Account_;
+            this.btnAccountManager.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Account_;
             this.btnAccountManager.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAccountManager.Location = new System.Drawing.Point(-10, -10);
             this.btnAccountManager.Name = "btnAccountManager";
@@ -216,7 +216,7 @@
             this.btnCategory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
             this.btnCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnCategory.Image = global::QuanLyCoffee.Properties.Resources.Category;
+            this.btnCategory.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Category;
             this.btnCategory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCategory.Location = new System.Drawing.Point(-10, -10);
             this.btnCategory.Name = "btnCategory";
@@ -256,7 +256,7 @@
             this.btnTable.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
             this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTable.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnTable.Image = global::QuanLyCoffee.Properties.Resources.Food_Table;
+            this.btnTable.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Food_Table;
             this.btnTable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTable.Location = new System.Drawing.Point(-9, -12);
             this.btnTable.Name = "btnTable";
@@ -285,7 +285,7 @@
             this.btnRevenue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
             this.btnRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRevenue.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnRevenue.Image = global::QuanLyCoffee.Properties.Resources.Revenue;
+            this.btnRevenue.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Revenue;
             this.btnRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRevenue.Location = new System.Drawing.Point(-10, -10);
             this.btnRevenue.Name = "btnRevenue";
@@ -313,7 +313,7 @@
             this.btnFoodAndDninks.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
             this.btnFoodAndDninks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFoodAndDninks.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnFoodAndDninks.Image = global::QuanLyCoffee.Properties.Resources.Food;
+            this.btnFoodAndDninks.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Food;
             this.btnFoodAndDninks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFoodAndDninks.Location = new System.Drawing.Point(-10, -10);
             this.btnFoodAndDninks.Name = "btnFoodAndDninks";
@@ -339,7 +339,7 @@
             this.IsMdiContainer = true;
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Quản lý quán cà phê";
+            this.Text = "Quản lý quán ăn nhanh";
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlTopMenu.ResumeLayout(false);

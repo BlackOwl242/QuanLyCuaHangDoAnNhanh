@@ -1,4 +1,4 @@
-﻿namespace QuanLyCoffee.UserControls
+﻿namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     partial class ucFoodAndDrinks
     {
@@ -247,7 +247,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Image = global::QuanLyCoffee.Properties.Resources.add;
+            this.btnAdd.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.add;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdd.Location = new System.Drawing.Point(19, 0);
             this.btnAdd.Name = "btnAdd";
@@ -264,7 +264,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Image = global::QuanLyCoffee.Properties.Resources.delete;
+            this.btnDelete.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.delete;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.Location = new System.Drawing.Point(369, 0);
             this.btnDelete.Name = "btnDelete";
@@ -281,7 +281,7 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Image = global::QuanLyCoffee.Properties.Resources.edit;
+            this.btnEdit.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.edit;
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEdit.Location = new System.Drawing.Point(194, 0);
             this.btnEdit.Name = "btnEdit";
@@ -298,7 +298,7 @@
             this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnView.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnView.ForeColor = System.Drawing.Color.White;
-            this.btnView.Image = global::QuanLyCoffee.Properties.Resources.view;
+            this.btnView.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.view;
             this.btnView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnView.Location = new System.Drawing.Point(544, 0);
             this.btnView.Name = "btnView";

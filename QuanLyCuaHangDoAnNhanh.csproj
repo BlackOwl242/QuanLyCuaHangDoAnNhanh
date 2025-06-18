@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1985404F-E5EF-43CB-819C-680E25956AC7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>QuanLyCoffee</RootNamespace>
-    <AssemblyName>QuanLyCoffee</AssemblyName>
+    <RootNamespace>QuanLyCuaHangDoAnNhanh</RootNamespace>
+    <AssemblyName>QuanLyCuaHangDoAnNhanh</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

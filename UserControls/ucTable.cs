@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace QuanLyCoffee.UserControls
+namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     public partial class ucTable: UserControl
     {

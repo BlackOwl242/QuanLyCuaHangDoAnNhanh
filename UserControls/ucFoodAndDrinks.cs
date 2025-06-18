@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLyCoffee.UserControls
+namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     public partial class ucFoodAndDrinks: UserControl
     {

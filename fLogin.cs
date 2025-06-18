@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLyCoffee
+namespace QuanLyCuaHangDoAnNhanh
 {
     public partial class fLogin: Form
     {

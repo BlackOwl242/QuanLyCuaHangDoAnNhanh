@@ -1,4 +1,4 @@
-﻿namespace QuanLyCoffee.UserControls
+﻿namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     partial class ucTableManagement
     {
