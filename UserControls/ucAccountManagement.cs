@@ -49,9 +49,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             string query = "EXEC USP_GetAccountByUserName @userName";
 
-            DataProvider provider = new DataProvider();
-
-            dgvAccount.DataSource = provider.ExecuteQuery(query, new object[] { "admin" });
+            dgvAccount.DataSource = DataProvider.Instance.ExecuteQuery(query, new object[] { "admin" });
         }
     }
 }

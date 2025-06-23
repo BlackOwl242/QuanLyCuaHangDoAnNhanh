@@ -26,8 +26,8 @@ namespace QuanLyCuaHangDoAnNhanh.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Hy;Initial Catalog=QuanLyQuanCafe;Persist Security Info=True;User ID=" +
-            "sa;Password=123456;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Hy;Initial Catalog=QuanLyCuaHangDoAnNhanh;Persist Security Info=True;" +
+            "User ID=sa;Password=123456;TrustServerCertificate=True")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

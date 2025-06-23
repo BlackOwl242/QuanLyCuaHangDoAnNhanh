@@ -12,6 +12,16 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 {
     class DataProvider
     {
+        private static DataProvider instance;
+
+        public static DataProvider Instance
+        {
+            get { if (instance == null) instance = new DataProvider(); return instance; }
+            private set { instance = value; }
+        }
+
+        private DataProvider() { }
+
         private string connString = Properties.Settings.Default.ConnectionString;
 
         public DataTable ExecuteQuery(string query, object[] parameter = null) 
