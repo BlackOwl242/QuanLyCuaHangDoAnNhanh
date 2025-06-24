@@ -82,13 +82,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             txtID.DataBindings.Clear();
             txtDish.DataBindings.Clear();
             cbCategory.DataBindings.Clear();
-            numPrice.DataBindings.Clear(); // Đang bị lỗi vì numPrice chưa được khởi tạo
+            numpPrice.DataBindings.Clear(); 
 
             // Thêm các binding mới, liên kết trực tiếp với BindingSource
             txtID.DataBindings.Add(new Binding("Text", foodList, "ID", true, DataSourceUpdateMode.Never));
             txtDish.DataBindings.Add(new Binding("Text", foodList, "TenMon", true, DataSourceUpdateMode.Never));
             cbCategory.DataBindings.Add(new Binding("Text", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
-            numPrice.DataBindings.Add(new Binding("Text", foodList, "Gia", true, DataSourceUpdateMode.Never));
+            numpPrice.DataBindings.Add(new Binding("Text", foodList, "Gia", true, DataSourceUpdateMode.Never));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
