@@ -244,6 +244,7 @@
             this.btnSearch.Size = new System.Drawing.Size(58, 39);
             this.btnSearch.TabIndex = 1;
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -284,6 +285,7 @@
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -301,6 +303,7 @@
             this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -318,6 +321,7 @@
             this.btnEdit.TabIndex = 5;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnView
             // 
@@ -356,6 +360,11 @@
             this.pnlButton.ResumeLayout(false);
             this.ResumeLayout(false);
 
+            // Event handlers for buttons
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
         }
 
         #endregion

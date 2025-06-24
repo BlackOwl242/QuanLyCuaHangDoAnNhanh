@@ -87,5 +87,88 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             txtCategory.DataBindings.Add(new Binding("Text", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
             txtPrice.DataBindings.Add(new Binding("Text", foodList, "Gia", true, DataSourceUpdateMode.Never));
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra các trường nhập liệu
+                string name = txtDish.Text;
+                int categoryID = Convert.ToInt32(txtCategory.Text);
+                float price = (float)Convert.ToDouble(txtPrice.Text);
+
+                if (FoodDAO.Instance.InsertFood(name, categoryID, price))
+                {
+                    MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadFoodList(); // Tải lại danh sách để cập nhật DataGridView
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi khi thêm món ăn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra các trường nhập liệu
+                int id = Convert.ToInt32(txtID.Text);
+                string name = txtDish.Text;
+                int categoryID = Convert.ToInt32(txtCategory.Text);
+                float price = (float)Convert.ToDouble(txtPrice.Text);
+
+                if (FoodDAO.Instance.UpdateFood(id, name, categoryID, price))
+                {
+                    MessageBox.Show("Cập nhật món ăn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadFoodList();
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi khi cập nhật món ăn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(txtID.Text);
+
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa món này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (FoodDAO.Instance.DeleteFood(id))
+                    {
+                        MessageBox.Show("Xóa món ăn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadFoodList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi xóa món ăn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            foodList.DataSource = FoodDAO.Instance.SearchFoodByName(txtSearch.Text);
+        }
     }
 }
+
+
