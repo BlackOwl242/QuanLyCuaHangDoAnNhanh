@@ -36,8 +36,6 @@
             this.lbCategory = new System.Windows.Forms.Label();
             this.lbDish = new System.Windows.Forms.Label();
             this.txtDish = new System.Windows.Forms.TextBox();
-            this.txtCategory = new System.Windows.Forms.TextBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
             this.lbID = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.pnlContent = new System.Windows.Forms.Panel();
@@ -51,6 +49,8 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnView = new System.Windows.Forms.Button();
+            this.cbCategory = new System.Windows.Forms.ComboBox();
+            this.numpPrice = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlContent.SuspendLayout();
@@ -58,19 +58,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.pnlTop.SuspendLayout();
             this.pnlButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LavenderBlush;
+            this.panel1.Controls.Add(this.numpPrice);
+            this.panel1.Controls.Add(this.cbCategory);
             this.panel1.Controls.Add(this.btnUpload);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.lbPrice);
             this.panel1.Controls.Add(this.lbCategory);
             this.panel1.Controls.Add(this.lbDish);
             this.panel1.Controls.Add(this.txtDish);
-            this.panel1.Controls.Add(this.txtCategory);
-            this.panel1.Controls.Add(this.txtPrice);
             this.panel1.Controls.Add(this.lbID);
             this.panel1.Controls.Add(this.txtID);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -141,30 +142,13 @@
             // 
             // txtDish
             // 
+            this.txtDish.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDish.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDish.Location = new System.Drawing.Point(85, 106);
             this.txtDish.Margin = new System.Windows.Forms.Padding(2);
             this.txtDish.Name = "txtDish";
             this.txtDish.Size = new System.Drawing.Size(236, 35);
             this.txtDish.TabIndex = 7;
-            // 
-            // txtCategory
-            // 
-            this.txtCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCategory.Location = new System.Drawing.Point(86, 151);
-            this.txtCategory.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(235, 35);
-            this.txtCategory.TabIndex = 6;
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(86, 197);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(235, 35);
-            this.txtPrice.TabIndex = 5;
             // 
             // lbID
             // 
@@ -179,6 +163,7 @@
             // 
             // txtID
             // 
+            this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtID.Location = new System.Drawing.Point(85, 61);
             this.txtID.Margin = new System.Windows.Forms.Padding(2);
@@ -341,6 +326,33 @@
             this.btnView.UseVisualStyleBackColor = false;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
+            // cbCategory
+            // 
+            this.cbCategory.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Items.AddRange(new object[] {
+            "Món chính",
+            "Món phụ",
+            "Món tráng miệng",
+            "Thức uống"});
+            this.cbCategory.Location = new System.Drawing.Point(85, 155);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(236, 33);
+            this.cbCategory.TabIndex = 12;
+            // 
+            // numpPrice
+            // 
+            this.numpPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numpPrice.Location = new System.Drawing.Point(85, 202);
+            this.numpPrice.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numpPrice.Name = "numpPrice";
+            this.numpPrice.Size = new System.Drawing.Size(236, 33);
+            this.numpPrice.TabIndex = 13;
+            // 
             // ucFoodAndDrinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -358,13 +370,9 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).EndInit();
             this.ResumeLayout(false);
 
-            // Event handlers for buttons
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
         }
 
         #endregion
@@ -381,8 +389,6 @@
         private System.Windows.Forms.Label lbID;
         private System.Windows.Forms.Label lbDish;
         private System.Windows.Forms.TextBox txtDish;
-        private System.Windows.Forms.TextBox txtCategory;
-        private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label lbPrice;
         private System.Windows.Forms.Label lbCategory;
         private System.Windows.Forms.Button btnUpload;
@@ -391,5 +397,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.NumericUpDown numpPrice;
+        private System.Windows.Forms.ComboBox cbCategory;
     }
 }

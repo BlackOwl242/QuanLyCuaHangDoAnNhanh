@@ -16,11 +16,14 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         // Sử dụng BindingSource để quản lý dữ liệu một cách hiệu quả
         readonly BindingSource foodList = new BindingSource();
 
+        private NumericUpDown numPrice;
+
         public ucFoodAndDrinks()
         {
             InitializeComponent();
             // Gán sự kiện Load để đảm bảo các control đã được khởi tạo
             this.Load += ucFoodAndDrinks_Load;
+
         }
 
         private void ucFoodAndDrinks_Load(object sender, EventArgs e)
@@ -58,7 +61,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         /// <summary>
         /// Tải danh sách món ăn từ CSDL và gán vào BindingSource.
-        /// </summary>
+        /// </summary>         
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
@@ -78,14 +81,14 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             // Xóa các binding cũ để tránh lỗi
             txtID.DataBindings.Clear();
             txtDish.DataBindings.Clear();
-            txtCategory.DataBindings.Clear();
-            txtPrice.DataBindings.Clear();
+            cbCategory.DataBindings.Clear();
+            numPrice.DataBindings.Clear(); // Đang bị lỗi vì numPrice chưa được khởi tạo
 
             // Thêm các binding mới, liên kết trực tiếp với BindingSource
             txtID.DataBindings.Add(new Binding("Text", foodList, "ID", true, DataSourceUpdateMode.Never));
             txtDish.DataBindings.Add(new Binding("Text", foodList, "TenMon", true, DataSourceUpdateMode.Never));
-            txtCategory.DataBindings.Add(new Binding("Text", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
-            txtPrice.DataBindings.Add(new Binding("Text", foodList, "Gia", true, DataSourceUpdateMode.Never));
+            cbCategory.DataBindings.Add(new Binding("Text", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
+            numPrice.DataBindings.Add(new Binding("Text", foodList, "Gia", true, DataSourceUpdateMode.Never));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -94,8 +97,8 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             {
                 // Kiểm tra các trường nhập liệu
                 string name = txtDish.Text;
-                int categoryID = Convert.ToInt32(txtCategory.Text);
-                float price = (float)Convert.ToDouble(txtPrice.Text);
+                int categoryID = Convert.ToInt32(cbCategory.Text);
+                float price = (float)Convert.ToDouble(numPrice.Text);
 
                 if (FoodDAO.Instance.InsertFood(name, categoryID, price))
                 {
@@ -120,8 +123,8 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 // Kiểm tra các trường nhập liệu
                 int id = Convert.ToInt32(txtID.Text);
                 string name = txtDish.Text;
-                int categoryID = Convert.ToInt32(txtCategory.Text);
-                float price = (float)Convert.ToDouble(txtPrice.Text);
+                int categoryID = Convert.ToInt32(cbCategory.Text);
+                float price = (float)Convert.ToDouble(numPrice.Text);
 
                 if (FoodDAO.Instance.UpdateFood(id, name, categoryID, price))
                 {
@@ -167,6 +170,11 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void btnSearch_Click(object sender, EventArgs e)
         {
             foodList.DataSource = FoodDAO.Instance.SearchFoodByName(txtSearch.Text);
+        }
+
+        private void txtCategory_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
