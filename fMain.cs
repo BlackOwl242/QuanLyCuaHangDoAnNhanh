@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using QuanLyCuaHangDoAnNhanh.UserControls;
-using QuanLyCuaHangDoAnNhanh.DAO;
 
 namespace QuanLyCuaHangDoAnNhanh
 {
@@ -101,6 +100,14 @@ namespace QuanLyCuaHangDoAnNhanh
         private void btnTableManagement_Click(object sender, EventArgs e)
         {
             OpenChildUserControl(new ucTableManagement(), "Quản lý bàn");
+        }
+
+        private void fMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có thật sự muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
     {
         private static DataProvider instance;
 
+        // Singleton property to get the single instance of DataProvider
         public static DataProvider Instance
         {
             get { if (instance == null) instance = new DataProvider(); return instance; }
@@ -22,8 +23,10 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
         private DataProvider() { }
 
+        // Connection string to the database, retrieved from application settings.
         private string connString = Properties.Settings.Default.ConnectionString;
 
+        // Executes a SQL query and returns the result as a DataTable.
         public DataTable ExecuteQuery(string query, object[] parameter = null) 
         {
             DataTable data = new DataTable();
@@ -56,6 +59,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             return data;
         }
 
+        // Executes a non-query SQL command (INSERT, UPDATE, DELETE) and returns the number of rows affected.
         public int ExecuteNonQuery(string query, object[] parameter = null)
         {
             int data = 0;
@@ -86,6 +90,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             return data;
         }
 
+        // Executes a SQL command that returns a single value (e.g., COUNT, MAX) and returns that value.
         public object ExecuteScalar(string query, object[] parameter = null)
         {
             object data = 0;

@@ -44,6 +44,10 @@
             this.btnPay = new System.Windows.Forms.Button();
             this.pnlTable = new System.Windows.Forms.Panel();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlContent.SuspendLayout();
             this.pnlBill.SuspendLayout();
             this.pnlOrder.SuspendLayout();
@@ -76,13 +80,20 @@
             // 
             // lsvBill
             // 
+            this.lsvBill.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
             this.lsvBill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(16, 16);
             this.lsvBill.Name = "lsvBill";
             this.lsvBill.Size = new System.Drawing.Size(478, 439);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
+            this.lsvBill.View = System.Windows.Forms.View.Details;
             // 
             // pnlOrder
             // 
@@ -227,18 +238,39 @@
             this.pnlTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTable.Location = new System.Drawing.Point(0, 0);
             this.pnlTable.Name = "pnlTable";
-            this.pnlTable.Padding = new System.Windows.Forms.Padding(16);
+            this.pnlTable.Padding = new System.Windows.Forms.Padding(16, 16, 0, 16);
             this.pnlTable.Size = new System.Drawing.Size(530, 654);
             this.pnlTable.TabIndex = 1;
             // 
             // flpTable
             // 
+            this.flpTable.AutoScroll = true;
             this.flpTable.BackColor = System.Drawing.Color.White;
             this.flpTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpTable.Location = new System.Drawing.Point(16, 16);
             this.flpTable.Name = "flpTable";
-            this.flpTable.Size = new System.Drawing.Size(498, 622);
+            this.flpTable.Size = new System.Drawing.Size(514, 622);
             this.flpTable.TabIndex = 0;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Tên món";
+            this.columnHeader1.Width = 264;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Số lượng";
+            this.columnHeader2.Width = 57;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Đơn giá";
+            this.columnHeader3.Width = 69;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Thành tiền";
+            this.columnHeader4.Width = 91;
             // 
             // ucTableManagement
             // 
@@ -279,5 +311,9 @@
         private System.Windows.Forms.NumericUpDown nmDiscount;
         private System.Windows.Forms.Button btnDiscount;
         private System.Windows.Forms.Button btnSwitchTable;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

@@ -339,7 +339,8 @@
             this.IsMdiContainer = true;
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Quản lý quán ăn nhanh";
+            this.Text = "Quản lý của hàng đồ ăn nhanh";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fMain_FormClosing);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlTopMenu.ResumeLayout(false);
