@@ -78,7 +78,8 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                     {
                         if (item.Contains('@'))
                         {
-                            sqlCommand.Parameters.AddWithValue(item, parameter[i]);
+                            string trimmedItem = item.TrimEnd(',');
+                            sqlCommand.Parameters.AddWithValue(trimmedItem, parameter[i]);
                             i++;
                         }
                     }

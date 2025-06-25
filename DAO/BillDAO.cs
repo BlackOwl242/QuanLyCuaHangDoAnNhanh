@@ -32,5 +32,23 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
             return -1; // Trả về -1 nếu không tìm thấy hóa đơn chưa thanh toán
         }   
+
+        public void InsertBill(int id)
+        {
+            string query = "exec USP_InsertBill @idTable";
+            DataProvider.Instance.ExecuteNonQuery(query, new object[] { id });
+        }
+
+        public int GetMaxIDBill()
+        {
+            try
+            {
+                return (int)DataProvider.Instance.ExecuteScalar("SELECT MAX(id) FROM dbo.Bill");
+            }
+            catch
+            {
+                return 1; // Trả về 1 nếu không có hóa đơn nào
+            }
+        }
     }
 }

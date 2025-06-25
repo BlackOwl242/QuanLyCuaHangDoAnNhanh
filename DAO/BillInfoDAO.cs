@@ -21,7 +21,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         public List<BillInfo> GetListBillInfo(int id)
         {
             List<BillInfo> listBillInfo = new List<BillInfo>();
-            string query = "SELECT * FROM dbo.BillInfo WHERE billID = " + id;
+            string query = "SELECT * FROM dbo.BillInfo WHERE idBill = " + id;
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
             foreach (DataRow item in data.Rows)
             {
@@ -29,6 +29,12 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                 listBillInfo.Add(billInfo);
             }
             return listBillInfo;
+        }
+
+        public void InsertBillInfo(int idBill, int idFood, int count)
+        {
+            string query = "USP_InsertBillInfo @idBill, @idFood, @count";
+            DataProvider.Instance.ExecuteNonQuery(query, new object[] { idBill, idFood, count });
         }
     }
 }

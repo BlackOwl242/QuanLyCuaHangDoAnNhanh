@@ -20,15 +20,11 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
         public Bill(DataRow row)
         {
             this.ID = (int)row["id"];
-            this.DateCheckIn = row["dateCheckIn"] as DateTime?;
+            this.DateCheckIn = (DateTime?)row["dateCheckIn"];
             var dateCheckOutTemp = row["dateCheckOut"];
             if (dateCheckOutTemp.ToString() != "")
             {
                 this.DateCheckOut = (DateTime?)dateCheckOutTemp;
-            }
-            else
-            {
-                this.DateCheckOut = null;
             }
             this.Status = (int)row["status"];
         }

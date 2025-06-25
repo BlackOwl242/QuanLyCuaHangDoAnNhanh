@@ -30,28 +30,24 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             InitializeComponent();
             LoadTable();
+            LoadCategory();
         }
-
-        #region Event
-        private void ucTableManagement_Load(object sender, EventArgs e)
-        {
-            btnAdd.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnAdd.Width, btnAdd.Height, 30, 30));
-            btnPay.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnPay.Width, btnPay.Height, 30, 30));
-            btnDiscount.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnDiscount.Width, btnDiscount.Height, 15, 15));
-            btnSwitchTable.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnSwitchTable.Width, btnSwitchTable.Height, 15, 15));
-        }
-        private void btn_Click(object sender, EventArgs e)
-        {
-            int tableID = (int)(sender as Button).Tag;
-            ShowBill(tableID);
-        }
-        #endregion
 
         #region Method
+        void LoadCategory()
+        {
+            List<Category> listCategory = CategoryDAO.Instance.GetListCategory();
+            cbCategory.DataSource = listCategory;
+            cbCategory.DisplayMember = "Name"; // Hiển thị tên danh mục
+        }
+
+        void LoadFoodListByCategoryID(int id)
+        {
+            List<Food> listFood = FoodDAO.Instance.GetListFood(id);
+            cbFoodAndDrinks.DataSource = listFood;
+            cbFoodAndDrinks.DisplayMember = "Name"; // Hiển thị tên món ăn
+        }
+
         void LoadTable()
         {
             List<Table> tableList = TableDAO.Instance.LoadTableList();
@@ -62,7 +58,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 btn.Text = item.Name + Environment.NewLine + item.Status;
                 flpTable.Controls.Add(btn);
                 btn.Click += btn_Click;
-                btn.Tag = item.ID; // Lưu ID của bàn vào Tag của nút
+                btn.Tag = item; // Lưu cả Table object vào Tag của nút
 
                 if (item.Status == "Trống")
                 {
@@ -80,12 +76,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             lsvBill.Items.Clear();
 
             List<DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
-
-            if (listBillInfo == null || listBillInfo.Count == 0)
-            {
-                MessageBox.Show("Bàn này chưa có món nào.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            float totalPrice = 0;
 
             foreach (DTO.Menu item in listBillInfo)
             {
@@ -93,9 +84,67 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 lsvItem.SubItems.Add(item.Count.ToString());
                 lsvItem.SubItems.Add(item.Price.ToString());
                 lsvItem.SubItems.Add(item.TotalPrice.ToString());
-
+                totalPrice += item.TotalPrice;
                 lsvBill.Items.Add(lsvItem);
             }
+            txtTotalPrice.Text = totalPrice.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
+        }
+
+        #endregion
+
+        #region Event
+        private void ucTableManagement_Load(object sender, EventArgs e)
+        {
+            btnAdd.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnAdd.Width, btnAdd.Height, 20, 20));
+            btnPay.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnPay.Width, btnPay.Height, 15, 15));
+            btnDiscount.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnDiscount.Width, btnDiscount.Height, 15, 15));
+            btnSwitchTable.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnSwitchTable.Width, btnSwitchTable.Height, 15, 15));
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            //int tableID = ((sender as Button).Tag as Table).ID;
+            Table table = (sender as Button).Tag as Table;
+
+            lsvBill.Tag = (sender as Button).Tag;
+            ShowBill(table.ID);
+        }
+
+        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = 0;
+
+            ComboBox cb = sender as ComboBox;
+
+            if (cb.SelectedItem == null)
+                return;
+
+            Category selected = cb.SelectedItem as Category;
+            id = selected.ID;
+
+            LoadFoodListByCategoryID(id);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            //Nếu bàn chưa có hóa đơn thì tạo hóa đơn mới
+            if (idBill == -1)
+            {
+                BillDAO.Instance.InsertBill(table.ID);
+                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
+            }
+            else
+            {
+                BillInfoDAO.Instance.InsertBillInfo(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
+            }
+            ShowBill(table.ID);
         }
         #endregion
     }
