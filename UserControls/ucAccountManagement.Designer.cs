@@ -37,13 +37,13 @@
             this.dgvAccount = new System.Windows.Forms.DataGridView();
             this.pnButton = new System.Windows.Forms.Panel();
             this.pnlRight = new System.Windows.Forms.Panel();
+            this.cbType = new System.Windows.Forms.ComboBox();
             this.btnViewAccount = new System.Windows.Forms.Button();
             this.txtDisplayName = new System.Windows.Forms.TextBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.lbType = new System.Windows.Forms.Label();
             this.lbDisplayName = new System.Windows.Forms.Label();
             this.lbUserName = new System.Windows.Forms.Label();
-            this.cbType = new System.Windows.Forms.ComboBox();
             this.pnlContent.SuspendLayout();
             this.pnDgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
@@ -182,6 +182,19 @@
             this.pnlRight.Size = new System.Drawing.Size(335, 654);
             this.pnlRight.TabIndex = 5;
             // 
+            // cbType
+            // 
+            this.cbType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Items.AddRange(new object[] {
+            "Admin",
+            "Nhân viên"});
+            this.cbType.Location = new System.Drawing.Point(121, 140);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(199, 29);
+            this.cbType.TabIndex = 7;
+            this.cbType.SelectedIndexChanged += new System.EventHandler(this.cbType_SelectedIndexChanged);
+            // 
             // btnViewAccount
             // 
             this.btnViewAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
@@ -248,18 +261,6 @@
             this.lbUserName.Size = new System.Drawing.Size(109, 21);
             this.lbUserName.TabIndex = 0;
             this.lbUserName.Text = "Tên tài khoản:";
-            // 
-            // cbType
-            // 
-            this.cbType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbType.FormattingEnabled = true;
-            this.cbType.Items.AddRange(new object[] {
-            "Admin",
-            "Nhân viên"});
-            this.cbType.Location = new System.Drawing.Point(121, 140);
-            this.cbType.Name = "cbType";
-            this.cbType.Size = new System.Drawing.Size(199, 29);
-            this.cbType.TabIndex = 7;
             // 
             // ucAccountManagement
             // 

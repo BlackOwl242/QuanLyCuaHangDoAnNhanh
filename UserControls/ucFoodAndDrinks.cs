@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyCuaHangDoAnNhanh.DAO;
+using QuanLyCuaHangDoAnNhanh.DTO;
 
 namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
@@ -16,13 +17,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         // Sử dụng BindingSource để quản lý dữ liệu một cách hiệu quả
         readonly BindingSource foodList = new BindingSource();
 
-        private NumericUpDown numPrice;
 
         public ucFoodAndDrinks()
         {
             InitializeComponent();
             // Gán sự kiện Load để đảm bảo các control đã được khởi tạo
             this.Load += ucFoodAndDrinks_Load;
+
 
         }
 
@@ -36,13 +37,15 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
             // Thiết lập liên kết dữ liệu cho các TextBox
             AddFoodBinding();
+
+            LoadCategoryIntoCombobox(cbCategory);
         }
 
         // Cấu hình các cột cho DataGridView một cách thủ công.
         // Điều này đảm bảo các cột luôn tồn tại và tránh lỗi NullReferenceException.
         void SetupDataGridView()
         {
-            // Quan trọng: Tắt tính năng tự động tạo cột
+            // Tắt tính năng tự động tạo cột
             dataGridView2.AutoGenerateColumns = false;
 
             // Gán foodList làm nguồn dữ liệu
@@ -52,11 +55,37 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             dataGridView2.Columns.Clear();
 
             // Thêm các cột theo cách thủ công và chỉ định DataPropertyName
-            // DataPropertyName phải khớp chính xác với tên cột trong DataTable trả về từ FoodDAO
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "ID", HeaderText = "Mã", DataPropertyName = "ID" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "TenMon", HeaderText = "Tên Món Ăn", DataPropertyName = "TenMon", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "IDDanhMuc", HeaderText = "Mã Danh Mục", DataPropertyName = "ID Danh mục" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Gia", HeaderText = "Đơn Giá", DataPropertyName = "Giá" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "ID",
+                HeaderText = "Mã",
+                DataPropertyName = "ID"
+            });
+
+            // Thêm cột tên món ăn
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "TenMon",
+                HeaderText = "Tên Món Ăn",
+                DataPropertyName = "TenMon",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            });
+
+            // Thêm cột danh mục
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "TenDanhMuc",                   
+                HeaderText = "Danh Mục",              
+                DataPropertyName = "TenDanhMuc"      
+            });
+
+            // Thêm cột Đơn Giá
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Gia",
+                HeaderText = "Đơn Giá",
+                DataPropertyName = "Gia"
+            });
         }
 
         /// <summary>
@@ -82,23 +111,30 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             txtID.DataBindings.Clear();
             txtDish.DataBindings.Clear();
             cbCategory.DataBindings.Clear();
-            numpPrice.DataBindings.Clear(); 
+            numpPrice.DataBindings.Clear();
 
             // Thêm các binding mới, liên kết trực tiếp với BindingSource
             txtID.DataBindings.Add(new Binding("Text", foodList, "ID", true, DataSourceUpdateMode.Never));
             txtDish.DataBindings.Add(new Binding("Text", foodList, "TenMon", true, DataSourceUpdateMode.Never));
-            cbCategory.DataBindings.Add(new Binding("Text", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
-            numpPrice.DataBindings.Add(new Binding("Text", foodList, "Gia", true, DataSourceUpdateMode.Never));
+            cbCategory.DataBindings.Add(new Binding("SelectedValue", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
+            numpPrice.DataBindings.Add(new Binding("Value", foodList, "Gia", true, DataSourceUpdateMode.Never));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            // Kiểm tra xem tên món ăn có được nhập hay không
+            if (string.IsNullOrWhiteSpace(txtDish.Text))
+            {
+                MessageBox.Show("Tên món ăn không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 // Kiểm tra các trường nhập liệu
                 string name = txtDish.Text;
-                int categoryID = Convert.ToInt32(cbCategory.Text);
-                float price = (float)Convert.ToDouble(numPrice.Text);
+                int categoryID = (int)cbCategory.SelectedValue;
+                float price = (float)numpPrice.Value;
 
                 if (FoodDAO.Instance.InsertFood(name, categoryID, price))
                 {
@@ -118,13 +154,27 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            // Kiểm tra xem ID có hợp lệ không
+            if (!int.TryParse(txtID.Text, out int id))
+            {
+                MessageBox.Show("Vui lòng chọn một món ăn để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Kiểm tra tên món ăn không được để trống
+            if (string.IsNullOrWhiteSpace(txtDish.Text))
+            {
+                MessageBox.Show("Tên món ăn không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 // Kiểm tra các trường nhập liệu
-                int id = Convert.ToInt32(txtID.Text);
                 string name = txtDish.Text;
-                int categoryID = Convert.ToInt32(cbCategory.Text);
-                float price = (float)Convert.ToDouble(numPrice.Text);
+                int categoryID = (int)cbCategory.SelectedValue; 
+                float price = (float)numpPrice.Value;
+
 
                 if (FoodDAO.Instance.UpdateFood(id, name, categoryID, price))
                 {
@@ -144,10 +194,15 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            // Kiểm tra xem ID có hợp lệ không
+            if (!int.TryParse(txtID.Text, out int id))
+            {
+                MessageBox.Show("Vui lòng chọn một món ăn để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                int id = Convert.ToInt32(txtID.Text);
-
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa món này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     if (FoodDAO.Instance.DeleteFood(id))
@@ -175,6 +230,12 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void txtCategory_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        void LoadCategoryIntoCombobox(ComboBox cb)
+        {
+            cb.DataSource = CategoryDAO.Instance.GetListCategory();
+            cb.DisplayMember = "Name"; // Hiển thị tên danh mục
+            cb.ValueMember = "ID";   // Nhưng giá trị thực sự là ID
         }
     }
 }

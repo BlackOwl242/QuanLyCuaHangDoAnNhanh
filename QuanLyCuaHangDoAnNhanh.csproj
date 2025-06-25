@@ -177,8 +177,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\FoodDAO.cs" />
+    <Compile Include="DTO\Account.cs" />
+    <Compile Include="DTO\Category.cs" />
     <Compile Include="DTO\Food.cs" />
     <Compile Include="fLogin.cs">
       <SubType>Form</SubType>

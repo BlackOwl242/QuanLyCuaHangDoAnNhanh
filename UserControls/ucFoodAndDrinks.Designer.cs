@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucFoodAndDrinks));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.numpPrice = new System.Windows.Forms.NumericUpDown();
+            this.cbCategory = new System.Windows.Forms.ComboBox();
             this.btnUpload = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbPrice = new System.Windows.Forms.Label();
@@ -49,16 +51,14 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnView = new System.Windows.Forms.Button();
-            this.cbCategory = new System.Windows.Forms.ComboBox();
-            this.numpPrice = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlContent.SuspendLayout();
             this.pnlDgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.pnlTop.SuspendLayout();
             this.pnlButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -79,6 +79,33 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(335, 654);
             this.panel1.TabIndex = 0;
+            // 
+            // numpPrice
+            // 
+            this.numpPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numpPrice.Location = new System.Drawing.Point(85, 202);
+            this.numpPrice.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numpPrice.Name = "numpPrice";
+            this.numpPrice.Size = new System.Drawing.Size(236, 33);
+            this.numpPrice.TabIndex = 13;
+            // 
+            // cbCategory
+            // 
+            this.cbCategory.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Items.AddRange(new object[] {
+            "Món chính",
+            "Món phụ",
+            "Món tráng miệng",
+            "Thức uống"});
+            this.cbCategory.Location = new System.Drawing.Point(85, 155);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(236, 33);
+            this.cbCategory.TabIndex = 12;
             // 
             // btnUpload
             // 
@@ -235,10 +262,10 @@
             // 
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtSearch.Location = new System.Drawing.Point(72, 10);
+            this.txtSearch.Location = new System.Drawing.Point(80, 10);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(614, 39);
+            this.txtSearch.Size = new System.Drawing.Size(606, 39);
             this.txtSearch.TabIndex = 0;
             // 
             // pnlButton
@@ -326,33 +353,6 @@
             this.btnView.UseVisualStyleBackColor = false;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
-            // cbCategory
-            // 
-            this.cbCategory.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Items.AddRange(new object[] {
-            "Món chính",
-            "Món phụ",
-            "Món tráng miệng",
-            "Thức uống"});
-            this.cbCategory.Location = new System.Drawing.Point(85, 155);
-            this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(236, 33);
-            this.cbCategory.TabIndex = 12;
-            // 
-            // numpPrice
-            // 
-            this.numpPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numpPrice.Location = new System.Drawing.Point(85, 202);
-            this.numpPrice.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.numpPrice.Name = "numpPrice";
-            this.numpPrice.Size = new System.Drawing.Size(236, 33);
-            this.numpPrice.TabIndex = 13;
-            // 
             // ucFoodAndDrinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -363,6 +363,7 @@
             this.Size = new System.Drawing.Size(1040, 654);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlContent.ResumeLayout(false);
             this.pnlDgv.ResumeLayout(false);
@@ -370,7 +371,6 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlButton.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).EndInit();
             this.ResumeLayout(false);
 
         }

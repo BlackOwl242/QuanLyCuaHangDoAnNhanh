@@ -39,14 +39,22 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
         public DataTable GetListFood()
         {
-            // Lấy danh sách món ăn từ cơ sở dữ liệu
-            string query = "SELECT id AS ID, name AS TenMon, idCategory AS IDDanhMuc, price AS Gia FROM dbo.Food";
+            // Truy vấn để lấy danh sách món ăn cùng với thông tin danh mục
+            string query = @"
+                SELECT 
+                    f.id AS ID, 
+                    f.name AS TenMon, 
+                    f.idCategory AS IDDanhMuc, 
+                    fc.name AS TenDanhMuc, 
+                    f.price AS Gia 
+                FROM dbo.Food AS f
+                INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id";
             return DataProvider.Instance.ExecuteQuery(query);
         }
 
         public bool InsertFood(string name, int idCategory, float price)
         {
-            // Sử dụng tham số @ để tránh lỗi SQL Injection
+            // Kiểm tra xem tên món ăn có hợp lệ không
             string query = "INSERT dbo.Food (name, idCategory, price) VALUES ( @name , @idCategory , @price )";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price });
             return result > 0;
@@ -59,11 +67,10 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         }
         public bool DeleteFood(int idFood)
         {
+            // Xóa các bản ghi liên quan trong BillInfo trước
+            DataProvider.Instance.ExecuteNonQuery("DELETE BillInfo WHERE idFood = @idFood", new object[] { idFood });
 
-            /* Trước khi xóa một món ăn thì cần phải xóa các bản ghi liên quan trong bảng BillInfo
-            để tránh lỗi khóa ngoại. Cần tạo một phương thức tương tự trong BillInfoDAO.
-            // BillInfoDAO.Instance.DeleteBillInfoByFoodID(idFood); 
-            */
+            // Xóa món ăn
             string query = "DELETE Food WHERE id = @id";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { idFood });
             return result > 0;
@@ -71,8 +78,17 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
         public DataTable SearchFoodByName(string name)
         {
-            // Sử dụng hàm dbo.fuConvertToUnsign1 để tìm kiếm không phân biệt chữ hoa chữ thường và dấu
-            string query = "SELECT id AS ID, name AS TenMon, idCategory AS IDDanhMuc, price AS Gia FROM dbo.Food WHERE dbo.fuConvertToUnsign1(name) LIKE N'%' + dbo.fuConvertToUnsign1( @name ) + '%'";
+            // Truy vấn để tìm kiếm món ăn theo tên, sử dụng hàm chuyển đổi không dấu
+            string query = @"
+                SELECT 
+                    f.id AS ID, 
+                    f.name AS TenMon, 
+                    f.idCategory AS IDDanhMuc, 
+                    fc.name AS TenDanhMuc, 
+                    f.price AS Gia
+                FROM dbo.Food AS f 
+                INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id
+                WHERE dbo.fuConvertToUnsign1(f.name) LIKE N'%' + dbo.fuConvertToUnsign1( @name ) + '%'";
             DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { name });
             return data;
         }
