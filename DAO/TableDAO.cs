@@ -35,5 +35,11 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             }
             return tableList;
         }
+
+        public void UpdateTableStatus(int tableId, string status)
+        {
+            string query = "UPDATE TableFood SET status = @status WHERE id = @tableId";
+            DataProvider.Instance.ExecuteNonQuery(query, new object[] { status, tableId });
+        }
     }
 }

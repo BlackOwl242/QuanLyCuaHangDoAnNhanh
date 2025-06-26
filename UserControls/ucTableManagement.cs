@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using QuanLyCuaHangDoAnNhanh.DTO;
 using QuanLyCuaHangDoAnNhanh.DAO;
+using System.Globalization;
 
 namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
@@ -26,11 +27,15 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             int nHeightEllipse
         );
 
+        private bool isDiscountApplied = false;
+        private int appliedDiscount = 0;
+
         public ucTableManagement()
         {
             InitializeComponent();
             LoadTable();
             LoadCategory();
+            LoadTableComboBox();
         }
 
         #region Method
@@ -50,6 +55,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         void LoadTable()
         {
+            flpTable.Controls.Clear(); // Xóa các nút bàn cũ trước khi tải lại
             List<Table> tableList = TableDAO.Instance.LoadTableList();
 
             foreach (Table item in tableList)
@@ -88,6 +94,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 lsvBill.Items.Add(lsvItem);
             }
             txtTotalPrice.Text = totalPrice.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
+
+        }
+        void LoadTableComboBox()
+        {
+            var tables = TableDAO.Instance.LoadTableList();
+            cbSwitchTable.DataSource = tables; // Gán danh sách bàn vào ComboBox
+            cbSwitchTable.DisplayMember = "Name"; // Hiển thị tên bàn
         }
 
         #endregion
@@ -145,6 +158,107 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 BillInfoDAO.Instance.InsertBillInfo(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
             }
             ShowBill(table.ID);
+            LoadTable(); // Tải lại danh sách bàn sau khi thêm món
+        }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            int discount;
+            double totalPrice = double.Parse(txtTotalPrice.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("vi-VN"));
+            double finalPrice;
+
+            if (isDiscountApplied)
+            {
+                discount = appliedDiscount;
+                finalPrice = totalPrice; // Đã giảm giá rồi, không giảm nữa
+            }
+            else
+            {
+                discount = (int)nmDiscount.Value;
+                finalPrice = totalPrice - (totalPrice * discount / 100);
+                txtTotalPrice.Text = finalPrice.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
+            }
+
+            if (idBill != -1)
+            {
+                if (MessageBox.Show(string.Format("Bạn có chắc muốn thanh toán hóa đơn cho bàn {0}?", table.Name), "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    BillDAO.Instance.CheckOut(idBill, discount, totalPrice);
+                    ShowBill(table.ID);
+                    MessageBox.Show("Thanh toán thành công!");
+                    LoadTable();
+                    // Reset trạng thái giảm giá sau khi thanh toán
+                    isDiscountApplied = false;
+                    appliedDiscount = 0;
+                }
+            }
+        }
+        private void btnDiscount_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            if (idBill != -1)
+            {
+                int discount = (int)nmDiscount.Value;
+                double totalPrice = double.Parse(txtTotalPrice.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("vi-VN"));
+                double finalPrice = totalPrice - (totalPrice * discount / 100);
+                txtTotalPrice.Text = finalPrice.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
+                MessageBox.Show(string.Format("Giảm giá {0}% cho bàn {1} thành công!", discount, table.Name));
+                isDiscountApplied = true;
+                appliedDiscount = discount;
+            }
+            else
+            {
+                MessageBox.Show("Bàn này chưa có hóa đơn để áp dụng giảm giá!");
+            }
+        }
+
+        private void btnSwitchTable_Click(object sender, EventArgs e)
+        {
+            Table sourceTable = lsvBill.Tag as Table;
+            Table targetTable = cbSwitchTable.SelectedItem as Table;
+            if (sourceTable == null || targetTable == null || sourceTable.ID == targetTable.ID)
+            {
+                MessageBox.Show("Vui lòng chọn bàn hợp lệ để chuyển/gộp!");
+                return;
+            }
+
+            int sourceBillId = BillDAO.Instance.GetUncheckBillIDByTableID(sourceTable.ID);
+            int targetBillId = BillDAO.Instance.GetUncheckBillIDByTableID(targetTable.ID);
+
+            // Nếu bàn đích trống => chuyển bàn
+            if (targetTable.Status == "Trống")
+            {
+                if (sourceBillId == -1)
+                {
+                    MessageBox.Show("Bàn nguồn không có hóa đơn để chuyển!");
+                    return;
+                }
+                BillDAO.Instance.SwitchTable(sourceBillId, targetTable.ID);
+                TableDAO.Instance.UpdateTableStatus(sourceTable.ID, "Trống");
+                TableDAO.Instance.UpdateTableStatus(targetTable.ID, "Có người");
+                MessageBox.Show($"Chuyển hóa đơn sang bàn {targetTable.Name} thành công!");
+            }
+            // Nếu bàn đích có người => gộp bàn
+            else
+            {
+                if (sourceBillId == -1 || targetBillId == -1)
+                {
+                    MessageBox.Show("Cả hai bàn phải có hóa đơn để gộp!");
+                    return;
+                }
+                BillDAO.Instance.MergeTable(sourceBillId, targetBillId);
+                TableDAO.Instance.UpdateTableStatus(sourceTable.ID, "Trống");
+                MessageBox.Show($"Gộp hóa đơn bàn {sourceTable.Name} vào bàn {targetTable.Name} thành công!");
+            }
+
+            LoadTable();
+            LoadTableComboBox();
+            ShowBill(targetTable.ID);
+            lsvBill.Tag = targetTable; // Cập nhật lsvBill.Tag sang bàn đích sau khi chuyển/gộp
         }
         #endregion
     }

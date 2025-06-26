@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuanLyCuaHangDoAnNhanh.UserControls;
+using System.Text.RegularExpressions;
 
 namespace QuanLyCuaHangDoAnNhanh.DAO
 {
@@ -72,16 +73,12 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
                 if (parameter != null)
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    var matches = Regex.Matches(query, @"@\w+");
+                    var paramNames = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList();
+
+                    for (int i = 0; i < paramNames.Count && i < parameter.Length; i++)
                     {
-                        if (item.Contains('@'))
-                        {
-                            string trimmedItem = item.TrimEnd(',');
-                            sqlCommand.Parameters.AddWithValue(trimmedItem, parameter[i]);
-                            i++;
-                        }
+                        sqlCommand.Parameters.AddWithValue(paramNames[i], parameter[i]);
                     }
                 }
 
