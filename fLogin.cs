@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyCuaHangDoAnNhanh.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,6 +34,7 @@ namespace QuanLyCuaHangDoAnNhanh
             InitializeComponent();
         }
 
+        #region Event
         private void pnlDangNhap_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) // Chỉ xử lý khi nhấn chuột trái
@@ -66,18 +68,38 @@ namespace QuanLyCuaHangDoAnNhanh
             
         }
 
-        private void fLogin_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("Bạn có thật sự muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
-            {
-                e.Cancel = true;
-            }
-        }
-
         private void fLogin_Load(object sender, EventArgs e)
         {
             btnLogin.Region = Region.FromHrgn(CreateRoundRectRgn
                 (0, 0, btnLogin.Width, btnLogin.Height, 28, 28));
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string userName = txtUserName.Text.Trim(); // Lấy tên đăng nhập từ TextBox
+            string password = txtPassword.Text.Trim(); // Lấy mật khẩu từ TextBox
+            // Kiểm tra thông tin đăng nhập
+            if (Login(userName, password))
+            {
+                // Nếu đăng nhập thành công, mở form chính
+                fMain fMain = new fMain();
+                this.Hide(); // Ẩn form đăng nhập
+                fMain.ShowDialog(); // Hiển thị form chính
+                this.Close(); // Đóng form đăng nhập sau khi form chính được đóng
+            }
+            else
+            {
+                // Nếu đăng nhập thất bại, hiển thị thông báo lỗi
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region Method
+        bool Login(string userName, string password)
+        {
+            return AccountDAO.Instance.Login(userName, password);
+        }
+        #endregion
     }
 }

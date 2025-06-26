@@ -37,7 +37,7 @@
             this.pnlMatKhau = new System.Windows.Forms.Panel();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.pnlTenDangNhap = new System.Windows.Forms.Panel();
-            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pbDangNhap = new System.Windows.Forms.PictureBox();
@@ -92,6 +92,7 @@
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Đăng nhập";
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // label4
             // 
@@ -130,7 +131,7 @@
             this.txtPassword.BackColor = System.Drawing.Color.LavenderBlush;
             this.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.ForeColor = System.Drawing.Color.LavenderBlush;
+            this.txtPassword.ForeColor = System.Drawing.Color.SaddleBrown;
             this.txtPassword.Location = new System.Drawing.Point(1, 1);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(363, 38);
@@ -140,23 +141,23 @@
             // pnlTenDangNhap
             // 
             this.pnlTenDangNhap.BackColor = System.Drawing.Color.SaddleBrown;
-            this.pnlTenDangNhap.Controls.Add(this.txtUsername);
+            this.pnlTenDangNhap.Controls.Add(this.txtUserName);
             this.pnlTenDangNhap.Location = new System.Drawing.Point(369, 198);
             this.pnlTenDangNhap.Name = "pnlTenDangNhap";
             this.pnlTenDangNhap.Padding = new System.Windows.Forms.Padding(1);
             this.pnlTenDangNhap.Size = new System.Drawing.Size(365, 41);
             this.pnlTenDangNhap.TabIndex = 3;
             // 
-            // txtUsername
+            // txtUserName
             // 
-            this.txtUsername.BackColor = System.Drawing.Color.LavenderBlush;
-            this.txtUsername.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 17F, System.Drawing.FontStyle.Bold);
-            this.txtUsername.ForeColor = System.Drawing.Color.LavenderBlush;
-            this.txtUsername.Location = new System.Drawing.Point(1, 1);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(363, 38);
-            this.txtUsername.TabIndex = 0;
+            this.txtUserName.BackColor = System.Drawing.Color.LavenderBlush;
+            this.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 17F, System.Drawing.FontStyle.Bold);
+            this.txtUserName.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.txtUserName.Location = new System.Drawing.Point(1, 1);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(363, 38);
+            this.txtUserName.TabIndex = 0;
             // 
             // label2
             // 
@@ -201,7 +202,6 @@
             this.Name = "fLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fLogin";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fLogin_FormClosing);
             this.Load += new System.EventHandler(this.fLogin_Load);
             this.pnlDangNhap.ResumeLayout(false);
             this.pnlDangNhap.PerformLayout();
@@ -224,7 +224,7 @@
         private System.Windows.Forms.Panel pnlTenDangNhap;
         private System.Windows.Forms.Panel pnlMatKhau;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLogin;
