@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,7 +8,7 @@ using QuanLyCuaHangDoAnNhanh.DTO;
 
 namespace QuanLyCuaHangDoAnNhanh.DAO
 {
-    internal class FoodDAO
+    public class FoodDAO
     {
         private static FoodDAO instance;
 
@@ -24,7 +24,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         {
             List<Food> list = new List<Food>();
 
-            string query = "select * from Food where idCategory = " + id;
+            string query = "SELECT * FROM dbo.Food WHERE idCategory = " + id;
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -33,7 +33,6 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                 Food food = new Food(item);
                 list.Add(food);
             }
-
             return list;
         }
 

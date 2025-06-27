@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -34,7 +34,6 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
         }
 
         private int categoryID;
-
         public int CategoryID
         {
             get { return categoryID; }

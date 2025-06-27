@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,7 +15,8 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
             this.Name = name;
         }
 
-        public Category(DataRow row)
+        public Category(DataRow row) 
+
         {
             this.ID = (int)row["id"];
             this.Name = row["name"].ToString();
@@ -36,3 +37,4 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
         }
     }
 }
+

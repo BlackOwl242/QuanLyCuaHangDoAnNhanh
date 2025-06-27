@@ -37,8 +37,8 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnView = new System.Windows.Forms.Button();
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
-            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpCheckIn = new System.Windows.Forms.DateTimePicker();
+            this.dtpCheckOut = new System.Windows.Forms.DateTimePicker();
             this.dgvRevenue = new System.Windows.Forms.DataGridView();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlDgv = new System.Windows.Forms.Panel();
@@ -79,9 +79,9 @@
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.Color.LavenderBlush;
-            this.pnlTop.Controls.Add(this.dtpFrom);
+            this.pnlTop.Controls.Add(this.dtpCheckIn);
             this.pnlTop.Controls.Add(this.btnView);
-            this.pnlTop.Controls.Add(this.dtpTo);
+            this.pnlTop.Controls.Add(this.dtpCheckOut);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
@@ -89,33 +89,32 @@
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(1040, 55);
             this.pnlTop.TabIndex = 0;
-            this.pnlTop.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // dtpFrom
+            // dtpCheckIn
             // 
-            this.dtpFrom.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.dtpFrom.CalendarFont = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFrom.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.dtpFrom.CalendarTrailingForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dtpFrom.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFrom.Location = new System.Drawing.Point(25, 12);
-            this.dtpFrom.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(274, 29);
-            this.dtpFrom.TabIndex = 4;
+            this.dtpCheckIn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dtpCheckIn.CalendarFont = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpCheckIn.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.dtpCheckIn.CalendarTrailingForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.dtpCheckIn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpCheckIn.Location = new System.Drawing.Point(25, 12);
+            this.dtpCheckIn.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpCheckIn.Name = "dtpCheckIn";
+            this.dtpCheckIn.Size = new System.Drawing.Size(274, 29);
+            this.dtpCheckIn.TabIndex = 4;
             // 
-            // dtpTo
+            // dtpCheckOut
             // 
-            this.dtpTo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.dtpTo.CalendarFont = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpTo.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.dtpTo.CalendarTrailingForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dtpTo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpTo.Location = new System.Drawing.Point(741, 12);
-            this.dtpTo.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(274, 29);
-            this.dtpTo.TabIndex = 3;
+            this.dtpCheckOut.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dtpCheckOut.CalendarFont = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpCheckOut.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.dtpCheckOut.CalendarTrailingForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.dtpCheckOut.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpCheckOut.Location = new System.Drawing.Point(741, 12);
+            this.dtpCheckOut.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpCheckOut.Name = "dtpCheckOut";
+            this.dtpCheckOut.Size = new System.Drawing.Size(274, 29);
+            this.dtpCheckOut.TabIndex = 3;
             // 
             // dgvRevenue
             // 
@@ -155,7 +154,6 @@
             // pnlChart
             // 
             this.pnlChart.Controls.Add(this.pnlChartBottom);
-            this.pnlChart.Controls.Add(this.pnlChartTop);
             this.pnlChart.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlChart.Location = new System.Drawing.Point(515, 55);
             this.pnlChart.Name = "pnlChart";
@@ -166,10 +164,10 @@
             // 
             this.pnlChartBottom.Controls.Add(this.chart2);
             this.pnlChartBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlChartBottom.Location = new System.Drawing.Point(0, 272);
+            this.pnlChartBottom.Location = new System.Drawing.Point(0, 0);
             this.pnlChartBottom.Name = "pnlChartBottom";
             this.pnlChartBottom.Padding = new System.Windows.Forms.Padding(25, 0, 25, 25);
-            this.pnlChartBottom.Size = new System.Drawing.Size(525, 327);
+            this.pnlChartBottom.Size = new System.Drawing.Size(525, 599);
             this.pnlChartBottom.TabIndex = 1;
             // 
             // chart2
@@ -185,7 +183,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart2.Series.Add(series1);
-            this.chart2.Size = new System.Drawing.Size(475, 302);
+            this.chart2.Size = new System.Drawing.Size(475, 574);
             this.chart2.TabIndex = 0;
             this.chart2.Text = "chart2";
             // 
@@ -240,15 +238,13 @@
         #endregion
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Panel pnlTop;
-        private System.Windows.Forms.DateTimePicker dtpFrom;
+        private System.Windows.Forms.DateTimePicker dtpCheckIn;
         private System.Windows.Forms.DataGridView dgvRevenue;
-        private System.Windows.Forms.DateTimePicker dtpTo;
+        private System.Windows.Forms.DateTimePicker dtpCheckOut;
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Panel pnlDgv;
         private System.Windows.Forms.Panel pnlChart;
         private System.Windows.Forms.Panel pnlChartBottom;
-        private System.Windows.Forms.Panel pnlChartTop;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

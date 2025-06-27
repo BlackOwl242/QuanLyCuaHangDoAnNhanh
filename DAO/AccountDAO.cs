@@ -1,4 +1,4 @@
-﻿using QuanLyCuaHangDoAnNhanh.DAO;
+using QuanLyCuaHangDoAnNhanh.DAO;
 using QuanLyCuaHangDoAnNhanh.DTO;
 using System;
 using System.Collections.Generic;
@@ -59,6 +59,28 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             string query = "DELETE dbo.Account WHERE UserName = @userName";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName });
             return result > 0;
+        }
+    }
+}
+        public static AccountDAO Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new AccountDAO();
+                return instance;
+            }
+            private set { instance = value; }
+        }
+        private AccountDAO() { }
+
+        public bool Login(string userName, string passWord)
+        {
+            string query = "USP_Login @userName , @passWord";
+
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, passWord });
+
+            return result.Rows.Count>0; // Trả về true nếu có ít nhất một tài khoản khớp với thông tin đăng nhập
         }
     }
 }

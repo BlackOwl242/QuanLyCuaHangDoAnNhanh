@@ -1,4 +1,4 @@
-﻿using QuanLyCuaHangDoAnNhanh.DTO;
+using QuanLyCuaHangDoAnNhanh.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,11 +19,11 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         }
 
         private CategoryDAO() { }
-
+        
         public List<Category> GetListCategory()
         {
             List<Category> list = new List<Category>();
-            string query = "select * from FoodCategory";
+            string query = "SELECT * FROM dbo.FoodCategory";
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
             foreach (DataRow item in data.Rows)
             {
