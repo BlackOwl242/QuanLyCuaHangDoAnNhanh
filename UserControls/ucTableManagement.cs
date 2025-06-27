@@ -48,7 +48,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         void LoadFoodListByCategoryID(int id)
         {
-            List<Food> listFood = FoodDAO.Instance.GetListFood(id);
+            List<Food> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
             cbFoodAndDrinks.DataSource = listFood;
             cbFoodAndDrinks.DisplayMember = "Name"; // Hiển thị tên món ăn
         }

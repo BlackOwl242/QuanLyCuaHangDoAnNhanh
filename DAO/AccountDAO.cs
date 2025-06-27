@@ -42,8 +42,6 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             return result > 0;
         }
         
-
-
         /// Cập nhật thông tin tài khoản.
         public bool UpdateAccount(string userName, string displayName, int type)
         {
@@ -60,19 +58,6 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName });
             return result > 0;
         }
-    }
-}
-        public static AccountDAO Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new AccountDAO();
-                return instance;
-            }
-            private set { instance = value; }
-        }
-        private AccountDAO() { }
 
         public bool Login(string userName, string passWord)
         {
