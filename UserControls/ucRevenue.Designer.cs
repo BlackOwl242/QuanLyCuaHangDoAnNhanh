@@ -32,6 +32,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnView = new System.Windows.Forms.Button();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.dtpCheckIn = new System.Windows.Forms.DateTimePicker();
@@ -42,6 +45,8 @@
             this.pnlChart = new System.Windows.Forms.Panel();
             this.pnlChartBottom = new System.Windows.Forms.Panel();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.pnlChartTop = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRevenue)).BeginInit();
             this.pnlContent.SuspendLayout();
@@ -49,6 +54,8 @@
             this.pnlChart.SuspendLayout();
             this.pnlChartBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            this.pnlChartTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnView
@@ -180,6 +187,33 @@
             this.chart2.TabIndex = 0;
             this.chart2.Text = "chart2";
             // 
+            // pnlChartTop
+            // 
+            this.pnlChartTop.Controls.Add(this.chart1);
+            this.pnlChartTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlChartTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlChartTop.Name = "pnlChartTop";
+            this.pnlChartTop.Padding = new System.Windows.Forms.Padding(25, 0, 25, 25);
+            this.pnlChartTop.Size = new System.Drawing.Size(525, 272);
+            this.pnlChartTop.TabIndex = 0;
+            // 
+            // chart1
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(25, 0);
+            this.chart1.Name = "chart1";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(475, 247);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
             // ucRevenue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,6 +229,8 @@
             this.pnlChart.ResumeLayout(false);
             this.pnlChartBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            this.pnlChartTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DTO\Account.cs" />
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillInfoDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -11,24 +11,85 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
     public class FoodDAO
     {
         private static FoodDAO instance;
+
         public static FoodDAO Instance
         {
-            get { if (instance == null) instance = new FoodDAO(); return instance; }
-            private set { instance = value; }
+            get { if (instance == null) instance = new FoodDAO(); return FoodDAO.instance; }
+            private set { FoodDAO.instance = value; }
         }
+
         private FoodDAO() { }
-        
-        public List<Food> GetListFood(int id)
+
+        public List<Food> GetFoodByCategoryID(int id)
         {
             List<Food> list = new List<Food>();
+
             string query = "SELECT * FROM dbo.Food WHERE idCategory = " + id;
+
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
             foreach (DataRow item in data.Rows)
             {
                 Food food = new Food(item);
                 list.Add(food);
             }
             return list;
+        }
+
+        public DataTable GetListFood()
+        {
+            // Truy vấn để lấy danh sách món ăn cùng với thông tin danh mục
+            string query = @"
+                SELECT 
+                    f.id AS ID, 
+                    f.name AS TenMon, 
+                    f.idCategory AS IDDanhMuc, 
+                    fc.name AS TenDanhMuc, 
+                    f.price AS Gia 
+                FROM dbo.Food AS f
+                INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
+
+        public bool InsertFood(string name, int idCategory, float price)
+        {
+            // Kiểm tra xem tên món ăn có hợp lệ không
+            string query = "INSERT dbo.Food (name, idCategory, price) VALUES ( @name , @idCategory , @price )";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price });
+            return result > 0;
+        }
+        public bool UpdateFood(int idFood, string name, int idCategory, float price)
+        {
+            string query = "UPDATE dbo.Food SET name = @name , idCategory = @idCategory , price = @price WHERE id = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price, idFood });
+            return result > 0;
+        }
+        public bool DeleteFood(int idFood)
+        {
+            // Xóa các bản ghi liên quan trong BillInfo trước
+            DataProvider.Instance.ExecuteNonQuery("DELETE BillInfo WHERE idFood = @idFood", new object[] { idFood });
+
+            // Xóa món ăn
+            string query = "DELETE Food WHERE id = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { idFood });
+            return result > 0;
+        }
+
+        public DataTable SearchFoodByName(string name)
+        {
+            // Truy vấn để tìm kiếm món ăn theo tên, sử dụng hàm chuyển đổi không dấu
+            string query = @"
+                SELECT 
+                    f.id AS ID, 
+                    f.name AS TenMon, 
+                    f.idCategory AS IDDanhMuc, 
+                    fc.name AS TenDanhMuc, 
+                    f.price AS Gia
+                FROM dbo.Food AS f 
+                INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id
+                WHERE dbo.fuConvertToUnsign1(f.name) LIKE N'%' + dbo.fuConvertToUnsign1( @name ) + '%'";
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { name });
+            return data;
         }
     }
 }
