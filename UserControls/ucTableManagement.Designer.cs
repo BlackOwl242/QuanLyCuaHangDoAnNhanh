@@ -215,7 +215,7 @@
             this.cbSwitchTable.FormattingEnabled = true;
             this.cbSwitchTable.Location = new System.Drawing.Point(16, 60);
             this.cbSwitchTable.Name = "cbSwitchTable";
-            this.cbSwitchTable.Size = new System.Drawing.Size(130, 29);
+            this.cbSwitchTable.Size = new System.Drawing.Size(112, 29);
             this.cbSwitchTable.TabIndex = 8;
             // 
             // nmDiscount
@@ -224,7 +224,7 @@
             this.nmDiscount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.nmDiscount.Location = new System.Drawing.Point(176, 60);
             this.nmDiscount.Name = "nmDiscount";
-            this.nmDiscount.Size = new System.Drawing.Size(130, 29);
+            this.nmDiscount.Size = new System.Drawing.Size(112, 29);
             this.nmDiscount.TabIndex = 7;
             this.nmDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -236,7 +236,7 @@
             this.btnDiscount.ForeColor = System.Drawing.Color.White;
             this.btnDiscount.Location = new System.Drawing.Point(176, 17);
             this.btnDiscount.Name = "btnDiscount";
-            this.btnDiscount.Size = new System.Drawing.Size(130, 37);
+            this.btnDiscount.Size = new System.Drawing.Size(112, 37);
             this.btnDiscount.TabIndex = 6;
             this.btnDiscount.Text = "Giảm giá";
             this.btnDiscount.UseVisualStyleBackColor = false;
@@ -250,7 +250,7 @@
             this.btnSwitchTable.ForeColor = System.Drawing.Color.White;
             this.btnSwitchTable.Location = new System.Drawing.Point(16, 17);
             this.btnSwitchTable.Name = "btnSwitchTable";
-            this.btnSwitchTable.Size = new System.Drawing.Size(130, 37);
+            this.btnSwitchTable.Size = new System.Drawing.Size(112, 37);
             this.btnSwitchTable.TabIndex = 5;
             this.btnSwitchTable.Text = "Chuyển bàn";
             this.btnSwitchTable.UseVisualStyleBackColor = false;

@@ -50,6 +50,7 @@
             this.btnRevenue = new System.Windows.Forms.Button();
             this.pnlFoodAndDrinks = new System.Windows.Forms.Panel();
             this.btnFoodAndDninks = new System.Windows.Forms.Button();
+            this.lblDisplayName = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             this.pnlTopMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).BeginInit();
@@ -96,6 +97,7 @@
             // pnlTopMenu
             // 
             this.pnlTopMenu.BackColor = System.Drawing.Color.Peru;
+            this.pnlTopMenu.Controls.Add(this.lblDisplayName);
             this.pnlTopMenu.Controls.Add(this.pbToggleMenu);
             this.pnlTopMenu.Location = new System.Drawing.Point(1, 0);
             this.pnlTopMenu.Margin = new System.Windows.Forms.Padding(0);
@@ -156,12 +158,12 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.pnlMenu.Controls.Add(this.pnlRevenue);
             this.pnlMenu.Controls.Add(this.pnlAccountManagement);
             this.pnlMenu.Controls.Add(this.pnlTableManagement);
             this.pnlMenu.Controls.Add(this.pnlCategory);
             this.pnlMenu.Controls.Add(this.pbSetting);
             this.pnlMenu.Controls.Add(this.pnlTable);
-            this.pnlMenu.Controls.Add(this.pnlRevenue);
             this.pnlMenu.Controls.Add(this.pnlFoodAndDrinks);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMenu.Location = new System.Drawing.Point(0, 74);
@@ -238,12 +240,13 @@
             this.pbSetting.Size = new System.Drawing.Size(46, 46);
             this.pbSetting.TabIndex = 13;
             this.pbSetting.TabStop = false;
+            this.pbSetting.Click += new System.EventHandler(this.pbSetting_Click);
             // 
             // pnlTable
             // 
             this.pnlTable.BackColor = System.Drawing.Color.Transparent;
             this.pnlTable.Controls.Add(this.btnTable);
-            this.pnlTable.Location = new System.Drawing.Point(1, 219);
+            this.pnlTable.Location = new System.Drawing.Point(1, 73);
             this.pnlTable.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTable.Name = "pnlTable";
             this.pnlTable.Size = new System.Drawing.Size(239, 73);
@@ -272,7 +275,7 @@
             // 
             this.pnlRevenue.BackColor = System.Drawing.Color.Transparent;
             this.pnlRevenue.Controls.Add(this.btnRevenue);
-            this.pnlRevenue.Location = new System.Drawing.Point(1, 73);
+            this.pnlRevenue.Location = new System.Drawing.Point(1, 219);
             this.pnlRevenue.Margin = new System.Windows.Forms.Padding(0);
             this.pnlRevenue.Name = "pnlRevenue";
             this.pnlRevenue.Size = new System.Drawing.Size(239, 73);
@@ -325,6 +328,20 @@
             this.btnFoodAndDninks.UseVisualStyleBackColor = false;
             this.btnFoodAndDninks.Click += new System.EventHandler(this.btnFoodAndDninks_Click);
             // 
+            // lblDisplayName
+            // 
+            this.lblDisplayName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblDisplayName.AutoSize = true;
+            this.lblDisplayName.BackColor = System.Drawing.Color.Transparent;
+            this.lblDisplayName.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisplayName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
+            this.lblDisplayName.Location = new System.Drawing.Point(71, 21);
+            this.lblDisplayName.Name = "lblDisplayName";
+            this.lblDisplayName.Size = new System.Drawing.Size(165, 32);
+            this.lblDisplayName.TabIndex = 2;
+            this.lblDisplayName.Text = "DisplayName";
+            this.lblDisplayName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,6 +361,7 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlTopMenu.ResumeLayout(false);
+            this.pnlTopMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).EndInit();
             this.pnlTableManagement.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
@@ -378,5 +396,6 @@
         private System.Windows.Forms.Button btnCategory;
         private System.Windows.Forms.PictureBox pbSetting;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblDisplayName;
     }
 }
