@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucFoodAndDrinks));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.numpPrice = new System.Windows.Forms.NumericUpDown();
             this.cbCategory = new System.Windows.Forms.ComboBox();
@@ -42,7 +44,7 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlDgv = new System.Windows.Forms.Panel();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvFoodAndDrinks = new System.Windows.Forms.DataGridView();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -56,7 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlContent.SuspendLayout();
             this.pnlDgv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFoodAndDrinks)).BeginInit();
             this.pnlTop.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -196,6 +198,7 @@
             this.txtID.Location = new System.Drawing.Point(85, 61);
             this.txtID.Margin = new System.Windows.Forms.Padding(2);
             this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(236, 35);
             this.txtID.TabIndex = 0;
             // 
@@ -213,7 +216,7 @@
             // 
             // pnlDgv
             // 
-            this.pnlDgv.Controls.Add(this.dataGridView2);
+            this.pnlDgv.Controls.Add(this.dgvFoodAndDrinks);
             this.pnlDgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDgv.Location = new System.Drawing.Point(0, 61);
             this.pnlDgv.Margin = new System.Windows.Forms.Padding(2);
@@ -222,17 +225,36 @@
             this.pnlDgv.Size = new System.Drawing.Size(705, 541);
             this.pnlDgv.TabIndex = 7;
             // 
-            // dataGridView2
+            // dgvFoodAndDrinks
             // 
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(19, 0);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(667, 521);
-            this.dataGridView2.TabIndex = 0;
+            this.dgvFoodAndDrinks.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LavenderBlush;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFoodAndDrinks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvFoodAndDrinks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LavenderBlush;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFoodAndDrinks.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvFoodAndDrinks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFoodAndDrinks.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvFoodAndDrinks.Location = new System.Drawing.Point(19, 0);
+            this.dgvFoodAndDrinks.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvFoodAndDrinks.Name = "dgvFoodAndDrinks";
+            this.dgvFoodAndDrinks.ReadOnly = true;
+            this.dgvFoodAndDrinks.RowTemplate.Height = 24;
+            this.dgvFoodAndDrinks.Size = new System.Drawing.Size(667, 521);
+            this.dgvFoodAndDrinks.TabIndex = 0;
+            this.dgvFoodAndDrinks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFoodAndDrinks_CellClick);
             // 
             // pnlTop
             // 
@@ -368,7 +390,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlContent.ResumeLayout(false);
             this.pnlDgv.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFoodAndDrinks)).EndInit();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlButton.ResumeLayout(false);
@@ -383,11 +405,9 @@
         private System.Windows.Forms.Panel pnlDgv;
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Panel pnlButton;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvFoodAndDrinks;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.Label lbID;
         private System.Windows.Forms.Label lbDish;
         private System.Windows.Forms.TextBox txtDish;
         private System.Windows.Forms.Label lbPrice;
@@ -400,5 +420,7 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.NumericUpDown numpPrice;
         private System.Windows.Forms.ComboBox cbCategory;
+        private System.Windows.Forms.Label lbID;
+        private System.Windows.Forms.TextBox txtID;
     }
 }

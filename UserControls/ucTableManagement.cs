@@ -152,14 +152,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 tableBLL.AddFoodToBill(tableBLL.GetMaxBillId(), (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
             }
 
-            // Kiểm tra món ăn đã được chọn chưa
-            if (cbFoodAndDrinks.SelectedItem == null)
-            {
-                MessageBox.Show("Vui lòng chọn một món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-                tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
-            }
-
             // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
             int foodID = (cbFoodAndDrinks.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;

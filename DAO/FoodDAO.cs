@@ -65,6 +65,13 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price, imagePath, idFood });
             return result > 0;
         }
+        public bool UpdateImageFood(int idFood, string imagePath)
+        {
+            // Cập nhật đường dẫn hình ảnh của món ăn
+            string query = "UPDATE dbo.Food SET ImagePath = @imagePath WHERE id = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { imagePath, idFood });
+            return result > 0;
+        }
         public bool DeleteFood(int idFood)
         {
             // Xóa các bản ghi liên quan trong BillInfo trước
@@ -81,8 +88,6 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             // Truy vấn để tìm kiếm món ăn theo tên, sử dụng hàm chuyển đổi không dấu
             // @name là tham số đầu vào, tránh SQL Injection
             string query = @" 
-            // Truy vấn để tìm kiếm món ăn theo tên, hỗ trợ cả tìm kiếm không dấu và có dấu
-            string query = @"
                 SELECT 
                     f.id AS ID, 
                     f.name AS TenMon, 

@@ -14,9 +14,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     public partial class ucAccountManagement: UserControl
     {
-        // Biến để xác định chế độ thêm mới
-        private bool isAddNewMode = false;
-
         // Import hàm CreateRoundRectRgn từ Gdi32.dll để tạo hình tròn cho nút
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -33,9 +30,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             InitializeComponent();
             LoadAccountList();
+            dgvAccount.AllowUserToAddRows = false;
         }
 
         #region Method
+        // Biến để xác định chế độ thêm mới
+        private bool isAddNewMode = false;
+
         void LoadAccountList()
         {
             string query = "SELECT UserName AS [Tên tài khoản], DisplayName AS [Tên hiển thị], CASE Type WHEN 1 THEN 'Admin' ELSE 'Nhân viên' END AS [Loại tài khoản] FROM dbo.Account";
@@ -61,19 +62,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             // Ở chế độ xem/sửa, không cho phép thay đổi Tên tài khoản (khóa chính)
             txtUserName.ReadOnly = true;
             isAddNewMode = false; // Tắt cờ "Thêm mới"
-        }
-
-        void AddAccountBinding()
-        {
-            // Xóa các binding cũ (nếu có)
-            txtUserName.DataBindings.Clear();
-            txtDisplayName.DataBindings.Clear();
-            cbType.DataBindings.Clear();
-
-            // Thêm binding mới
-            txtUserName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên tài khoản", true, DataSourceUpdateMode.Never));
-            txtDisplayName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
-            cbType.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Loại tài khoản", true, DataSourceUpdateMode.Never));
         }
 
         void ResetPassword(string userName)
@@ -137,36 +125,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 isAddNewMode = false;
                 SetBinding();
             }
-        }
-
-
-        void LoadAccountList()
-        {
-            string query = "SELECT UserName AS [Tên tài khoản], DisplayName AS [Tên hiển thị], CASE Type WHEN 1 THEN 'Admin' ELSE 'Nhân viên' END AS [Loại tài khoản] FROM dbo.Account";
-            dgvAccount.DataSource = DataProvider.Instance.ExecuteQuery(query);
-        }
-
-        void ClearBinding()
-        {
-            // Ngắt liên kết dữ liệu
-            txtUserName.DataBindings.Clear();
-            txtDisplayName.DataBindings.Clear();
-            cbType.DataBindings.Clear();
-        }
-
-        void SetBinding()
-        {
-            // Thiết lập lại liên kết dữ liệu
-            ClearBinding();
-
-            // Thiết lập liên kết dữ liệu với DataGridView
-            txtUserName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên tài khoản", true, DataSourceUpdateMode.Never));
-            txtDisplayName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
-            cbType.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Loại tài khoản", true, DataSourceUpdateMode.Never));
-
-            // Ở chế độ xem/sửa, không cho phép thay đổi Tên tài khoản (khóa chính)
-            txtUserName.ReadOnly = true;
-            isAddNewMode = false; // Tắt cờ "Thêm mới"
         }
         
         private void btnAdd_Click(object sender, EventArgs e)

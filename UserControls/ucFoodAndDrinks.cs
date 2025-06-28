@@ -17,38 +17,19 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
     {
         // Sử dụng BindingSource để quản lý dữ liệu một cách hiệu quả
         readonly BindingSource foodList = new BindingSource();
-        private string _currentImagePath = null;
+        private string _currentImagePath = null; // Biến để lưu đường dẫn ảnh hiện tại
 
         public ucFoodAndDrinks()
         {
             InitializeComponent();
             // Gán sự kiện Load để đảm bảo các control đã được khởi tạo
             this.Load += ucFoodAndDrinks_Load;
+            dgvFoodAndDrinks.AllowUserToAddRows = false;
         }
 
-        private void ucFoodAndDrinks_Load(object sender, EventArgs e)
-        {
-            // Thiết lập DataGridView và gán DataSource
-            SetupDataGridView();
-            // Tải dữ liệu từ CSDL
-            LoadFoodList();
-            // Thiết lập liên kết dữ liệu cho các TextBox
-            AddFoodBinding();
-            LoadCategoryIntoCombobox(cbCategory);
-            foodList.CurrentChanged += FoodList_CurrentChanged;
-        }
-        private void FoodList_CurrentChanged(object sender, EventArgs e)
-        {
-            // Lấy đường dẫn ảnh từ món ăn đang được chọn
-            if (foodList.Current is DataRowView rowView)
-            {
-                string imagePath = rowView["ImagePath"] != DBNull.Value ? rowView["ImagePath"].ToString() : null;
-
-                // Hiển thị ảnh
-                ShowImage(imagePath);
-                _currentImagePath = imagePath; // Cập nhật đường dẫn hiện tại
-            }
-        }
+        #region Method
+        // Biến để xác định chế độ thêm mới
+        private bool isAddNewMode = false;
 
         void ShowImage(string relativePath)
         {
@@ -82,18 +63,70 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         // Đảm bảo các cột luôn tồn tại và tránh lỗi NullReferenceException.
         void SetupDataGridView()
         {
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.DataSource = foodList;
-            dataGridView2.Columns.Clear();
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "ID", HeaderText = "Mã", DataPropertyName = "ID" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "TenMon", HeaderText = "Tên Món Ăn", DataPropertyName = "TenMon", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "TenDanhMuc", HeaderText = "Danh Mục", DataPropertyName = "TenDanhMuc" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Gia", HeaderText = "Đơn Giá", DataPropertyName = "Gia" });
+            dgvFoodAndDrinks.AutoGenerateColumns = false;
+            dgvFoodAndDrinks.DataSource = foodList;
+            dgvFoodAndDrinks.Columns.Clear();
+            dgvFoodAndDrinks.Columns.Add(new DataGridViewTextBoxColumn { Name = "ID", HeaderText = "Mã", DataPropertyName = "ID" });
+            dgvFoodAndDrinks.Columns.Add(new DataGridViewTextBoxColumn { Name = "TenMon", HeaderText = "Tên Món Ăn", DataPropertyName = "TenMon", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            dgvFoodAndDrinks.Columns.Add(new DataGridViewTextBoxColumn { Name = "TenDanhMuc", HeaderText = "Danh Mục", DataPropertyName = "TenDanhMuc" });
+            dgvFoodAndDrinks.Columns.Add(new DataGridViewTextBoxColumn { Name = "Gia", HeaderText = "Đơn Giá", DataPropertyName = "Gia" });
         }
 
-        /// <summary>
-        /// Tải danh sách món ăn từ CSDL và gán vào BindingSource.
-        /// </summary>         
+        void ClearBinding()
+        {
+            // Xóa các binding hiện tại để tránh lỗi khi thêm mới
+            txtID.DataBindings.Clear();
+            txtDish.DataBindings.Clear();
+            cbCategory.DataBindings.Clear();
+            numpPrice.DataBindings.Clear();
+        }
+
+        void SetBinding()
+        {
+            ClearBinding();
+
+            // Thêm các binding mới, liên kết trực tiếp với BindingSource
+            txtID.DataBindings.Add(new Binding("Text", foodList, "ID", true, DataSourceUpdateMode.Never));
+            txtDish.DataBindings.Add(new Binding("Text", foodList, "TenMon", true, DataSourceUpdateMode.Never));
+            cbCategory.DataBindings.Add(new Binding("SelectedValue", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
+            numpPrice.DataBindings.Add(new Binding("Value", foodList, "Gia", true, DataSourceUpdateMode.Never));
+
+            isAddNewMode = false; // Tắt cờ "Thêm mới"
+        }
+
+        void LoadCategoryIntoCombobox(ComboBox cb)
+        {
+            cb.DataSource = CategoryDAO.Instance.GetListCategory();
+            cb.DisplayMember = "Name"; // Hiển thị tên danh mục
+            cb.ValueMember = "ID";   // Nhưng giá trị thực sự là ID
+        }
+        #endregion
+
+        #region Event
+        private void ucFoodAndDrinks_Load(object sender, EventArgs e)
+        {
+            // Thiết lập DataGridView và gán DataSource
+            SetupDataGridView();
+            // Tải dữ liệu từ CSDL
+            LoadFoodList();
+            // Thiết lập liên kết dữ liệu cho các TextBox
+            SetBinding();
+            LoadCategoryIntoCombobox(cbCategory);
+            foodList.CurrentChanged += FoodList_CurrentChanged;
+        }
+
+        private void FoodList_CurrentChanged(object sender, EventArgs e)
+        {
+            // Lấy đường dẫn ảnh từ món ăn đang được chọn
+            if (foodList.Current is DataRowView rowView)
+            {
+                string imagePath = rowView["ImagePath"] != DBNull.Value ? rowView["ImagePath"].ToString() : null;
+
+                // Hiển thị ảnh
+                ShowImage(imagePath);
+                _currentImagePath = imagePath; // Cập nhật đường dẫn hiện tại
+            }
+        }
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
@@ -136,40 +169,68 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             foodList.DataSource = FoodDAO.Instance.GetListFood();
         }
-        void AddFoodBinding()
-        {
-            // Xóa các binding cũ để tránh lỗi
-            txtID.DataBindings.Clear();
-            txtDish.DataBindings.Clear();
-            cbCategory.DataBindings.Clear();
-            numpPrice.DataBindings.Clear();
-
-            // Thêm các binding mới, liên kết trực tiếp với BindingSource
-            txtID.DataBindings.Add(new Binding("Text", foodList, "ID", true, DataSourceUpdateMode.Never));
-            txtDish.DataBindings.Add(new Binding("Text", foodList, "TenMon", true, DataSourceUpdateMode.Never));
-            cbCategory.DataBindings.Add(new Binding("SelectedValue", foodList, "IDDanhMuc", true, DataSourceUpdateMode.Never));
-            numpPrice.DataBindings.Add(new Binding("Value", foodList, "Gia", true, DataSourceUpdateMode.Never));
-        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem có ảnh được tải lên không
-            if (string.IsNullOrWhiteSpace(txtDish.Text))
+            if (!isAddNewMode)
             {
-                MessageBox.Show("Tên món ăn không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Chuyển sang chế độ thêm mới
+                isAddNewMode = true;
+                txtID.Text = "";
+                txtDish.Text = "";
+                cbCategory.SelectedIndex = -1;
+                numpPrice.Value = 0;
+                pictureBox1.Image = null;
+                _currentImagePath = null;
+
+                txtDish.ReadOnly = false;
+                txtID.ReadOnly = true;
+                cbCategory.Enabled = true;
+                numpPrice.Enabled = true;
+                btnEdit.Enabled = false;
+                btnAdd.Text = "Lưu";
                 return;
             }
+
+            // Đang ở chế độ thêm mới, thực hiện lưu dữ liệu
             try
             {
                 string name = txtDish.Text;
+                if (cbCategory.SelectedValue == null)
+                {
+                    MessageBox.Show("Vui lòng chọn danh mục!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 int categoryID = (int)cbCategory.SelectedValue;
                 float price = (float)numpPrice.Value;
 
-                // Thêm món ăn với đường dẫn ảnh
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    MessageBox.Show("Tên món ăn không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (categoryID == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn danh mục cho món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (float.IsNaN(price) || price <= 0)
+                {
+                    MessageBox.Show("Giá món ăn phải lớn hơn 0!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (string.IsNullOrEmpty(_currentImagePath))
+                {
+                    MessageBox.Show("Vui lòng tải lên ảnh cho món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 if (FoodDAO.Instance.InsertFood(name, categoryID, price, _currentImagePath))
                 {
                     MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadFoodList();
+                    SetBinding();
+                    isAddNewMode = false;
+                    btnAdd.Text = "Thêm";
                 }
                 else
                 {
@@ -184,26 +245,40 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem ID có hợp lệ không
-            if (!int.TryParse(txtID.Text, out int id))
-            {
-                MessageBox.Show("Vui lòng chọn một món ăn để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtDish.Text))
-            {
-                MessageBox.Show("Tên món ăn không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Kiểm tra xem có ảnh mới được tải lên không
             try
             {
                 string name = txtDish.Text;
                 int categoryID = (int)cbCategory.SelectedValue;
                 float price = (float)numpPrice.Value;
 
+                // Kiểm tra xem ID có hợp lệ không
+                if (!int.TryParse(txtID.Text, out int id))
+                {
+                    MessageBox.Show("Vui lòng chọn một món ăn để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtDish.Text))
+                {
+                    MessageBox.Show("Tên món ăn không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (int.Parse(cbCategory.SelectedValue.ToString()) == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn danh mục cho món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (float.IsNaN(price) || price <= 0)
+                {
+                    MessageBox.Show("Giá món ăn phải lớn hơn 0!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (string.IsNullOrEmpty(_currentImagePath))
+                {
+                    MessageBox.Show("Vui lòng tải lên ảnh cho món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 // Cập nhật món ăn với đường dẫn ảnh
                 if (FoodDAO.Instance.UpdateFood(id, name, categoryID, price, _currentImagePath))
                 {
@@ -256,12 +331,29 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             foodList.DataSource = FoodDAO.Instance.SearchFoodByName(txtSearch.Text);
         }
 
-        void LoadCategoryIntoCombobox(ComboBox cb)
+        private void dgvFoodAndDrinks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            cb.DataSource = CategoryDAO.Instance.GetListCategory();
-            cb.DisplayMember = "Name"; // Hiển thị tên danh mục
-            cb.ValueMember = "ID";   // Nhưng giá trị thực sự là ID
+            // Nếu đang ở chế độ thêm mới, hủy chế độ thêm mới và quay lại chế độ xem/sửa
+            if (isAddNewMode)
+            {
+                isAddNewMode = false;
+                SetBinding();
+                btnAdd.Text = "Thêm";
+                btnEdit.Enabled = true;
+            }
+
+            // Nếu click vào dòng hợp lệ thì cập nhật lại trạng thái các control
+            if (e.RowIndex >= 0 && e.RowIndex < dgvFoodAndDrinks.Rows.Count)
+            {
+                txtDish.ReadOnly = false;
+                txtID.ReadOnly = true;
+                cbCategory.Enabled = true;
+                numpPrice.Enabled = true;
+                btnEdit.Enabled = true;
+                btnAdd.Enabled = true;
+            }
         }
+        #endregion
     }
 }
 

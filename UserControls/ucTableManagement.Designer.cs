@@ -285,6 +285,7 @@
             this.flpTable.AutoScroll = true;
             this.flpTable.BackColor = System.Drawing.Color.White;
             this.flpTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpTable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.flpTable.Location = new System.Drawing.Point(16, 16);
             this.flpTable.Name = "flpTable";
             this.flpTable.Size = new System.Drawing.Size(514, 622);

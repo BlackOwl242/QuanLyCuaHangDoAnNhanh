@@ -363,5 +363,8 @@ MigrationBackup/
 FodyWeavers.xsd
 App.config
 Properties/Settings.Designer.cs
-
 Properties/Settings.settings
+
+/Images/Food And Drinks
+*.config
+/Properties

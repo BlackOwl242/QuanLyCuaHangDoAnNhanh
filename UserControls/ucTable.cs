@@ -14,7 +14,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     public partial class ucTable: UserControl
     {
-        BindingSource tableList = new BindingSource();
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -32,21 +31,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             dgvTable.DataSource = tableList;
             AddTableBinding();
         }
+
+        #region Method
+        BindingSource tableList = new BindingSource();
+        private bool isAddNewMode = false;
         void LoadTable()
         {
             tableList.DataSource = TableDAO.Instance.LoadTableList();
-        }
-
-        private void ucTable_Load(object sender, EventArgs e)
-        {
-            btnAdd.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnAdd.Width, btnAdd.Height, 15, 15));
-            btnEdit.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnEdit.Width, btnEdit.Height, 15, 15));
-            btnDelete.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnDelete.Width, btnDelete.Height, 15, 15));
-            btnView.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnView.Width, btnView.Height, 15, 15));
         }
         void AddTableBinding()
         {
@@ -60,14 +51,59 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             cbStatus.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
             txtID.ReadOnly = true;
         }
+        #endregion
 
+        #region Event
+        private void ucTable_Load(object sender, EventArgs e)
+        {
+            btnAdd.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnAdd.Width, btnAdd.Height, 15, 15));
+            btnEdit.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnEdit.Width, btnEdit.Height, 15, 15));
+            btnDelete.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnDelete.Width, btnDelete.Height, 15, 15));
+            btnView.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnView.Width, btnView.Height, 15, 15));
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string name = txtTableName.Text;
-            if (TableDAO.Instance.InsertTable(name))
+            if (!isAddNewMode)
+            {
+                // Chuyển sang chế độ thêm mới
+                isAddNewMode = true;
+                txtID.Text = "";
+                txtTableName.Text = "";
+                cbStatus.SelectedIndex = -1; // hoặc cbStatus.Text = "";
+                txtTableName.ReadOnly = false;
+                cbStatus.Enabled = true;
+                btnEdit.Enabled = false;
+                btnAdd.Text = "Lưu";
+                return;
+            }
+
+            // Đang ở chế độ thêm mới, thực hiện lưu
+            string name = txtTableName.Text.Trim();
+            string status = cbStatus.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Tên bàn không được để trống!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái bàn!");
+                return;
+            }
+
+            if (TableDAO.Instance.InsertTable(name, status))
             {
                 MessageBox.Show("Thêm bàn thành công");
                 LoadTable();
+                AddTableBinding();
+                isAddNewMode = false;
+                btnAdd.Text = "Thêm";
+                btnEdit.Enabled = true;
             }
             else
             {
@@ -77,13 +113,33 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn bàn để sửa!");
+                return;
+            }
+            txtTableName.ReadOnly = false;
+            cbStatus.Enabled = true;
+
+            // Khi bấm lại lần nữa sẽ lưu
+            btnEdit.Text = btnEdit.Text == "Lưu" ? "Sửa" : "Lưu";
+
+            if (btnEdit.Text == "Lưu")
+                return;
+
+            // Lưu thông tin sửa
             int id = Convert.ToInt32(txtID.Text);
-            string name = txtTableName.Text;
-            string status = cbStatus.Text;
+            string name = txtTableName.Text.Trim();
+            string status = cbStatus.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Tên bàn không được để trống!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái bàn!");
                 return;
             }
 
@@ -91,14 +147,16 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             {
                 MessageBox.Show("Sửa bàn thành công");
                 LoadTable();
+                AddTableBinding();
+                txtTableName.ReadOnly = true;
+                cbStatus.Enabled = false;
+                btnEdit.Text = "Sửa";
             }
-
             else
             {
                 MessageBox.Show("Sửa bàn thất bại");
             }
         }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(txtID.Text);
@@ -117,5 +175,18 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             LoadTable();
         }
+        private void dgvTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (isAddNewMode)
+            {
+                isAddNewMode = false;
+                AddTableBinding();
+                btnAdd.Text = "Thêm";
+                btnEdit.Enabled = true;
+            }
+            txtTableName.ReadOnly = true;
+            cbStatus.Enabled = true;
+        }
+        #endregion
     }
 }

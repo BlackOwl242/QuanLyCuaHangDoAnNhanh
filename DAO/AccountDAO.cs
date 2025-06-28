@@ -24,10 +24,15 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         private AccountDAO() { }
         public bool Login(string userName, string passWord)
         {
+            string hashedPass = HashPassword(passWord);
+
             string query = "USP_Login @userName , @passWord";
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, passWord });
-            return result.Rows.Count > 0;
+
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, hashedPass });
+
+            return result.Rows.Count > 0; // Trả về true nếu có ít nhất một tài khoản khớp với thông tin đăng nhập
         }
+
 
         // Lấy thông tin tài khoản bằng UserName
         public Account GetAccountByUserName(string userName)
@@ -64,17 +69,6 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             string query = "DELETE dbo.Account WHERE UserName = @userName";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName });
             return result > 0;
-        }
-
-        public bool Login(string userName, string passWord)
-        {
-            string hashedPass = HashPassword(passWord);
-
-            string query = "USP_Login @userName , @passWord";
-
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, hashedPass });
-
-            return result.Rows.Count>0; // Trả về true nếu có ít nhất một tài khoản khớp với thông tin đăng nhập
         }
 
         public bool ResetPassword(string name)

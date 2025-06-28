@@ -32,6 +32,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             LoadDateTimePickerBill();
             UpdateSummaryPanels();
             LoadListBillByDate(dtpCheckIn.Value, dtpCheckOut.Value);
+            dgvRevenue.AllowUserToAddRows = false;
         }
 
         #region Method

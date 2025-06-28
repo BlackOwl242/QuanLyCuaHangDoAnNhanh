@@ -41,10 +41,10 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             string query = "UPDATE TableFood SET status = @status WHERE id = @tableId";
             DataProvider.Instance.ExecuteNonQuery(query, new object[] { status, tableId });
         }
-        public bool InsertTable(string name)
+        public bool InsertTable(string name, string status)
         {
-            string query = "INSERT dbo.TableFood ( name, status ) VALUES ( @name, N'Trống' )";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name });
+            string query = "INSERT INTO TableFood (name, status) VALUES (@name, @status)";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, status });
             return result > 0;
         }
         public bool UpdateTable(int id, string name, string status)
