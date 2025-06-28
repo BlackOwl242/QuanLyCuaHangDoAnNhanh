@@ -368,3 +368,4 @@ Properties/Settings.settings
 /Images/Food And Drinks
 *.config
 /Properties
+Properties/Settings.Designer.cs
