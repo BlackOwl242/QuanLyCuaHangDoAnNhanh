@@ -33,9 +33,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         public ucTableManagement()
         {
             InitializeComponent();
-            LoadTable();
-            LoadCategory();
-            LoadTableComboBox();
+            // Khóa không cho người dùng sửa ID
+            if (!this.DesignMode)
+            {
+                LoadTable();
+                LoadCategory();
+                LoadTableComboBox();
+            }
         }
 
         #region Method
@@ -48,7 +52,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         void LoadFoodListByCategoryID(int id)
         {
-            List<Food> listFood = FoodDAO.Instance.GetListFood(id);
+            List<Food> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
             cbFoodAndDrinks.DataSource = listFood;
             cbFoodAndDrinks.DisplayMember = "Name"; // Hiển thị tên món ăn
         }
@@ -79,11 +83,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         void ShowBill(int id)
         {
+            // Hiển thị thông tin hóa đơn cho bàn
             lsvBill.Items.Clear();
-
+            // Lấy danh sách món ăn trong hóa đơn của bàn
             List<DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
             float totalPrice = 0;
 
+            // Hiển thị thông tin món ăn trong ListView
             foreach (DTO.Menu item in listBillInfo)
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
@@ -120,9 +126,9 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btn_Click(object sender, EventArgs e)
         {
-            //int tableID = ((sender as Button).Tag as Table).ID;
+            // Lấy đối tượng Table từ Tag của nút
             Table table = (sender as Button).Tag as Table;
-
+            // Kiểm tra nếu table không null
             lsvBill.Tag = (sender as Button).Tag;
             ShowBill(table.ID);
         }
@@ -145,18 +151,35 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
+            // Nếu không có bàn nào được chọn thì thông báo lỗi
+            if (table == null)
+            {
+                MessageBox.Show("Vui lòng chọn một bàn trước khi thêm món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Kiểm tra xem có món ăn nào được chọn không
 
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            
             //Nếu bàn chưa có hóa đơn thì tạo hóa đơn mới
             if (idBill == -1)
             {
                 BillDAO.Instance.InsertBill(table.ID);
-                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
+                idBill = BillDAO.Instance.GetMaxIDBill(); // Lấy ID của hóa đơn vừa tạo
             }
-            else
+
+            // Kiểm tra món ăn đã được chọn chưa
+            if (cbFoodAndDrinks.SelectedItem == null)
             {
-                BillInfoDAO.Instance.InsertBillInfo(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
+                MessageBox.Show("Vui lòng chọn một món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
+            int foodID = (cbFoodAndDrinks.SelectedItem as Food).ID;
+            int count = (int)nmFoodCount.Value;
+            BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
+            
             ShowBill(table.ID);
             LoadTable(); // Tải lại danh sách bàn sau khi thêm món
         }
@@ -164,6 +187,12 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void btnPay_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
+            // Kiểm tra xem có bàn nào được chọn không
+            if (table == null)
+            {
+                MessageBox.Show("Vui lòng chọn một bàn để thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
             int discount;
@@ -199,6 +228,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void btnDiscount_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
+            // Kiểm tra xem có bàn nào được chọn không
+            if (table == null)
+            {
+                MessageBox.Show("Vui lòng chọn bàn để áp dụng giảm giá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Kiểm tra xem bàn có hóa đơn chưa
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
             if (idBill != -1)
             {

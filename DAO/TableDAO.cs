@@ -43,14 +43,14 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         }
         public bool InsertTable(string name)
         {
-            string query = "INSERT dbo.TableFood ( name ) VALUES ( @name )";
+            string query = "INSERT dbo.TableFood ( name, status ) VALUES ( @name, N'Trống' )";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name });
             return result > 0;
         }
-        public bool UpdateTable(int id, string name)
+        public bool UpdateTable(int id, string name, string status)
         {
-            string query = "UPDATE dbo.TableFood SET name = @name WHERE id = @id";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, id });
+            string query = "UPDATE dbo.TableFood SET name = @name, status = @status WHERE id = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, status, id });
             return result > 0;
         }
         public bool DeleteTable(int id)

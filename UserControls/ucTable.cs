@@ -50,10 +50,15 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         }
         void AddTableBinding()
         {
+            // Xóa binding cũ để tránh lỗi (nếu có)
+            txtID.DataBindings.Clear();
+            txtTableName.DataBindings.Clear();
+            cbStatus.DataBindings.Clear();
+
             txtID.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
             txtTableName.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            txtStatus.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
-
+            cbStatus.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
+            txtID.ReadOnly = true;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -74,11 +79,20 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             int id = Convert.ToInt32(txtID.Text);
             string name = txtTableName.Text;
-            if (TableDAO.Instance.UpdateTable(id, name))
+            string status = cbStatus.Text;
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Tên bàn không được để trống!");
+                return;
+            }
+
+            if (TableDAO.Instance.UpdateTable(id, name, status))
             {
                 MessageBox.Show("Sửa bàn thành công");
                 LoadTable();
             }
+
             else
             {
                 MessageBox.Show("Sửa bàn thất bại");

@@ -29,9 +29,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         public ucCategory()
         {
             InitializeComponent();
-            txtID.ReadOnly = true; // Khóa không cho người dùng sửa ID
-            LoadCategory();
-
         }
 
         private void ucCategory_Load(object sender, EventArgs e)
@@ -44,22 +41,21 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 (0, 0, btnDelete.Width, btnDelete.Height, 15, 15));
             btnView.Region = Region.FromHrgn(CreateRoundRectRgn
                 (0, 0, btnView.Width, btnView.Height, 15, 15));
-        }
-        void LoadAndBindData()
-        {
-            // Gán BindingSource cho DataGridView
+
             dgvCategory.DataSource = categoryList;
             LoadCategory();
             AddCategoryBinding();
-        }
+        }        
         void LoadCategory()
         {
-            // Tải dữ liệu và gán vào BindingSource. DataGridView sẽ tự động cập nhật.
+            // Tải dữ liệu vào BindingSource, DataGridView sẽ tự động cập nhật
             categoryList.DataSource = CategoryDAO.Instance.GetListCategory();
 
-            // Đặt lại tên cho các cột để hiển thị thân thiện hơn
-            dgvCategory.Columns["ID"].HeaderText = "Mã Danh Mục";
-            dgvCategory.Columns["Name"].HeaderText = "Tên Danh Mục";
+            // Đặt lại tên cho các cột
+            if (dgvCategory.Columns["ID"] != null)
+                dgvCategory.Columns["ID"].HeaderText = "Mã Danh Mục";
+            if (dgvCategory.Columns["Name"] != null)
+                dgvCategory.Columns["Name"].HeaderText = "Tên Danh Mục";
         }
         void AddCategoryBinding()
         {
@@ -70,6 +66,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             // Liên kết các TextBox với BindingSource
             txtID.DataBindings.Add(new Binding("Text", categoryList, "ID", true, DataSourceUpdateMode.Never));
             txtCategoryName.DataBindings.Add(new Binding("Text", categoryList, "Name", true, DataSourceUpdateMode.Never));
+            txtID.ReadOnly = true; // Khóa không cho người dùng sửa ID
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
