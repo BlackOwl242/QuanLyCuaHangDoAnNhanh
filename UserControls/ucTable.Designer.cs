@@ -53,6 +53,7 @@
             // txtID
             // 
             this.txtID.BackColor = System.Drawing.Color.White;
+            this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtID.Location = new System.Drawing.Point(91, 25);
             this.txtID.Name = "txtID";
@@ -75,6 +76,7 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -92,6 +94,7 @@
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -109,6 +112,7 @@
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnView
             // 
@@ -126,6 +130,7 @@
             this.btnView.TabIndex = 3;
             this.btnView.Text = "Xem";
             this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // pnlContent
             // 
@@ -191,6 +196,7 @@
             // txtStatus
             // 
             this.txtStatus.BackColor = System.Drawing.Color.White;
+            this.txtStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtStatus.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtStatus.Location = new System.Drawing.Point(91, 137);
             this.txtStatus.Name = "txtStatus";
@@ -200,6 +206,7 @@
             // txtTableName
             // 
             this.txtTableName.BackColor = System.Drawing.Color.White;
+            this.txtTableName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTableName.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtTableName.Location = new System.Drawing.Point(91, 81);
             this.txtTableName.Name = "txtTableName";

@@ -23,7 +23,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         private TableDAO() { }
 
         public List<Table> LoadTableList()
-        {
+        {           
             List<Table> tableList = new List<Table>();
 
             DataTable data = DataProvider.Instance.ExecuteQuery("USP_GetTableList");
@@ -40,6 +40,24 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         {
             string query = "UPDATE TableFood SET status = @status WHERE id = @tableId";
             DataProvider.Instance.ExecuteNonQuery(query, new object[] { status, tableId });
+        }
+        public bool InsertTable(string name)
+        {
+            string query = "INSERT dbo.TableFood ( name ) VALUES ( @name )";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name });
+            return result > 0;
+        }
+        public bool UpdateTable(int id, string name)
+        {
+            string query = "UPDATE dbo.TableFood SET name = @name WHERE id = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, id });
+            return result > 0;
+        }
+        public bool DeleteTable(int id)
+        {
+            string query = "DELETE dbo.TableFood WHERE id = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { id });
+            return result > 0;
         }
     }
 }

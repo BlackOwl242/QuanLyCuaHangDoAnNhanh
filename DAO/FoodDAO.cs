@@ -78,7 +78,8 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         public DataTable SearchFoodByName(string name)
         {
             // Truy vấn để tìm kiếm món ăn theo tên, sử dụng hàm chuyển đổi không dấu
-            string query = @"
+            // @name là tham số đầu vào, tránh SQL Injection
+            string query = @" 
                 SELECT 
                     f.id AS ID, 
                     f.name AS TenMon, 
@@ -87,7 +88,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                     f.price AS Gia
                 FROM dbo.Food AS f 
                 INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id
-                WHERE dbo.fuConvertToUnsign1(f.name) LIKE N'%' + dbo.fuConvertToUnsign1( @name ) + '%'";
+                WHERE dbo.fuConvertToUnsign1(f.name) LIKE N'%' + dbo.fuConvertToUnsign1( @name ) + '%'"; // % để tìm kiếm không phân biệt chữ hoa chữ thường
             DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { name });
             return data;
         }

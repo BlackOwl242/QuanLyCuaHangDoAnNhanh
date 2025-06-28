@@ -100,8 +100,10 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         void SetBinding()
         {
+            // Thiết lập lại liên kết dữ liệu
             ClearBinding();
 
+            // Thiết lập liên kết dữ liệu với DataGridView
             txtUserName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên tài khoản", true, DataSourceUpdateMode.Never));
             txtDisplayName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
             cbType.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Loại tài khoản", true, DataSourceUpdateMode.Never));
@@ -109,19 +111,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             // Ở chế độ xem/sửa, không cho phép thay đổi Tên tài khoản (khóa chính)
             txtUserName.ReadOnly = true;
             isAddNewMode = false; // Tắt cờ "Thêm mới"
-        }
-
-        void AddAccountBinding()
-        {
-            // Xóa các binding cũ (nếu có)
-            txtUserName.DataBindings.Clear();
-            txtDisplayName.DataBindings.Clear();
-            cbType.DataBindings.Clear();
-
-            // Thêm binding mới
-            txtUserName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên tài khoản", true, DataSourceUpdateMode.Never));
-            txtDisplayName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
-            cbType.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Loại tài khoản", true, DataSourceUpdateMode.Never));           
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
