@@ -139,6 +139,36 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             }
         }
 
+
+        void LoadAccountList()
+        {
+            string query = "SELECT UserName AS [Tên tài khoản], DisplayName AS [Tên hiển thị], CASE Type WHEN 1 THEN 'Admin' ELSE 'Nhân viên' END AS [Loại tài khoản] FROM dbo.Account";
+            dgvAccount.DataSource = DataProvider.Instance.ExecuteQuery(query);
+        }
+
+        void ClearBinding()
+        {
+            // Ngắt liên kết dữ liệu
+            txtUserName.DataBindings.Clear();
+            txtDisplayName.DataBindings.Clear();
+            cbType.DataBindings.Clear();
+        }
+
+        void SetBinding()
+        {
+            // Thiết lập lại liên kết dữ liệu
+            ClearBinding();
+
+            // Thiết lập liên kết dữ liệu với DataGridView
+            txtUserName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên tài khoản", true, DataSourceUpdateMode.Never));
+            txtDisplayName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
+            cbType.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Loại tài khoản", true, DataSourceUpdateMode.Never));
+
+            // Ở chế độ xem/sửa, không cho phép thay đổi Tên tài khoản (khóa chính)
+            txtUserName.ReadOnly = true;
+            isAddNewMode = false; // Tắt cờ "Thêm mới"
+        }
+        
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try

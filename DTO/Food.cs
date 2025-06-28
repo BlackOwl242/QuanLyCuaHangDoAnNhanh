@@ -9,12 +9,14 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
 {
     public class Food
     {
-        public Food(int id, string name, int categoryID, float price)
+        public string ImagePath { get; set; }
+        public Food(int id, string name, int categoryID, float price, string imagePath = null)
         {
             this.ID = id;
             this.Name = name;
             this.CategoryID = categoryID;
             this.Price = price;
+            this.ImagePath = imagePath;
         }
 
         public Food(DataRow row)
@@ -23,6 +25,14 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
             this.Name = row["name"].ToString();
             this.CategoryID = (int)row["idcategory"];
             this.Price = (float)Convert.ToDouble(row["price"].ToString());
+            if (row.Table.Columns.Contains("ImagePath") && row["ImagePath"] != DBNull.Value)
+            {
+                this.ImagePath = row["ImagePath"].ToString();
+            }
+            else
+            {
+                this.ImagePath = null;
+            }
         }
 
         private float price;

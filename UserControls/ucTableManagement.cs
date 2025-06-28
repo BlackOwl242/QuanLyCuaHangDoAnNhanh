@@ -33,9 +33,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         public ucTableManagement()
         {
             InitializeComponent();
-            LoadTable();
-            LoadCategory();
-            LoadTableComboBox();
+            // Khóa không cho người dùng sửa ID
+            if (!this.DesignMode)
+            {
+                LoadTable();
+                LoadCategory();
+                LoadTableComboBox();
+            }
         }
 
         #region Method
@@ -72,6 +76,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         void ShowBill(int id)
         {
+            // Hiển thị thông tin hóa đơn cho bàn
             lsvBill.Items.Clear();
             var listBillInfo = tableBLL.GetMenuByTable(id);
             float totalPrice = 0;
@@ -110,9 +115,9 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btn_Click(object sender, EventArgs e)
         {
-            //int tableID = ((sender as Button).Tag as Table).ID;
+            // Lấy đối tượng Table từ Tag của nút
             Table table = (sender as Button).Tag as Table;
-
+            // Kiểm tra nếu table không null
             lsvBill.Tag = (sender as Button).Tag;
             ShowBill(table.ID);
         }
@@ -146,10 +151,20 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 tableBLL.CreateBill(table.ID);
                 tableBLL.AddFoodToBill(tableBLL.GetMaxBillId(), (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
             }
-            else
+
+            // Kiểm tra món ăn đã được chọn chưa
+            if (cbFoodAndDrinks.SelectedItem == null)
             {
+                MessageBox.Show("Vui lòng chọn một món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
                 tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
             }
+
+            // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
+            int foodID = (cbFoodAndDrinks.SelectedItem as Food).ID;
+            int count = (int)nmFoodCount.Value;
+            BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
+            
             ShowBill(table.ID);
             LoadTable();
         }

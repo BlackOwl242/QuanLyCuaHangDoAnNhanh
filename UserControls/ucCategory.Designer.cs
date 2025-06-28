@@ -34,15 +34,15 @@
             this.btnView = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnDgv = new System.Windows.Forms.Panel();
-            this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.pnButton = new System.Windows.Forms.Panel();
             this.txtCategoryName = new System.Windows.Forms.TextBox();
+            this.dgvCategory = new System.Windows.Forms.DataGridView();
             this.txtID = new System.Windows.Forms.TextBox();
-            this.lbCategoryName = new System.Windows.Forms.Label();
             this.lbID = new System.Windows.Forms.Label();
+            this.lbCategoryName = new System.Windows.Forms.Label();
+            this.pnButton = new System.Windows.Forms.Panel();
             this.pnlContent.SuspendLayout();
             this.pnDgv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
             this.pnButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +62,7 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -79,6 +80,7 @@
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -96,6 +98,7 @@
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnView
             // 
@@ -113,6 +116,7 @@
             this.btnView.TabIndex = 3;
             this.btnView.Text = "Xem";
             this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // pnlContent
             // 
@@ -128,7 +132,7 @@
             // 
             this.pnDgv.BackColor = System.Drawing.Color.LavenderBlush;
             this.pnDgv.Controls.Add(this.txtCategoryName);
-            this.pnDgv.Controls.Add(this.dgvAccount);
+            this.pnDgv.Controls.Add(this.dgvCategory);
             this.pnDgv.Controls.Add(this.txtID);
             this.pnDgv.Controls.Add(this.lbID);
             this.pnDgv.Controls.Add(this.lbCategoryName);
@@ -140,16 +144,58 @@
             this.pnDgv.Size = new System.Drawing.Size(1040, 573);
             this.pnDgv.TabIndex = 7;
             // 
-            // dgvAccount
+            // txtCategoryName
             // 
-            this.dgvAccount.BackgroundColor = System.Drawing.Color.White;
-            this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAccount.Location = new System.Drawing.Point(25, 100);
-            this.dgvAccount.Margin = new System.Windows.Forms.Padding(0);
-            this.dgvAccount.Name = "dgvAccount";
-            this.dgvAccount.Size = new System.Drawing.Size(990, 473);
-            this.dgvAccount.TabIndex = 0;
+            this.txtCategoryName.BackColor = System.Drawing.Color.White;
+            this.txtCategoryName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCategoryName.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.txtCategoryName.Location = new System.Drawing.Point(150, 50);
+            this.txtCategoryName.Name = "txtCategoryName";
+            this.txtCategoryName.Size = new System.Drawing.Size(314, 32);
+            this.txtCategoryName.TabIndex = 4;
+            // 
+            // dgvCategory
+            // 
+            this.dgvCategory.BackgroundColor = System.Drawing.Color.White;
+            this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCategory.Location = new System.Drawing.Point(25, 100);
+            this.dgvCategory.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvCategory.Name = "dgvCategory";
+            this.dgvCategory.Size = new System.Drawing.Size(990, 473);
+            this.dgvCategory.TabIndex = 0;
+            // 
+            // txtID
+            // 
+            this.txtID.BackColor = System.Drawing.Color.White;
+            this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtID.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.txtID.Location = new System.Drawing.Point(150, 12);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(314, 32);
+            this.txtID.TabIndex = 3;
+            // 
+            // lbID
+            // 
+            this.lbID.AutoSize = true;
+            this.lbID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lbID.Location = new System.Drawing.Point(25, 18);
+            this.lbID.Margin = new System.Windows.Forms.Padding(0);
+            this.lbID.Name = "lbID";
+            this.lbID.Size = new System.Drawing.Size(30, 21);
+            this.lbID.TabIndex = 0;
+            this.lbID.Text = "ID:";
+            // 
+            // lbCategoryName
+            // 
+            this.lbCategoryName.AutoSize = true;
+            this.lbCategoryName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lbCategoryName.Location = new System.Drawing.Point(25, 56);
+            this.lbCategoryName.Margin = new System.Windows.Forms.Padding(0);
+            this.lbCategoryName.Name = "lbCategoryName";
+            this.lbCategoryName.Size = new System.Drawing.Size(114, 21);
+            this.lbCategoryName.TabIndex = 1;
+            this.lbCategoryName.Text = "Tên danh mục:";
             // 
             // pnButton
             // 
@@ -164,46 +210,6 @@
             this.pnButton.Size = new System.Drawing.Size(1040, 81);
             this.pnButton.TabIndex = 6;
             // 
-            // txtCategoryName
-            // 
-            this.txtCategoryName.BackColor = System.Drawing.Color.White;
-            this.txtCategoryName.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.txtCategoryName.Location = new System.Drawing.Point(150, 50);
-            this.txtCategoryName.Name = "txtCategoryName";
-            this.txtCategoryName.Size = new System.Drawing.Size(314, 32);
-            this.txtCategoryName.TabIndex = 4;
-            // 
-            // txtID
-            // 
-            this.txtID.BackColor = System.Drawing.Color.White;
-            this.txtID.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.txtID.Location = new System.Drawing.Point(150, 12);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(314, 32);
-            this.txtID.TabIndex = 3;
-            // 
-            // lbCategoryName
-            // 
-            this.lbCategoryName.AutoSize = true;
-            this.lbCategoryName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.lbCategoryName.Location = new System.Drawing.Point(25, 56);
-            this.lbCategoryName.Margin = new System.Windows.Forms.Padding(0);
-            this.lbCategoryName.Name = "lbCategoryName";
-            this.lbCategoryName.Size = new System.Drawing.Size(114, 21);
-            this.lbCategoryName.TabIndex = 1;
-            this.lbCategoryName.Text = "Tên danh mục:";
-            // 
-            // lbID
-            // 
-            this.lbID.AutoSize = true;
-            this.lbID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.lbID.Location = new System.Drawing.Point(25, 18);
-            this.lbID.Margin = new System.Windows.Forms.Padding(0);
-            this.lbID.Name = "lbID";
-            this.lbID.Size = new System.Drawing.Size(30, 21);
-            this.lbID.TabIndex = 0;
-            this.lbID.Text = "ID:";
-            // 
             // ucCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,7 +221,7 @@
             this.pnlContent.ResumeLayout(false);
             this.pnDgv.ResumeLayout(false);
             this.pnDgv.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).EndInit();
             this.pnButton.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -230,7 +236,7 @@
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Panel pnDgv;
         private System.Windows.Forms.TextBox txtCategoryName;
-        private System.Windows.Forms.DataGridView dgvAccount;
+        private System.Windows.Forms.DataGridView dgvCategory;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label lbID;
         private System.Windows.Forms.Label lbCategoryName;

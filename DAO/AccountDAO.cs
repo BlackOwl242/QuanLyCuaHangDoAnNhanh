@@ -22,17 +22,21 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         }
 
         private AccountDAO() { }
+        public bool Login(string userName, string passWord)
+        {
+            string query = "USP_Login @userName , @passWord";
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, passWord });
+            return result.Rows.Count > 0;
+        }
 
         // Lấy thông tin tài khoản bằng UserName
         public Account GetAccountByUserName(string userName)
         {
             DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM account WHERE userName = @userName", new object[] { userName });
-
             foreach (DataRow item in data.Rows)
             {
                 return new Account(item);
             }
-
             return null;
         }
 

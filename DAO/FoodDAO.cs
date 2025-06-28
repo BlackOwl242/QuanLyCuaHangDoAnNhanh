@@ -45,23 +45,24 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                     f.name AS TenMon, 
                     f.idCategory AS IDDanhMuc, 
                     fc.name AS TenDanhMuc, 
-                    f.price AS Gia 
+                    f.price AS Gia,
+                    f.ImagePath
                 FROM dbo.Food AS f
                 INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id";
             return DataProvider.Instance.ExecuteQuery(query);
         }
 
-        public bool InsertFood(string name, int idCategory, float price)
+        public bool InsertFood(string name, int idCategory, float price, string imagePath)
         {
             // Kiểm tra xem tên món ăn có hợp lệ không
-            string query = "INSERT dbo.Food (name, idCategory, price) VALUES ( @name , @idCategory , @price )";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price });
+            string query = "INSERT dbo.Food (name, idCategory, price, ImagePath) VALUES ( @name , @idCategory , @price , @imagePath )";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price, imagePath });
             return result > 0;
         }
-        public bool UpdateFood(int idFood, string name, int idCategory, float price)
+        public bool UpdateFood(int idFood, string name, int idCategory, float price, string imagePath)
         {
-            string query = "UPDATE dbo.Food SET name = @name , idCategory = @idCategory , price = @price WHERE id = @id";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price, idFood });
+            string query = "UPDATE dbo.Food SET name = @name, idCategory = @idCategory, price = @price, ImagePath = @imagePath WHERE id = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price, imagePath, idFood });
             return result > 0;
         }
         public bool DeleteFood(int idFood)
@@ -77,6 +78,9 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
         public DataTable SearchFoodByName(string name)
         {
+            // Truy vấn để tìm kiếm món ăn theo tên, sử dụng hàm chuyển đổi không dấu
+            // @name là tham số đầu vào, tránh SQL Injection
+            string query = @" 
             // Truy vấn để tìm kiếm món ăn theo tên, hỗ trợ cả tìm kiếm không dấu và có dấu
             string query = @"
                 SELECT 
@@ -84,7 +88,8 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                     f.name AS TenMon, 
                     f.idCategory AS IDDanhMuc, 
                     fc.name AS TenDanhMuc, 
-                    f.price AS Gia
+                    f.price AS Gia,
+                    f.ImagePath
                 FROM dbo.Food AS f 
                 INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id
                 WHERE f.name LIKE N'%' + @name + '%'

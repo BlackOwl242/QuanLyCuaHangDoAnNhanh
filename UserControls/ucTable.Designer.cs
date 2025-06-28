@@ -38,7 +38,7 @@
             this.dgvTable = new System.Windows.Forms.DataGridView();
             this.pnlButton = new System.Windows.Forms.Panel();
             this.pnlRight = new System.Windows.Forms.Panel();
-            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.cbStatus = new System.Windows.Forms.ComboBox();
             this.txtTableName = new System.Windows.Forms.TextBox();
             this.lbStatus = new System.Windows.Forms.Label();
             this.lbTableName = new System.Windows.Forms.Label();
@@ -53,6 +53,7 @@
             // txtID
             // 
             this.txtID.BackColor = System.Drawing.Color.White;
+            this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtID.Location = new System.Drawing.Point(91, 25);
             this.txtID.Name = "txtID";
@@ -75,6 +76,7 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -92,6 +94,7 @@
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -109,6 +112,7 @@
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnView
             // 
@@ -126,6 +130,7 @@
             this.btnView.TabIndex = 3;
             this.btnView.Text = "Xem";
             this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // pnlContent
             // 
@@ -176,7 +181,7 @@
             // pnlRight
             // 
             this.pnlRight.BackColor = System.Drawing.Color.LavenderBlush;
-            this.pnlRight.Controls.Add(this.txtStatus);
+            this.pnlRight.Controls.Add(this.cbStatus);
             this.pnlRight.Controls.Add(this.txtTableName);
             this.pnlRight.Controls.Add(this.txtID);
             this.pnlRight.Controls.Add(this.lbStatus);
@@ -188,20 +193,24 @@
             this.pnlRight.Size = new System.Drawing.Size(335, 654);
             this.pnlRight.TabIndex = 7;
             // 
-            // txtStatus
+            // cbStatus
             // 
-            this.txtStatus.BackColor = System.Drawing.Color.White;
-            this.txtStatus.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.txtStatus.Location = new System.Drawing.Point(91, 137);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(228, 32);
-            this.txtStatus.TabIndex = 5;
+            this.cbStatus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.Items.AddRange(new object[] {
+            "Trống",
+            "Có người"});
+            this.cbStatus.Location = new System.Drawing.Point(91, 137);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(228, 33);
+            this.cbStatus.TabIndex = 5;
             // 
             // txtTableName
             // 
             this.txtTableName.BackColor = System.Drawing.Color.White;
+            this.txtTableName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTableName.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.txtTableName.Location = new System.Drawing.Point(91, 81);
+            this.txtTableName.Location = new System.Drawing.Point(91, 82);
             this.txtTableName.Name = "txtTableName";
             this.txtTableName.Size = new System.Drawing.Size(228, 32);
             this.txtTableName.TabIndex = 4;
@@ -270,10 +279,10 @@
         private System.Windows.Forms.DataGridView dgvTable;
         private System.Windows.Forms.Panel pnlButton;
         private System.Windows.Forms.Panel pnlRight;
-        private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.TextBox txtTableName;
         private System.Windows.Forms.Label lbStatus;
         private System.Windows.Forms.Label lbTableName;
         private System.Windows.Forms.Label lbID;
+        private System.Windows.Forms.ComboBox cbStatus;
     }
 }
