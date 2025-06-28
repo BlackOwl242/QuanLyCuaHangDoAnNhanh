@@ -256,10 +256,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             foodList.DataSource = FoodDAO.Instance.SearchFoodByName(txtSearch.Text);
         }
 
-        private void txtCategory_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         void LoadCategoryIntoCombobox(ComboBox cb)
         {
             cb.DataSource = CategoryDAO.Instance.GetListCategory();

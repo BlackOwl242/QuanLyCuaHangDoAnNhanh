@@ -39,18 +39,16 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                 SqlCommand sqlCommand = new SqlCommand(query, conn);
 
                 if (parameter != null)
-                { 
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                {
+                    var matches = Regex.Matches(query, @"@\w+");
+                    var paramNames = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList();
+
+                    for (int i = 0; i < paramNames.Count && i < parameter.Length; i++)
                     {
-                        if (item.Contains('@'))
-                        {
-                            sqlCommand.Parameters.AddWithValue(item, parameter[i]);
-                            i++;
-                        }
+                        sqlCommand.Parameters.AddWithValue(paramNames[i], parameter[i]);
                     }
                 }
+
                 SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
 
                 adapter.Fill(data);
@@ -101,15 +99,12 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
                 if (parameter != null)
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    var matches = Regex.Matches(query, @"@\w+");
+                    var paramNames = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList();
+
+                    for (int i = 0; i < paramNames.Count && i < parameter.Length; i++)
                     {
-                        if (item.Contains('@'))
-                        {
-                            sqlCommand.Parameters.AddWithValue(item, parameter[i]);
-                            i++;
-                        }
+                        sqlCommand.Parameters.AddWithValue(paramNames[i], parameter[i]);
                     }
                 }
 

@@ -38,7 +38,7 @@
             this.pnButton = new System.Windows.Forms.Panel();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.cbType = new System.Windows.Forms.ComboBox();
-            this.btnViewAccount = new System.Windows.Forms.Button();
+            this.btnResetPassword = new System.Windows.Forms.Button();
             this.txtDisplayName = new System.Windows.Forms.TextBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.lbType = new System.Windows.Forms.Label();
@@ -170,7 +170,7 @@
             // pnlRight
             // 
             this.pnlRight.Controls.Add(this.cbType);
-            this.pnlRight.Controls.Add(this.btnViewAccount);
+            this.pnlRight.Controls.Add(this.btnResetPassword);
             this.pnlRight.Controls.Add(this.txtDisplayName);
             this.pnlRight.Controls.Add(this.txtUserName);
             this.pnlRight.Controls.Add(this.lbType);
@@ -193,21 +193,21 @@
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(199, 29);
             this.cbType.TabIndex = 7;
-            this.cbType.SelectedIndexChanged += new System.EventHandler(this.cbType_SelectedIndexChanged);
             // 
-            // btnViewAccount
+            // btnResetPassword
             // 
-            this.btnViewAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
-            this.btnViewAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewAccount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.btnViewAccount.ForeColor = System.Drawing.Color.White;
-            this.btnViewAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnViewAccount.Location = new System.Drawing.Point(121, 194);
-            this.btnViewAccount.Name = "btnViewAccount";
-            this.btnViewAccount.Size = new System.Drawing.Size(199, 44);
-            this.btnViewAccount.TabIndex = 6;
-            this.btnViewAccount.Text = "Xem";
-            this.btnViewAccount.UseVisualStyleBackColor = false;
+            this.btnResetPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
+            this.btnResetPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnResetPassword.ForeColor = System.Drawing.Color.White;
+            this.btnResetPassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnResetPassword.Location = new System.Drawing.Point(121, 194);
+            this.btnResetPassword.Name = "btnResetPassword";
+            this.btnResetPassword.Size = new System.Drawing.Size(199, 44);
+            this.btnResetPassword.TabIndex = 6;
+            this.btnResetPassword.Text = "Đặt lại mật khẩu";
+            this.btnResetPassword.UseVisualStyleBackColor = false;
+            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
             // txtDisplayName
             // 
@@ -294,7 +294,7 @@
         private System.Windows.Forms.Label lbDisplayName;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtDisplayName;
-        private System.Windows.Forms.Button btnViewAccount;
+        private System.Windows.Forms.Button btnResetPassword;
         private System.Windows.Forms.Panel pnButton;
         private System.Windows.Forms.Panel pnDgv;
         private System.Windows.Forms.DataGridView dgvAccount;

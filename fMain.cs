@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using QuanLyCuaHangDoAnNhanh.UserControls;
+using QuanLyCuaHangDoAnNhanh.DAO;
 
 namespace QuanLyCuaHangDoAnNhanh
 {
@@ -23,13 +16,16 @@ namespace QuanLyCuaHangDoAnNhanh
         {
             InitializeComponent();
             OpenChildUserControl(new ucTableManagement(), "Quản lý bàn");
+            SetMenuByRole(); // Thiết lập menu dựa trên vai trò người dùng
         }
 
+        #region Method
         private void OpenChildUserControl(UserControl userControl, string title)
         {
             // Cập nhật Text của Label tiêu đề
             lblTitle.Text = title; // lblTitle là tên của Label trên top
-            
+            lblDisplayName.Text = AccountDAO.Instance.GetAccountByUserName(SessionManager.CurrentAccount.UserName).DisplayName;
+
             // Nếu đã có User Control đang hiển thị, giải phóng nó
             if (currentChildUserControl != null)
             {
@@ -43,9 +39,42 @@ namespace QuanLyCuaHangDoAnNhanh
             pnlMain.Controls.Add(userControl); // Thêm User Control mới vào panel
         }
 
+        public void SettingUC_DisplayNameChanged(object sender, EventArgs e)
+        {
+            // Cập nhật lại tên hiển thị trên giao diện
+            lblDisplayName.Text = SessionManager.CurrentAccount.DisplayName;
+        }
+
+        private void SetMenuByRole()
+        {
+            if (SessionManager.CurrentAccount != null && SessionManager.CurrentAccount.Type == 0) // Nhân viên
+            {
+                btnTableManagement.Visible = true;
+                btnAccountManager.Visible = false;
+                btnCategory.Visible = false;
+                btnRevenue.Visible = false;
+                btnFoodAndDninks.Visible = false;
+                btnTable.Visible = true;
+                // Ẩn các nút khác tương tự
+            }
+            else // Admin
+            {
+                btnTableManagement.Visible = true;
+                btnCategory.Visible = true;
+                btnAccountManager.Visible = true;
+                btnRevenue.Visible = true;
+                btnFoodAndDninks.Visible = true;
+                btnTable.Visible = true;
+                // Hiện các nút khác tương tự
+            }
+        }
+        #endregion
+
+        #region Event
         private void pbToggleMenu_Click(object sender, EventArgs e)
         {
             timerMenu.Start();
+            lblDisplayName.Visible = !lblDisplayName.Visible; // Ẩn/hiện tên hiển thị khi click vào biểu tượng menu
         }
 
         private void timerMenu_Tick(object sender, EventArgs e)
@@ -57,7 +86,7 @@ namespace QuanLyCuaHangDoAnNhanh
                 if (pnlMenu.Width <= 80 && pnlTopMenu.Width <= 80)
                 {
                     isMenuExpanded = false;
-                    timerMenu.Stop(); 
+                    timerMenu.Stop();
                 }
             }
             else
@@ -67,7 +96,7 @@ namespace QuanLyCuaHangDoAnNhanh
                 if (pnlMenu.Width >= 240 && pnlTopMenu.Width <= 240)
                 {
                     isMenuExpanded = true;
-                    timerMenu.Stop(); 
+                    timerMenu.Stop();
                 }
             }
         }
@@ -102,6 +131,13 @@ namespace QuanLyCuaHangDoAnNhanh
             OpenChildUserControl(new ucTableManagement(), "Quản lý bàn");
         }
 
+        private void pbSetting_Click(object sender, EventArgs e)
+        {
+            var settingUC = new ucSetting();
+            settingUC.DisplayNameChanged += SettingUC_DisplayNameChanged;
+            OpenChildUserControl(new ucSetting(), "Cài đặt");
+        }
+
         private void fMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Bạn có thật sự muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
@@ -109,5 +145,6 @@ namespace QuanLyCuaHangDoAnNhanh
                 e.Cancel = true;
             }
         }
+        #endregion
     }
 }

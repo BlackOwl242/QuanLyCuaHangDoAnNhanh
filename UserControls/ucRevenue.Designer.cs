@@ -28,49 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucRevenue));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.btnView = new System.Windows.Forms.Button();
+            this.lblTotalMoney = new System.Windows.Forms.Label();
+            this.lblTotalMoneyTitle = new System.Windows.Forms.Label();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.dtpCheckIn = new System.Windows.Forms.DateTimePicker();
             this.dtpCheckOut = new System.Windows.Forms.DateTimePicker();
             this.dgvRevenue = new System.Windows.Forms.DataGridView();
-            this.pnlContent = new System.Windows.Forms.Panel();
+            this.pnlChildForm = new System.Windows.Forms.Panel();
             this.pnlDgv = new System.Windows.Forms.Panel();
-            this.pnlChart = new System.Windows.Forms.Panel();
+            this.pnlStatistical = new System.Windows.Forms.Panel();
             this.pnlChartBottom = new System.Windows.Forms.Panel();
+            this.pnlChart = new System.Windows.Forms.Panel();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.pnlContent = new System.Windows.Forms.Panel();
+            this.pnlBill = new System.Windows.Forms.Panel();
+            this.lblTotalInvoice = new System.Windows.Forms.Label();
+            this.lblTotalInvoiceTitle = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnView = new System.Windows.Forms.Button();
+            this.pnlTotalMoney = new System.Windows.Forms.Panel();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRevenue)).BeginInit();
-            this.pnlContent.SuspendLayout();
+            this.pnlChildForm.SuspendLayout();
             this.pnlDgv.SuspendLayout();
-            this.pnlChart.SuspendLayout();
+            this.pnlStatistical.SuspendLayout();
             this.pnlChartBottom.SuspendLayout();
+            this.pnlChart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            this.pnlContent.SuspendLayout();
+            this.pnlBill.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.pnlTotalMoney.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnView
+            // lblTotalMoney
             // 
-            this.btnView.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
-            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnView.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnView.ForeColor = System.Drawing.Color.White;
-            this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
-            this.btnView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnView.Location = new System.Drawing.Point(452, 12);
-            this.btnView.Name = "btnView";
-            this.btnView.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btnView.Size = new System.Drawing.Size(130, 29);
-            this.btnView.TabIndex = 4;
-            this.btnView.Text = "Xem";
-            this.btnView.UseVisualStyleBackColor = false;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            this.lblTotalMoney.AutoSize = true;
+            this.lblTotalMoney.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.lblTotalMoney.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalMoney.Location = new System.Drawing.Point(13, 54);
+            this.lblTotalMoney.Name = "lblTotalMoney";
+            this.lblTotalMoney.Size = new System.Drawing.Size(163, 28);
+            this.lblTotalMoney.TabIndex = 1;
+            this.lblTotalMoney.Text = "Tổng doanh thu";
+            // 
+            // lblTotalMoneyTitle
+            // 
+            this.lblTotalMoneyTitle.AutoSize = true;
+            this.lblTotalMoneyTitle.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.lblTotalMoneyTitle.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalMoneyTitle.Location = new System.Drawing.Point(13, 11);
+            this.lblTotalMoneyTitle.Name = "lblTotalMoneyTitle";
+            this.lblTotalMoneyTitle.Size = new System.Drawing.Size(102, 25);
+            this.lblTotalMoneyTitle.TabIndex = 0;
+            this.lblTotalMoneyTitle.Text = "Doanh thu";
             // 
             // pnlTop
             // 
@@ -124,18 +141,18 @@
             this.dgvRevenue.Size = new System.Drawing.Size(490, 574);
             this.dgvRevenue.TabIndex = 1;
             // 
-            // pnlContent
+            // pnlChildForm
             // 
-            this.pnlContent.BackColor = System.Drawing.Color.LavenderBlush;
-            this.pnlContent.Controls.Add(this.pnlDgv);
-            this.pnlContent.Controls.Add(this.pnlChart);
-            this.pnlContent.Controls.Add(this.pnlTop);
-            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlContent.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1040, 654);
-            this.pnlContent.TabIndex = 0;
+            this.pnlChildForm.BackColor = System.Drawing.Color.LavenderBlush;
+            this.pnlChildForm.Controls.Add(this.pnlDgv);
+            this.pnlChildForm.Controls.Add(this.pnlStatistical);
+            this.pnlChildForm.Controls.Add(this.pnlTop);
+            this.pnlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChildForm.Location = new System.Drawing.Point(0, 0);
+            this.pnlChildForm.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlChildForm.Name = "pnlChildForm";
+            this.pnlChildForm.Size = new System.Drawing.Size(1040, 654);
+            this.pnlChildForm.TabIndex = 0;
             // 
             // pnlDgv
             // 
@@ -147,57 +164,170 @@
             this.pnlDgv.Size = new System.Drawing.Size(515, 599);
             this.pnlDgv.TabIndex = 6;
             // 
-            // pnlChart
+            // pnlStatistical
             // 
-            this.pnlChart.Controls.Add(this.pnlChartBottom);
-            this.pnlChart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlChart.Location = new System.Drawing.Point(515, 55);
-            this.pnlChart.Name = "pnlChart";
-            this.pnlChart.Size = new System.Drawing.Size(525, 599);
-            this.pnlChart.TabIndex = 5;
+            this.pnlStatistical.Controls.Add(this.pnlChartBottom);
+            this.pnlStatistical.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlStatistical.Location = new System.Drawing.Point(515, 55);
+            this.pnlStatistical.Name = "pnlStatistical";
+            this.pnlStatistical.Size = new System.Drawing.Size(525, 599);
+            this.pnlStatistical.TabIndex = 5;
             // 
             // pnlChartBottom
             // 
-            this.pnlChartBottom.Controls.Add(this.chart2);
-            this.pnlChartBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChartBottom.Controls.Add(this.pnlChart);
+            this.pnlChartBottom.Controls.Add(this.pnlContent);
+            this.pnlChartBottom.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlChartBottom.Location = new System.Drawing.Point(0, 0);
             this.pnlChartBottom.Name = "pnlChartBottom";
             this.pnlChartBottom.Padding = new System.Windows.Forms.Padding(25, 0, 25, 25);
             this.pnlChartBottom.Size = new System.Drawing.Size(525, 599);
             this.pnlChartBottom.TabIndex = 1;
             // 
+            // pnlChart
+            // 
+            this.pnlChart.Controls.Add(this.chart2);
+            this.pnlChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChart.Location = new System.Drawing.Point(25, 106);
+            this.pnlChart.Name = "pnlChart";
+            this.pnlChart.Size = new System.Drawing.Size(475, 468);
+            this.pnlChart.TabIndex = 2;
+            // 
             // chart2
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea1);
+            this.chart2.BackColor = System.Drawing.Color.Transparent;
+            this.chart2.BorderlineColor = System.Drawing.Color.Transparent;
+            chartArea4.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea4);
             this.chart2.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chart2.Legends.Add(legend1);
-            this.chart2.Location = new System.Drawing.Point(25, 0);
+            legend4.Name = "Legend1";
+            this.chart2.Legends.Add(legend4);
+            this.chart2.Location = new System.Drawing.Point(0, 0);
             this.chart2.Name = "chart2";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart2.Series.Add(series1);
-            this.chart2.Size = new System.Drawing.Size(475, 574);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart2.Series.Add(series4);
+            this.chart2.Size = new System.Drawing.Size(475, 468);
             this.chart2.TabIndex = 0;
-            this.chart2.Text = "chart2";          
+            this.chart2.Text = "chart2";
+            // 
+            // pnlContent
+            // 
+            this.pnlContent.Controls.Add(this.pnlTotalMoney);
+            this.pnlContent.Controls.Add(this.pnlBill);
+            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlContent.Location = new System.Drawing.Point(25, 0);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Size = new System.Drawing.Size(475, 106);
+            this.pnlContent.TabIndex = 1;
+            // 
+            // pnlBill
+            // 
+            this.pnlBill.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pnlBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.pnlBill.Controls.Add(this.pictureBox2);
+            this.pnlBill.Controls.Add(this.lblTotalInvoice);
+            this.pnlBill.Controls.Add(this.lblTotalInvoiceTitle);
+            this.pnlBill.Location = new System.Drawing.Point(0, 0);
+            this.pnlBill.Name = "pnlBill";
+            this.pnlBill.Size = new System.Drawing.Size(224, 104);
+            this.pnlBill.TabIndex = 1;
+            // 
+            // lblTotalInvoice
+            // 
+            this.lblTotalInvoice.AutoSize = true;
+            this.lblTotalInvoice.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.lblTotalInvoice.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalInvoice.Location = new System.Drawing.Point(14, 54);
+            this.lblTotalInvoice.Name = "lblTotalInvoice";
+            this.lblTotalInvoice.Size = new System.Drawing.Size(120, 28);
+            this.lblTotalInvoice.TabIndex = 2;
+            this.lblTotalInvoice.Text = "Số hoá đơn";
+            // 
+            // lblTotalInvoiceTitle
+            // 
+            this.lblTotalInvoiceTitle.AutoSize = true;
+            this.lblTotalInvoiceTitle.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.lblTotalInvoiceTitle.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalInvoiceTitle.Location = new System.Drawing.Point(14, 11);
+            this.lblTotalInvoiceTitle.Name = "lblTotalInvoiceTitle";
+            this.lblTotalInvoiceTitle.Size = new System.Drawing.Size(155, 25);
+            this.lblTotalInvoiceTitle.TabIndex = 1;
+            this.lblTotalInvoiceTitle.Text = "Tổng sổ hoá đơn";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.money;
+            this.pictureBox1.Location = new System.Drawing.Point(170, 11);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(36, 36);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.bill;
+            this.pictureBox2.Location = new System.Drawing.Point(175, 11);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(36, 36);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            // 
+            // btnView
+            // 
+            this.btnView.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnView.ForeColor = System.Drawing.Color.White;
+            this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
+            this.btnView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnView.Location = new System.Drawing.Point(452, 12);
+            this.btnView.Name = "btnView";
+            this.btnView.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnView.Size = new System.Drawing.Size(130, 29);
+            this.btnView.TabIndex = 4;
+            this.btnView.Text = "Xem";
+            this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            // 
+            // pnlTotalMoney
+            // 
+            this.pnlTotalMoney.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pnlTotalMoney.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.pnlTotalMoney.Controls.Add(this.lblTotalMoney);
+            this.pnlTotalMoney.Controls.Add(this.lblTotalMoneyTitle);
+            this.pnlTotalMoney.Controls.Add(this.pictureBox1);
+            this.pnlTotalMoney.Location = new System.Drawing.Point(248, 0);
+            this.pnlTotalMoney.Name = "pnlTotalMoney";
+            this.pnlTotalMoney.Size = new System.Drawing.Size(224, 104);
+            this.pnlTotalMoney.TabIndex = 4;
             // 
             // ucRevenue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnlContent);
+            this.Controls.Add(this.pnlChildForm);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ucRevenue";
             this.Size = new System.Drawing.Size(1040, 654);
+            this.Load += new System.EventHandler(this.ucRevenue_Load);
             this.pnlTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRevenue)).EndInit();
-            this.pnlContent.ResumeLayout(false);
+            this.pnlChildForm.ResumeLayout(false);
             this.pnlDgv.ResumeLayout(false);
-            this.pnlChart.ResumeLayout(false);
+            this.pnlStatistical.ResumeLayout(false);
             this.pnlChartBottom.ResumeLayout(false);
+            this.pnlChart.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            this.pnlContent.ResumeLayout(false);
+            this.pnlBill.ResumeLayout(false);
+            this.pnlBill.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.pnlTotalMoney.ResumeLayout(false);
+            this.pnlTotalMoney.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -208,10 +338,20 @@
         private System.Windows.Forms.DateTimePicker dtpCheckIn;
         private System.Windows.Forms.DataGridView dgvRevenue;
         private System.Windows.Forms.DateTimePicker dtpCheckOut;
-        private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.Panel pnlChildForm;
         private System.Windows.Forms.Panel pnlDgv;
-        private System.Windows.Forms.Panel pnlChart;
+        private System.Windows.Forms.Panel pnlStatistical;
         private System.Windows.Forms.Panel pnlChartBottom;
+        private System.Windows.Forms.Panel pnlChart;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.Panel pnlBill;
+        private System.Windows.Forms.Label lblTotalInvoice;
+        private System.Windows.Forms.Label lblTotalInvoiceTitle;
+        private System.Windows.Forms.Label lblTotalMoney;
+        private System.Windows.Forms.Label lblTotalMoneyTitle;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel pnlTotalMoney;
     }
 }

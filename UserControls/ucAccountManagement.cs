@@ -35,6 +35,61 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             LoadAccountList();
         }
 
+        #region Method
+        void LoadAccountList()
+        {
+            string query = "SELECT UserName AS [Tên tài khoản], DisplayName AS [Tên hiển thị], CASE Type WHEN 1 THEN 'Admin' ELSE 'Nhân viên' END AS [Loại tài khoản] FROM dbo.Account";
+            dgvAccount.DataSource = DataProvider.Instance.ExecuteQuery(query);
+        }
+
+        void ClearBinding()
+        {
+            // Ngắt liên kết dữ liệu
+            txtUserName.DataBindings.Clear();
+            txtDisplayName.DataBindings.Clear();
+            cbType.DataBindings.Clear();
+        }
+
+        void SetBinding()
+        {
+            ClearBinding();
+
+            txtUserName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên tài khoản", true, DataSourceUpdateMode.Never));
+            txtDisplayName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
+            cbType.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Loại tài khoản", true, DataSourceUpdateMode.Never));
+
+            // Ở chế độ xem/sửa, không cho phép thay đổi Tên tài khoản (khóa chính)
+            txtUserName.ReadOnly = true;
+            isAddNewMode = false; // Tắt cờ "Thêm mới"
+        }
+
+        void AddAccountBinding()
+        {
+            // Xóa các binding cũ (nếu có)
+            txtUserName.DataBindings.Clear();
+            txtDisplayName.DataBindings.Clear();
+            cbType.DataBindings.Clear();
+
+            // Thêm binding mới
+            txtUserName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên tài khoản", true, DataSourceUpdateMode.Never));
+            txtDisplayName.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
+            cbType.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Loại tài khoản", true, DataSourceUpdateMode.Never));
+        }
+
+        void ResetPassword(string userName)
+        {
+            if (AccountDAO.Instance.ResetPassword(userName))
+            {
+                MessageBox.Show("Đặt lại mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Đặt lại mật khẩu thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region Event
         private void ucAccountManagement_Load(object sender, EventArgs e)
         {
             btnAdd.Region = Region.FromHrgn(CreateRoundRectRgn
@@ -45,8 +100,8 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 (0, 0, btnDelete.Width, btnDelete.Height, 15, 15));
             btnView.Region = Region.FromHrgn(CreateRoundRectRgn
                 (0, 0, btnView.Width, btnView.Height, 15, 15));
-            btnViewAccount.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnViewAccount.Width, btnViewAccount.Height, 15, 15));
+            btnResetPassword.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnResetPassword.Width, btnResetPassword.Height, 15, 15));
 
             // --- Gán các sự kiện ---
             dgvAccount.CellClick += DgvAccount_CellClick;
@@ -84,6 +139,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             }
         }
 
+
         void LoadAccountList()
         {
             string query = "SELECT UserName AS [Tên tài khoản], DisplayName AS [Tên hiển thị], CASE Type WHEN 1 THEN 'Admin' ELSE 'Nhân viên' END AS [Loại tài khoản] FROM dbo.Account";
@@ -112,7 +168,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             txtUserName.ReadOnly = true;
             isAddNewMode = false; // Tắt cờ "Thêm mới"
         }
-
+        
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -161,6 +217,11 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (SessionManager.CurrentAccount == null)
+            {
+                MessageBox.Show("Không xác định được tài khoản đăng nhập.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 // Kiểm tra xem có tài khoản nào được chọn không
@@ -200,9 +261,23 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (SessionManager.CurrentAccount == null)
+            {
+                MessageBox.Show("Không xác định được tài khoản đăng nhập.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 string userName = txtUserName.Text;
+
+                string currentUserName = SessionManager.CurrentAccount?.UserName;
+
+                if (userName == currentUserName)
+                {
+                    MessageBox.Show("Bạn không thể xóa tài khoản đang đăng nhập!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
@@ -230,9 +305,24 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             SetBinding();
         }
 
-        private void cbType_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnResetPassword_Click(object sender, EventArgs e)
         {
-
+            string userName = txtUserName.Text;
+            if (SessionManager.CurrentAccount == null)
+            {
+                MessageBox.Show("Không xác định được tài khoản đăng nhập.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                MessageBox.Show("Vui lòng chọn một tài khoản để đặt lại mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (MessageBox.Show("Bạn có chắc chắn muốn đặt lại mật khẩu cho tài khoản này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                ResetPassword(userName);
+            }
         }
+        #endregion
     }
 }

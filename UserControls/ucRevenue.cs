@@ -9,54 +9,63 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyCuaHangDoAnNhanh.DAO;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Runtime.InteropServices;
+using QuanLyCuaHangDoAnNhanh.BLL;
 
 namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     public partial class ucRevenue: UserControl
     {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeft,
+            int nTop,
+            int nRight,
+            int nBottom,
+            int nWidthEllipse,
+            int nHeightEllipse
+        );
         public ucRevenue()
         {
             InitializeComponent();
             LoadDateTimePickerBill();
+            UpdateSummaryPanels();
             LoadListBillByDate(dtpCheckIn.Value, dtpCheckOut.Value);
         }
 
         #region Method
+        private RevenueBLL revenueBLL = new RevenueBLL();
+
         void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
         {
-            dgvRevenue.DataSource = BillDAO.Instance.GetListBillByDate(checkIn, checkOut);
-            LoadRevenueChart();
+            var billTable = revenueBLL.GetBillsByDate(checkIn, checkOut);
+            dgvRevenue.DataSource = billTable;
+            LoadRevenueChart(billTable);
         }
-        void LoadRevenueChart()
+
+        private void UpdateSummaryPanels()
         {
-            // Xóa dữ liệu cũ
+            decimal totalMoney = revenueBLL.GetTotalMoney();
+            int totalInvoice = revenueBLL.GetTotalInvoice();
+
+            lblTotalMoney.Text = totalMoney.ToString("N0") + " VNĐ";
+            lblTotalInvoice.Text = totalInvoice.ToString();
+        }
+
+        void LoadRevenueChart(DataTable billTable)
+        {
             chart2.Series.Clear();
             chart2.ChartAreas.Clear();
 
-            // Tạo ChartArea và Series
             ChartArea chartArea = new ChartArea("RevenueArea");
             chart2.ChartAreas.Add(chartArea);
 
             Series series = new Series("Doanh thu");
-            series.ChartType = SeriesChartType.Column; // hoặc Line
+            series.ChartType = SeriesChartType.Column;
 
-            // Lấy dữ liệu từ DataGridView
-            var revenueByDate = new Dictionary<DateTime, double>();
-            foreach (DataGridViewRow row in dgvRevenue.Rows)
-            {
-                if (row.Cells["Ngày vào"].Value != null && row.Cells["Ngày ra"].Value != null)
-                {
-                    DateTime date = Convert.ToDateTime(row.Cells["Ngày ra"].Value);
-                    double total = Convert.ToDouble(row.Cells["Tổng tiền"].Value);
+            var revenueByDate = revenueBLL.GetRevenueByDate(billTable);
 
-                    if (revenueByDate.ContainsKey(date.Date))
-                        revenueByDate[date.Date] += total;
-                    else
-                        revenueByDate[date.Date] = total;
-                }
-            }
-
-            // Thêm dữ liệu vào Series
             foreach (var item in revenueByDate.OrderBy(x => x.Key))
             {
                 series.Points.AddXY(item.Key.ToString("dd/MM/yyyy"), item.Value);
@@ -77,6 +86,17 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             DateTime today = DateTime.Now;
             dtpCheckIn.Value = new DateTime(today.Year, today.Month, 1);
             dtpCheckOut.Value = dtpCheckIn.Value.AddMonths(1).AddDays(-1); 
+        }
+
+        private void ucRevenue_Load(object sender, EventArgs e)
+        {
+            btnView.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, btnView.Width, btnView.Height, 15, 15));
+            pnlBill.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, pnlBill.Width, pnlBill.Height, 30, 30));
+            pnlTotalMoney.Region = Region.FromHrgn(CreateRoundRectRgn
+                (0, 0, pnlTotalMoney.Width, pnlTotalMoney.Height, 30, 30));
+
         }
         #endregion
     }

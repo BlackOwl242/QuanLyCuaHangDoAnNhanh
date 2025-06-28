@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using QuanLyCuaHangDoAnNhanh.DTO;
 using QuanLyCuaHangDoAnNhanh.DAO;
 using System.Globalization;
+using QuanLyCuaHangDoAnNhanh.BLL;
+using System.IO;
+using System.Xml;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
@@ -43,41 +43,34 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         }
 
         #region Method
+        private TableManagementBLL tableBLL = new TableManagementBLL();
+
         void LoadCategory()
         {
-            List<Category> listCategory = CategoryDAO.Instance.GetListCategory();
+            var listCategory = tableBLL.GetCategories();
             cbCategory.DataSource = listCategory;
-            cbCategory.DisplayMember = "Name"; // Hiển thị tên danh mục
+            cbCategory.DisplayMember = "Name";
         }
 
         void LoadFoodListByCategoryID(int id)
         {
-            List<Food> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
+            var listFood = tableBLL.GetFoodsByCategory(id);
             cbFoodAndDrinks.DataSource = listFood;
-            cbFoodAndDrinks.DisplayMember = "Name"; // Hiển thị tên món ăn
+            cbFoodAndDrinks.DisplayMember = "Name";
         }
 
         void LoadTable()
         {
-            flpTable.Controls.Clear(); // Xóa các nút bàn cũ trước khi tải lại
-            List<Table> tableList = TableDAO.Instance.LoadTableList();
-
-            foreach (Table item in tableList)
+            flpTable.Controls.Clear();
+            var tableList = tableBLL.GetTables();
+            foreach (var item in tableList)
             {
                 Button btn = new Button() { Width = TableDAO.TableWidth, Height = TableDAO.TableHeight };
                 btn.Text = item.Name + Environment.NewLine + item.Status;
                 flpTable.Controls.Add(btn);
                 btn.Click += btn_Click;
-                btn.Tag = item; // Lưu cả Table object vào Tag của nút
-
-                if (item.Status == "Trống")
-                {
-                    btn.BackColor = Color.LightGreen; // Màu xanh lá cho bàn trống
-                }
-                else
-                {
-                    btn.BackColor = Color.LightCoral; // Màu đỏ cho bàn đã có người
-                }
+                btn.Tag = item;
+                btn.BackColor = item.Status == "Trống" ? Color.LightGreen : Color.LightCoral;
             }
         }
 
@@ -85,12 +78,9 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             // Hiển thị thông tin hóa đơn cho bàn
             lsvBill.Items.Clear();
-            // Lấy danh sách món ăn trong hóa đơn của bàn
-            List<DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
+            var listBillInfo = tableBLL.GetMenuByTable(id);
             float totalPrice = 0;
-
-            // Hiển thị thông tin món ăn trong ListView
-            foreach (DTO.Menu item in listBillInfo)
+            foreach (var item in listBillInfo)
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
                 lsvItem.SubItems.Add(item.Count.ToString());
@@ -100,15 +90,14 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 lsvBill.Items.Add(lsvItem);
             }
             txtTotalPrice.Text = totalPrice.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
-
         }
+
         void LoadTableComboBox()
         {
-            var tables = TableDAO.Instance.LoadTableList();
-            cbSwitchTable.DataSource = tables; // Gán danh sách bàn vào ComboBox
-            cbSwitchTable.DisplayMember = "Name"; // Hiển thị tên bàn
+            var tables = tableBLL.GetTables();
+            cbSwitchTable.DataSource = tables;
+            cbSwitchTable.DisplayMember = "Name";
         }
-
         #endregion
 
         #region Event
@@ -151,21 +140,16 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
-            // Nếu không có bàn nào được chọn thì thông báo lỗi
             if (table == null)
             {
-                MessageBox.Show("Vui lòng chọn một bàn trước khi thêm món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Xin vui lòng chọn bàn ăn trước.");
                 return;
             }
-            // Kiểm tra xem có món ăn nào được chọn không
-
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
-            
-            //Nếu bàn chưa có hóa đơn thì tạo hóa đơn mới
+            int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
             if (idBill == -1)
             {
-                BillDAO.Instance.InsertBill(table.ID);
-                idBill = BillDAO.Instance.GetMaxIDBill(); // Lấy ID của hóa đơn vừa tạo
+                tableBLL.CreateBill(table.ID);
+                tableBLL.AddFoodToBill(tableBLL.GetMaxBillId(), (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
             }
 
             // Kiểm tra món ăn đã được chọn chưa
@@ -173,6 +157,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             {
                 MessageBox.Show("Vui lòng chọn một món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+                tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
             }
 
             // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
@@ -181,20 +166,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
             
             ShowBill(table.ID);
-            LoadTable(); // Tải lại danh sách bàn sau khi thêm món
+            LoadTable();
         }
 
         private void btnPay_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
-            // Kiểm tra xem có bàn nào được chọn không
-            if (table == null)
-            {
-                MessageBox.Show("Vui lòng chọn một bàn để thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
             int discount;
             double totalPrice = double.Parse(txtTotalPrice.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("vi-VN"));
             double finalPrice;
@@ -202,7 +180,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             if (isDiscountApplied)
             {
                 discount = appliedDiscount;
-                finalPrice = totalPrice; // Đã giảm giá rồi, không giảm nữa
+                finalPrice = totalPrice;
             }
             else
             {
@@ -213,29 +191,27 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
             if (idBill != -1)
             {
-                if (MessageBox.Show(string.Format("Bạn có chắc muốn thanh toán hóa đơn cho bàn {0}?", table.Name), "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show(
+                    string.Format("Bạn có chắc muốn thanh toán & in hóa đơn cho bàn {0}?", table.Name),
+                    "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    BillDAO.Instance.CheckOut(idBill, discount, totalPrice);
+                    var billInfo = tableBLL.GetMenuByTable(table.ID);
+                    InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice);
+                    InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice);
+                    tableBLL.CheckOut(idBill, discount, totalPrice);
                     ShowBill(table.ID);
-                    MessageBox.Show("Thanh toán thành công!");
+                    MessageBox.Show("Thanh toán & in hóa đơn thành công!");
                     LoadTable();
-                    // Reset trạng thái giảm giá sau khi thanh toán
                     isDiscountApplied = false;
                     appliedDiscount = 0;
                 }
             }
         }
+
         private void btnDiscount_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
-            // Kiểm tra xem có bàn nào được chọn không
-            if (table == null)
-            {
-                MessageBox.Show("Vui lòng chọn bàn để áp dụng giảm giá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            // Kiểm tra xem bàn có hóa đơn chưa
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
             if (idBill != -1)
             {
                 int discount = (int)nmDiscount.Value;
@@ -262,10 +238,9 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 return;
             }
 
-            int sourceBillId = BillDAO.Instance.GetUncheckBillIDByTableID(sourceTable.ID);
-            int targetBillId = BillDAO.Instance.GetUncheckBillIDByTableID(targetTable.ID);
+            int sourceBillId = tableBLL.GetUncheckBillIdByTable(sourceTable.ID);
+            int targetBillId = tableBLL.GetUncheckBillIdByTable(targetTable.ID);
 
-            // Nếu bàn đích trống => chuyển bàn
             if (targetTable.Status == "Trống")
             {
                 if (sourceBillId == -1)
@@ -273,12 +248,11 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     MessageBox.Show("Bàn nguồn không có hóa đơn để chuyển!");
                     return;
                 }
-                BillDAO.Instance.SwitchTable(sourceBillId, targetTable.ID);
-                TableDAO.Instance.UpdateTableStatus(sourceTable.ID, "Trống");
-                TableDAO.Instance.UpdateTableStatus(targetTable.ID, "Có người");
+                tableBLL.SwitchTable(sourceBillId, targetTable.ID);
+                tableBLL.UpdateTableStatus(sourceTable.ID, "Trống");
+                tableBLL.UpdateTableStatus(targetTable.ID, "Có người");
                 MessageBox.Show($"Chuyển hóa đơn sang bàn {targetTable.Name} thành công!");
             }
-            // Nếu bàn đích có người => gộp bàn
             else
             {
                 if (sourceBillId == -1 || targetBillId == -1)
@@ -286,15 +260,15 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     MessageBox.Show("Cả hai bàn phải có hóa đơn để gộp!");
                     return;
                 }
-                BillDAO.Instance.MergeTable(sourceBillId, targetBillId);
-                TableDAO.Instance.UpdateTableStatus(sourceTable.ID, "Trống");
+                tableBLL.MergeTable(sourceBillId, targetBillId);
+                tableBLL.UpdateTableStatus(sourceTable.ID, "Trống");
                 MessageBox.Show($"Gộp hóa đơn bàn {sourceTable.Name} vào bàn {targetTable.Name} thành công!");
             }
 
             LoadTable();
             LoadTableComboBox();
             ShowBill(targetTable.ID);
-            lsvBill.Tag = targetTable; // Cập nhật lsvBill.Tag sang bàn đích sau khi chuyển/gộp
+            lsvBill.Tag = targetTable;
         }
         #endregion
     }

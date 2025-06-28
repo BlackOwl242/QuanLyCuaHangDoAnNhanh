@@ -36,5 +36,19 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             string query = "USP_InsertBillInfo @idBill, @idFood, @count";
             DataProvider.Instance.ExecuteNonQuery(query, new object[] { idBill, idFood, count });
         }
+
+        public int GetTotalInvoice()
+        {
+            string query = "SELECT COUNT(*) FROM Bill WHERE Status = 1"; // Status = 1: đã thanh toán
+            object result = DataProvider.Instance.ExecuteScalar(query);
+            return result != null ? Convert.ToInt32(result) : 0;
+        }
+
+        public decimal GetTotalMoney()
+        {
+            string query = "SELECT ISNULL(SUM(TotalPrice), 0) FROM Bill WHERE Status = 1"; // Status = 1: đã thanh toán
+            object result = DataProvider.Instance.ExecuteScalar(query);
+            return result != null ? Convert.ToDecimal(result) : 0;
+        }
     }
 }

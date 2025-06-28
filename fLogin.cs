@@ -1,14 +1,7 @@
 ﻿using QuanLyCuaHangDoAnNhanh.DAO;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyCuaHangDoAnNhanh
@@ -28,7 +21,7 @@ namespace QuanLyCuaHangDoAnNhanh
 
         private bool isDragging = false; // Biến cờ để kiểm tra xem form có đang được kéo hay không
         private Point lastLocation;    // Lưu trữ vị trí cuối cùng của chuột
-
+        
         public fLogin()
         {
             InitializeComponent();
@@ -78,9 +71,12 @@ namespace QuanLyCuaHangDoAnNhanh
         {
             string userName = txtUserName.Text.Trim(); // Lấy tên đăng nhập từ TextBox
             string password = txtPassword.Text.Trim(); // Lấy mật khẩu từ TextBox
-            // Kiểm tra thông tin đăng nhập
+                                                       // Kiểm tra thông tin đăng nhập
             if (Login(userName, password))
             {
+                // Gán tài khoản đăng nhập vào SessionManager
+                SessionManager.CurrentAccount = AccountDAO.Instance.GetAccountByUserName(userName);
+
                 // Nếu đăng nhập thành công, mở form chính
                 fMain fMain = new fMain();
                 this.Hide(); // Ẩn form đăng nhập
