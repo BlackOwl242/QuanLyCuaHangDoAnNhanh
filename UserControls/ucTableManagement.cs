@@ -146,16 +146,32 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 return;
             }
             int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
+            // Nếu chưa có hóa đơn thì tạo mới
             if (idBill == -1)
             {
                 tableBLL.CreateBill(table.ID);
-                tableBLL.AddFoodToBill(tableBLL.GetMaxBillId(), (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
+                idBill = tableBLL.GetMaxBillId();
             }
+            // Thêm món ăn vào hóa đơn
+            if (cbFoodAndDrinks.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn món ăn trước.");
+                return;
+            }
+            // Lấy ID món ăn và số lượng từ các điều khiển
+            if (!(cbFoodAndDrinks.SelectedItem is Food))
+            {
+                MessageBox.Show("Vui lòng chọn món ăn hợp lệ.");
+                return;
+            }
+            // Thêm món ăn vào hóa đơn
+            tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
+
+
 
             // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
             int foodID = (cbFoodAndDrinks.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
-            BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
             
             ShowBill(table.ID);
             LoadTable();
@@ -187,15 +203,35 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     string.Format("Bạn có chắc muốn thanh toán & in hóa đơn cho bàn {0}?", table.Name),
                     "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    var billInfo = tableBLL.GetMenuByTable(table.ID);
-                    InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice);
-                    InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice);
-                    tableBLL.CheckOut(idBill, discount, totalPrice);
-                    ShowBill(table.ID);
-                    MessageBox.Show("Thanh toán & in hóa đơn thành công!");
-                    LoadTable();
-                    isDiscountApplied = false;
-                    appliedDiscount = 0;
+                    // Lấy thông tin bàn, tổng tiền, sinh qrContent như đã làm ở InvoiceExporter
+                    string bankBin = "970432";
+                    string bankAccount = "263696255";
+                    string accountName = "LE QUOC HUY";
+                    double amount = finalPrice; // tổng tiền
+                    string description = $"BAN {table.Name} {DateTime.Now:yyyyMMddHHmmss}";
+
+                    string qrContent = InvoiceExporter.GenerateVietQRContent(bankBin, bankAccount, accountName, amount, description);
+
+                    // Hiển thị form QR
+                    using (var frm = new fPaymentQR(table.Name, amount, qrContent))
+                    {
+                        if (frm.ShowDialog() == DialogResult.OK && frm.PaymentConfirmed)
+                        {
+                            var billInfo = tableBLL.GetMenuByTable(table.ID);
+                            // Sau khi xác nhận đã thanh toán, in hóa đơn
+                            InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice);
+                            tableBLL.CheckOut(idBill, discount, totalPrice);
+                            ShowBill(table.ID);
+                            MessageBox.Show("Thanh toán & in hóa đơn thành công!");
+                            LoadTable();
+                            isDiscountApplied = false;
+                            appliedDiscount = 0;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thanh toán bị hủy hoặc không thành công.");
+                        }
+                    }
                 }
             }
         }
