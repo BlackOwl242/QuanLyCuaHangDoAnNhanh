@@ -33,8 +33,6 @@
             this.lblTilte = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.pictureBoxQR = new System.Windows.Forms.PictureBox();
-            this.lblTableTilte = new System.Windows.Forms.Label();
-            this.lblTotalTilte = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQR)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,7 +40,7 @@
             // 
             this.lblTable.AutoSize = true;
             this.lblTable.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lblTable.Location = new System.Drawing.Point(67, 49);
+            this.lblTable.Location = new System.Drawing.Point(12, 48);
             this.lblTable.Name = "lblTable";
             this.lblTable.Size = new System.Drawing.Size(78, 25);
             this.lblTable.TabIndex = 0;
@@ -52,7 +50,7 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.Location = new System.Drawing.Point(116, 83);
+            this.lblTotal.Location = new System.Drawing.Point(12, 82);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(135, 25);
             this.lblTotal.TabIndex = 1;
@@ -96,34 +94,12 @@
             this.pictureBoxQR.TabIndex = 4;
             this.pictureBoxQR.TabStop = false;
             // 
-            // lblTableTilte
-            // 
-            this.lblTableTilte.AutoSize = true;
-            this.lblTableTilte.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTableTilte.Location = new System.Drawing.Point(12, 49);
-            this.lblTableTilte.Name = "lblTableTilte";
-            this.lblTableTilte.Size = new System.Drawing.Size(49, 25);
-            this.lblTableTilte.TabIndex = 5;
-            this.lblTableTilte.Text = "Bàn:";
-            // 
-            // lblTotalTilte
-            // 
-            this.lblTotalTilte.AutoSize = true;
-            this.lblTotalTilte.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lblTotalTilte.Location = new System.Drawing.Point(12, 83);
-            this.lblTotalTilte.Name = "lblTotalTilte";
-            this.lblTotalTilte.Size = new System.Drawing.Size(98, 25);
-            this.lblTotalTilte.TabIndex = 6;
-            this.lblTotalTilte.Text = "Tổng tiền:";
-            // 
             // fPaymentQR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(529, 372);
-            this.Controls.Add(this.lblTotalTilte);
-            this.Controls.Add(this.lblTableTilte);
             this.Controls.Add(this.pictureBoxQR);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.lblTilte);
@@ -146,7 +122,5 @@
         private System.Windows.Forms.Label lblTilte;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.PictureBox pictureBoxQR;
-        private System.Windows.Forms.Label lblTableTilte;
-        private System.Windows.Forms.Label lblTotalTilte;
     }
 }

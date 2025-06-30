@@ -143,8 +143,6 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 writer.WriteEndElement(); // HoaDon
                 writer.WriteEndDocument();
             }
-
-            MessageBox.Show($"Hóa đơn đã được lưu vào:\n{filePath}", "Thông báo");
         }
 
         public static void ExportInvoiceToPdf(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal)

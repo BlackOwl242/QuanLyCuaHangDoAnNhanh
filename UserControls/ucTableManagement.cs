@@ -220,6 +220,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                             var billInfo = tableBLL.GetMenuByTable(table.ID);
                             // Sau khi xác nhận đã thanh toán, in hóa đơn
                             InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice);
+                            InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice);
                             tableBLL.CheckOut(idBill, discount, totalPrice);
                             ShowBill(table.ID);
                             MessageBox.Show("Thanh toán & in hóa đơn thành công!");
