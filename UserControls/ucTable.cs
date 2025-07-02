@@ -72,6 +72,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 // Chuyển sang chế độ thêm mới
                 isAddNewMode = true;
                 txtID.Text = "";
+                txtID.Enabled = false; // Không cho sửa ID khi thêm mới
                 txtTableName.Text = "";
                 cbStatus.SelectedIndex = -1; // hoặc cbStatus.Text = "";
                 txtTableName.ReadOnly = false;
