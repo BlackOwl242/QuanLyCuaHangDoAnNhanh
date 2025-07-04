@@ -8,12 +8,13 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
 {
     public class RevenueBLL
     {
+        // Hàm lấy danh sách hóa đơn theo ngày từ DataTable
         public DataTable GetBillsByDate(DateTime checkIn, DateTime checkOut)
         {
             return BillDAO.Instance.GetListBillByDate(checkIn, checkOut);
         }
 
-
+        // Hàm lấy doanh thu theo ngày từ DataTable
         public Dictionary<DateTime, double> GetRevenueByDate(DataTable billTable)
         {
             var revenueByDate = new Dictionary<DateTime, double>();

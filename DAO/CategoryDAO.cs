@@ -23,8 +23,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         public List<Category> GetListCategory()
         {
             List<Category> list = new List<Category>();
-            string query = "SELECT * FROM dbo.FoodCategory";
-            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+            DataTable data = DataProvider.Instance.ExecuteQuery("USP_GetFoodCategory");
             foreach (DataRow item in data.Rows)
             {
                 Category category = new Category(item);

@@ -46,7 +46,7 @@
             this.pnlStatistical = new System.Windows.Forms.Panel();
             this.pnlChartBottom = new System.Windows.Forms.Panel();
             this.pnlChart = new System.Windows.Forms.Panel();
-            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartRevenue = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlTotalMoney = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -61,7 +61,7 @@
             this.pnlStatistical.SuspendLayout();
             this.pnlChartBottom.SuspendLayout();
             this.pnlChart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRevenue)).BeginInit();
             this.pnlContent.SuspendLayout();
             this.pnlTotalMoney.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -223,31 +223,31 @@
             // 
             // pnlChart
             // 
-            this.pnlChart.Controls.Add(this.chart2);
+            this.pnlChart.Controls.Add(this.chartRevenue);
             this.pnlChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlChart.Location = new System.Drawing.Point(25, 106);
             this.pnlChart.Name = "pnlChart";
             this.pnlChart.Size = new System.Drawing.Size(475, 468);
             this.pnlChart.TabIndex = 2;
             // 
-            // chart2
+            // chartRevenue
             // 
-            this.chart2.BackColor = System.Drawing.Color.Transparent;
-            this.chart2.BorderlineColor = System.Drawing.Color.Transparent;
+            this.chartRevenue.BackColor = System.Drawing.Color.Transparent;
+            this.chartRevenue.BorderlineColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea1);
-            this.chart2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartRevenue.ChartAreas.Add(chartArea1);
+            this.chartRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
-            this.chart2.Legends.Add(legend1);
-            this.chart2.Location = new System.Drawing.Point(0, 0);
-            this.chart2.Name = "chart2";
+            this.chartRevenue.Legends.Add(legend1);
+            this.chartRevenue.Location = new System.Drawing.Point(0, 0);
+            this.chartRevenue.Name = "chartRevenue";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            this.chart2.Series.Add(series1);
-            this.chart2.Size = new System.Drawing.Size(475, 468);
-            this.chart2.TabIndex = 0;
-            this.chart2.Text = "chart2";
+            this.chartRevenue.Series.Add(series1);
+            this.chartRevenue.Size = new System.Drawing.Size(475, 468);
+            this.chartRevenue.TabIndex = 0;
+            this.chartRevenue.Text = "chart2";
             // 
             // pnlContent
             // 
@@ -339,7 +339,7 @@
             this.pnlStatistical.ResumeLayout(false);
             this.pnlChartBottom.ResumeLayout(false);
             this.pnlChart.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRevenue)).EndInit();
             this.pnlContent.ResumeLayout(false);
             this.pnlTotalMoney.ResumeLayout(false);
             this.pnlTotalMoney.PerformLayout();
@@ -362,7 +362,7 @@
         private System.Windows.Forms.Panel pnlStatistical;
         private System.Windows.Forms.Panel pnlChartBottom;
         private System.Windows.Forms.Panel pnlChart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartRevenue;
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Panel pnlBill;
         private System.Windows.Forms.Label lblTotalInvoice;

@@ -38,6 +38,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         #region Method
         private RevenueBLL revenueBLL = new RevenueBLL();
 
+        // Hàm lấy danh sách hóa đơn theo ngày và hiển thị lên DataGridView
         void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
         {
             var billTable = revenueBLL.GetBillsByDate(checkIn, checkOut);
@@ -45,6 +46,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             LoadRevenueChart(billTable);
         }
 
+        // Hàm tính toán và hiển thị tổng tiền và số lượng hóa đơn và hiển thị lên các label
         private void LoadSummaryPanelsByDataGridView(DataTable billTable)
         {
             var revenue = revenueBLL.GetRevenueByDate(billTable);
@@ -59,13 +61,14 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             lblTotalInvoice.Text = totalInvoice.ToString();
         }
 
+        // Hàm hiển thị biểu đồ doanh thu
         void LoadRevenueChart(DataTable billTable)
         {
-            chart2.Series.Clear();
-            chart2.ChartAreas.Clear();
+            chartRevenue.Series.Clear();
+            chartRevenue.ChartAreas.Clear();
 
             ChartArea chartArea = new ChartArea("RevenueArea");
-            chart2.ChartAreas.Add(chartArea);
+            chartRevenue.ChartAreas.Add(chartArea);
 
             Series series = new Series("Doanh thu");
             series.ChartType = SeriesChartType.Column;
@@ -77,7 +80,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 series.Points.AddXY(item.Key.ToString("dd/MM/yyyy"), item.Value);
             }
 
-            chart2.Series.Add(series);
+            chartRevenue.Series.Add(series);
         }
         #endregion
 
