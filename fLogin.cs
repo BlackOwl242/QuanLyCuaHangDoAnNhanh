@@ -71,7 +71,6 @@ namespace QuanLyCuaHangDoAnNhanh
         {
             string userName = txtUserName.Text.Trim(); // Lấy tên đăng nhập từ TextBox
             string password = txtPassword.Text.Trim(); // Lấy mật khẩu từ TextBox
-                                                       // Kiểm tra thông tin đăng nhập
             if (Login(userName, password))
             {
                 // Gán tài khoản đăng nhập vào SessionManager

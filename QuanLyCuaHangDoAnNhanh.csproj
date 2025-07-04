@@ -199,7 +199,6 @@
     <Compile Include="BLL\InvoiceExporter.cs" />
     <Compile Include="BLL\RevenueBLL.cs" />
     <Compile Include="BLL\SettingBLL.cs" />
-    <Compile Include="BLL\UpLoadImageAndSave.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DTO\Account.cs" />
     <Compile Include="DAO\BillDAO.cs" />
@@ -445,7 +444,6 @@
     <Content Include="Images\Food And Drinks\Tiramisu.jpg" />
     <Content Include="Images\Food And Drinks\TraSuaNguyenVi.jpg" />
     <Content Include="Images\Food And Drinks\TraSuaTranChauDuongDen.jpg" />
-    <Content Include="Images\LoginBg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />

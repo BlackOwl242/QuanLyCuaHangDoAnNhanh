@@ -15,7 +15,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
     {
         private static DataProvider instance;
 
-        // Singleton property to get the single instance of DataProvider
+        // Design pattern Singleton để đảm bảo chỉ có một thể hiện của DataProvider.
         public static DataProvider Instance
         {
             get { if (instance == null) instance = new DataProvider(); return instance; }
@@ -24,10 +24,10 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
         private DataProvider() { }
 
-        // Connection string to the database, retrieved from application settings.
+        // Chuỗi kết nối đến cơ sở dữ liệu.
         private string connString = Properties.Settings.Default.ConnectionString;
 
-        // Executes a SQL query and returns the result as a DataTable.
+        // Thực thi một câu lệnh SQL và trả về một DataTable chứa kết quả truy vấn.
         public DataTable ExecuteQuery(string query, object[] parameter = null) 
         {
             DataTable data = new DataTable();
@@ -35,30 +35,30 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-
+                // Tạo SqlCommand với câu lệnh SQL và kết nối
                 SqlCommand sqlCommand = new SqlCommand(query, conn);
 
                 if (parameter != null)
                 {
-                    var matches = Regex.Matches(query, @"@\w+");
-                    var paramNames = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList();
-
+                    var matches = Regex.Matches(query, @"@\w+"); // Tìm tất cả các tham số trong câu lệnh SQL
+                    var paramNames = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList(); // Lấy danh sách tên tham số
+                    // Thêm các tham số vào SqlCommand
                     for (int i = 0; i < paramNames.Count && i < parameter.Length; i++)
                     {
-                        sqlCommand.Parameters.AddWithValue(paramNames[i], parameter[i]);
+                        sqlCommand.Parameters.AddWithValue(paramNames[i], parameter[i]); // Thêm tham số vào SqlCommand
                     }
                 }
-
+                // Tạo SqlDataAdapter để thực thi câu lệnh SQL và điền dữ liệu vào DataTable
                 SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
-
+         
                 adapter.Fill(data);
-
+                // Đóng kết nối
                 conn.Close();
             }
             return data;
         }
 
-        // Executes a non-query SQL command (INSERT, UPDATE, DELETE) and returns the number of rows affected.
+        // Thực hiện một câu lệnh SQL không trả về dữ liệu (INSERT, UPDATE, DELETE) và trả về số lượng dòng bị ảnh hưởng.
         public int ExecuteNonQuery(string query, object[] parameter = null)
         {
             int data = 0;
@@ -71,7 +71,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
                 if (parameter != null)
                 {
-                    var matches = Regex.Matches(query, @"@\w+");
+                    var matches = Regex.Matches(query, @"@\w+"); // Tìm tất cả các tham số trong câu lệnh SQL
                     var paramNames = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList();
 
                     for (int i = 0; i < paramNames.Count && i < parameter.Length; i++)
@@ -86,7 +86,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             return data;
         }
 
-        // Executes a SQL command that returns a single value (e.g., COUNT, MAX) and returns that value.
+        // Thực hiện một câu lệnh SQL trả về một giá trị duy nhất (ví dụ: COUNT, MAX) và trả về giá trị đó.
         public object ExecuteScalar(string query, object[] parameter = null)
         {
             object data = 0;

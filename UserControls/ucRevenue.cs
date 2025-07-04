@@ -30,8 +30,8 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             InitializeComponent();
             LoadDateTimePickerBill();
-            UpdateSummaryPanels();
             LoadListBillByDate(dtpCheckIn.Value, dtpCheckOut.Value);
+            LoadSummaryPanelsByDataGridView((DataTable)dgvRevenue.DataSource);
             dgvRevenue.AllowUserToAddRows = false;
         }
 
@@ -45,12 +45,17 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             LoadRevenueChart(billTable);
         }
 
-        private void UpdateSummaryPanels()
+        private void LoadSummaryPanelsByDataGridView(DataTable billTable)
         {
-            decimal totalMoney = revenueBLL.GetTotalMoney();
-            int totalInvoice = revenueBLL.GetTotalInvoice();
-
+            var revenue = revenueBLL.GetRevenueByDate(billTable);
+            double totalRevenue = revenue.Sum(x => x.Value);
+            double totalMoney = billTable.AsEnumerable()
+                .Where(row => row.Field<DateTime?>("Ngày ra") != null)
+                .Sum(row => row.Field<double>("Tổng tiền"));
             lblTotalMoney.Text = totalMoney.ToString("N0") + " VNĐ";
+            int totalInvoice = billTable.AsEnumerable()
+                .Where(row => row.Field<DateTime?>("Ngày ra") != null)
+                .Count();
             lblTotalInvoice.Text = totalInvoice.ToString();
         }
 
@@ -80,6 +85,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void btnView_Click(object sender, EventArgs e)
         {
             LoadListBillByDate(dtpCheckIn.Value, dtpCheckOut.Value);
+            LoadSummaryPanelsByDataGridView((DataTable)dgvRevenue.DataSource);
         }
 
         void LoadDateTimePickerBill()

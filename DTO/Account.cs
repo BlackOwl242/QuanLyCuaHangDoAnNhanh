@@ -22,8 +22,6 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
             this.UserName = row["userName"].ToString();
             this.DisplayName = row["displayName"].ToString();
             this.Type = (int)row["type"];
-            // Mật khẩu không nên được lấy ra ở đây trừ khi cần thiết
-            // this.Password = row["password"].ToString(); 
         }
 
         private int type;

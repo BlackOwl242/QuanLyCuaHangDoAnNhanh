@@ -15,7 +15,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
     public partial class ucFoodAndDrinks: UserControl
     {
-        // Sử dụng BindingSource để quản lý dữ liệu một cách hiệu quả
+        // Sử dụng BindingSource để quản lý dữ liệu
         readonly BindingSource foodList = new BindingSource();
         private string _currentImagePath = null; // Biến để lưu đường dẫn ảnh hiện tại
 

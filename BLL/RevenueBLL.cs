@@ -13,15 +13,6 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             return BillDAO.Instance.GetListBillByDate(checkIn, checkOut);
         }
 
-        public decimal GetTotalMoney()
-        {
-            return BillInfoDAO.Instance.GetTotalMoney();
-        }
-
-        public int GetTotalInvoice()
-        {
-            return BillInfoDAO.Instance.GetTotalInvoice();
-        }
 
         public Dictionary<DateTime, double> GetRevenueByDate(DataTable billTable)
         {
