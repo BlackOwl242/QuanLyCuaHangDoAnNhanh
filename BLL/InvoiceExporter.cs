@@ -114,12 +114,13 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             string invoiceDir = exporter.GetInvoiceDirectory();
             string fileName = $"HoaDon_{table.Name}_{DateTime.Now:yyyyMMdd_HHmmss}.xml";
             string filePath = Path.Combine(invoiceDir, fileName);
+            string invoiceCode = "HD" + DateTime.Now.ToString("yyyyMMddHHmmss");
 
             using (XmlWriter writer = XmlWriter.Create(filePath, new XmlWriterSettings { Indent = true }))
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("HoaDon");
-
+                writer.WriteElementString("MaHoaDon", invoiceCode);
                 writer.WriteElementString("Ban", table.Name);
                 writer.WriteElementString("Ngay", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
                 writer.WriteStartElement("DanhSachMon");
@@ -151,6 +152,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             string invoiceDir = exporter.GetInvoiceDirectory();
             string fileName = $"HoaDon_{table.Name}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
             string filePath = Path.Combine(invoiceDir, fileName);
+            string invoiceCode = "HD" + DateTime.Now.ToString("yyyyMMddHHmmss");
 
             string fontPath = Path.Combine(Application.StartupPath, "Fonts", "arial.ttf");
             BaseFont bf = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
@@ -166,6 +168,10 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 Paragraph title = new Paragraph("HÓA ĐƠN THANH TOÁN", fontTitle);
                 title.Alignment = Element.ALIGN_CENTER;
                 doc.Add(title);
+
+                Paragraph _invoiceCode = new Paragraph($"Mã hóa đơn: {invoiceCode}", fontNormal);
+                _invoiceCode.Alignment = Element.ALIGN_CENTER;
+                doc.Add(_invoiceCode);
 
                 doc.Add(new Paragraph($"Bàn: {table.Name}", fontNormal));
                 doc.Add(new Paragraph($"Ngày: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
