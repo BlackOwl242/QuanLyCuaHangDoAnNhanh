@@ -1,4 +1,5 @@
-﻿using QuanLyCuaHangDoAnNhanh.DAO;
+﻿using QuanLyCuaHangDoAnNhanh.BLL;
+using QuanLyCuaHangDoAnNhanh.DAO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,11 +35,12 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         #region Method
         private bool isAddNewMode = false;
         private bool isEditMode = false;
+        private CategoryBLL categoryBLL = new CategoryBLL();
 
         void LoadCategory()
         {
             // Tải dữ liệu vào BindingSource, DataGridView sẽ tự động cập nhật
-            categoryList.DataSource = CategoryDAO.Instance.GetListCategory();
+            categoryList.DataSource = categoryBLL.GetListCategory();
 
             // Đặt lại tên cho các cột
             if (dgvCategory.Columns["ID"] != null)
@@ -100,7 +102,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 return;
             }
 
-            if (CategoryDAO.Instance.InsertCategory(name))
+            if (categoryBLL.InsertCategory(name))
             {
                 MessageBox.Show("Thêm danh mục thành công!");
                 LoadCategory();
@@ -142,7 +144,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 return;
             }
 
-            if (CategoryDAO.Instance.UpdateCategory(id, name))
+            if (categoryBLL.UpdateCategory(id, name))
             {
                 MessageBox.Show("Sửa danh mục thành công!");
                 LoadCategory();
@@ -177,7 +179,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             {
                 try
                 {
-                    if (CategoryDAO.Instance.DeleteCategory(id))
+                    if (categoryBLL.DeleteCategory(id))
                     {
                         MessageBox.Show("Xóa danh mục thành công!");
                         LoadCategory(); // Tải lại danh sách sau khi xóa

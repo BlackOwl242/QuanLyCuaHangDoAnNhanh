@@ -1,4 +1,5 @@
-﻿using QuanLyCuaHangDoAnNhanh.DAO;
+﻿using QuanLyCuaHangDoAnNhanh.BLL;
+using QuanLyCuaHangDoAnNhanh.DAO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         #region Method
         BindingSource tableList = new BindingSource();
         private bool isAddNewMode = false;
+        private TableBLL tableBLL = new TableBLL();
         void LoadTable()
         {
             tableList.DataSource = TableDAO.Instance.LoadTableList();
@@ -97,7 +99,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 return;
             }
 
-            if (TableDAO.Instance.InsertTable(name, status))
+            if (tableBLL.InsertTable(name, status))
             {
                 MessageBox.Show("Thêm bàn thành công");
                 LoadTable();
@@ -144,7 +146,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 return;
             }
 
-            if (TableDAO.Instance.UpdateTable(id, name, status))
+            if (tableBLL.UpdateTable(id, name, status))
             {
                 MessageBox.Show("Sửa bàn thành công");
                 LoadTable();
@@ -161,7 +163,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(txtID.Text);
-            if (TableDAO.Instance.DeleteTable(id))
+            if (tableBLL.DeleteTable(id))
             {
                 MessageBox.Show("Xóa bàn thành công");
                 LoadTable();

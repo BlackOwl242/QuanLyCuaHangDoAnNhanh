@@ -194,7 +194,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\AccountBLL.cs" />
+    <Compile Include="BLL\CategoryBLL.cs" />
     <Compile Include="BLL\FoodAndDrinksBLL.cs" />
+    <Compile Include="BLL\TableBLL.cs" />
     <Compile Include="BLL\TableManagementBLL.cs" />
     <Compile Include="BLL\InvoiceExporter.cs" />
     <Compile Include="BLL\RevenueBLL.cs" />

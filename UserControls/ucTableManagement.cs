@@ -44,6 +44,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         #region Method
         private TableManagementBLL tableBLL = new TableManagementBLL();
+        string employeeName = SessionManager.CurrentAccount.DisplayName;
 
         void LoadCategory()
         {
@@ -167,8 +168,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             // Thêm món ăn vào hóa đơn
             tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
 
-
-
             // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
             int foodID = (cbFoodAndDrinks.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
@@ -219,8 +218,8 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                         {
                             var billInfo = tableBLL.GetMenuByTable(table.ID);
                             // Sau khi xác nhận đã thanh toán, in hóa đơn
-                            InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice);
-                            InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice);
+                            InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice, employeeName);
+                            InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice, employeeName);
                             tableBLL.CheckOut(idBill, discount, totalPrice);
                             ShowBill(table.ID);
                             MessageBox.Show("Thanh toán & in hóa đơn thành công!");

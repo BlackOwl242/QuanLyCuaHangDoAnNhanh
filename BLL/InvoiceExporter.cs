@@ -108,7 +108,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             return invoiceDir;
         }
 
-        public static void ExportInvoiceToXml(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal)
+        public static void ExportInvoiceToXml(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal, string employeeName)
         {
             InvoiceExporter exporter = new InvoiceExporter();
             string invoiceDir = exporter.GetInvoiceDirectory();
@@ -139,13 +139,13 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 writer.WriteElementString("TongCong", total.ToString());
                 writer.WriteElementString("GiamGia", discount.ToString());
                 writer.WriteElementString("ThanhTien", finalTotal.ToString());
-
+                writer.WriteElementString("NhanVien", employeeName);
                 writer.WriteEndElement(); // HoaDon
                 writer.WriteEndDocument();
             }
         }
 
-        public static void ExportInvoiceToPdf(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal)
+        public static void ExportInvoiceToPdf(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal, string employeeName)
         {
             InvoiceExporter exporter = new InvoiceExporter();
             string invoiceDir = exporter.GetInvoiceDirectory();
@@ -169,6 +169,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
 
                 doc.Add(new Paragraph($"Bàn: {table.Name}", fontNormal));
                 doc.Add(new Paragraph($"Ngày: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
+                doc.Add(new Paragraph($"Nhân viên: {employeeName}", fontNormal));
                 doc.Add(new Paragraph(" ", fontNormal));
 
                 PdfPTable tablePdf = new PdfPTable(4);

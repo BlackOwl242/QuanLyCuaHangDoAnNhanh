@@ -74,8 +74,8 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         public bool ResetPassword(string name)
         {
             string defaultPassword = HashPassword("0");
-            string query = string.Format("UPDATE dbo.Account SET password = N'0' WHERE UserName = N'{0}'", name);
-            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            string query = "UPDATE dbo.Account SET PassWord = @password WHERE UserName = @userName";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { defaultPassword, name });
             return result > 0;
         }
 

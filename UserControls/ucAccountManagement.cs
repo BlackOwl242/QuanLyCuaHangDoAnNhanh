@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using QuanLyCuaHangDoAnNhanh.DAO;
+using QuanLyCuaHangDoAnNhanh.BLL;
 
 namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
@@ -34,6 +35,9 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         }
 
         #region Method
+        private AccountBLL accountBLL = new AccountBLL();
+        string employeeName = SessionManager.CurrentAccount.DisplayName;
+
         // Biến để xác định chế độ thêm mới
         private bool isAddNewMode = false;
 
@@ -66,7 +70,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         void ResetPassword(string userName)
         {
-            if (AccountDAO.Instance.ResetPassword(userName))
+            if (accountBLL.ResetPassword(userName))
             {
                 MessageBox.Show("Đặt lại mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -119,22 +123,46 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void DgvAccount_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Nếu đang ở chế độ thêm mới, hãy thoát ra và quay lại chế độ xem
             if (isAddNewMode)
             {
                 isAddNewMode = false;
-                SetBinding();
+                btnAdd.Text = "Thêm";
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+                btnResetPassword.Enabled = true;
+                btnView.Enabled = true;
+                dgvAccount.Enabled = true;
             }
+            SetBinding();
         }
-        
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
+            if (!isAddNewMode)
             {
-                string userName = txtUserName.Text;
-                string displayName = txtDisplayName.Text;
+                // Vào chế độ thêm mới
+                isAddNewMode = true;
+                ClearBinding();
 
-                // Kiểm tra các ô nhập liệu có bị bỏ trống không
+                txtUserName.Text = "";
+                txtDisplayName.Text = "";
+                cbType.SelectedIndex = 1; // Mặc định là "Nhân viên"
+                txtUserName.ReadOnly = false;
+
+                btnAdd.Text = "Lưu";
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+                btnResetPassword.Enabled = false;
+                btnView.Enabled = false;
+                dgvAccount.Enabled = false;
+                return;
+            }
+            else
+            {
+                // Đang ở chế độ thêm mới, thực hiện lưu
+                string userName = txtUserName.Text.Trim();
+                string displayName = txtDisplayName.Text.Trim();
+
                 if (string.IsNullOrWhiteSpace(userName))
                 {
                     MessageBox.Show("Tên tài khoản không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -145,33 +173,36 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     MessageBox.Show("Tên hiển thị không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                // Kiểm tra xem tên tài khoản đã tồn tại trong CSDL chưa
-                if (AccountDAO.Instance.GetAccountByUserName(userName) != null)
+                if (accountBLL.GetAccountByUserName(userName) != null)
                 {
                     MessageBox.Show("Tên tài khoản '" + userName + "' đã tồn tại. Vui lòng chọn một tên khác.", "Lỗi Trùng Lặp", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                // Nếu tất cả các kiểm tra đều ổn, tiến hành thêm tài khoản mới
                 int type = (cbType.SelectedItem.ToString() == "Admin") ? 1 : 0;
 
-                if (AccountDAO.Instance.InsertAccount(userName, displayName, type))
+                if (accountBLL.InsertAccount(userName, displayName, type))
                 {
                     MessageBox.Show("Thêm tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAccountList();
-                    SetBinding(); // Quay lại chế độ xem/sửa
+                    SetBinding();
                 }
                 else
                 {
                     MessageBox.Show("Thêm tài khoản thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Thoát chế độ thêm mới
+                isAddNewMode = false;
+                btnAdd.Text = "Thêm";
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+                btnResetPassword.Enabled = true;
+                btnView.Enabled = true;
+                dgvAccount.Enabled = true;
             }
         }
+
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
@@ -200,7 +231,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
                 int type = (cbType.SelectedItem.ToString() == "Admin") ? 1 : 0;
 
-                if (AccountDAO.Instance.UpdateAccount(userName, displayName, type))
+                if (accountBLL.UpdateAccount(userName, displayName, type))
                 {
                     MessageBox.Show("Cập nhật tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAccountList();
@@ -239,7 +270,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (AccountDAO.Instance.DeleteAccount(userName))
+                    if (accountBLL.DeleteAccount(userName))
                     {
                         MessageBox.Show("Xóa tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadAccountList();
@@ -261,6 +292,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         {
             LoadAccountList();
             SetBinding();
+            isAddNewMode = false;
+            btnAdd.Text = "Thêm";
+            btnEdit.Enabled = true;
+            btnDelete.Enabled = true;
+            btnResetPassword.Enabled = true;
+            btnView.Enabled = true;
+            dgvAccount.Enabled = true;
         }
 
         private void btnResetPassword_Click(object sender, EventArgs e)
