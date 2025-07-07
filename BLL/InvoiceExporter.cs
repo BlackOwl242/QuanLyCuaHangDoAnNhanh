@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.draw;
 using QuanLyCuaHangDoAnNhanh.DTO;
 using System.Windows.Forms;
 using QRCoder;
@@ -200,7 +201,10 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 doc.Add(new Paragraph(" ", fontNormal));
                 doc.Add(new Paragraph($"Tổng cộng: {total:N0} VNĐ", fontNormal));
                 doc.Add(new Paragraph($"Giảm giá: {discount}%", fontNormal));
-                doc.Add(new Paragraph($"Thành tiền: {finalTotal:N0} VNĐ", fontNormal));
+                // Chèn một dòng trống, và một dấu ngang từ đầu đến cuối trang
+                doc.Add(new Paragraph(" ", fontNormal));
+                doc.Add(new LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, -1));
+                doc.Add(new Paragraph($"Thành tiền: {finalTotal:N0} VNĐ", fontTitle));
 
                 // --- QR PAYMENT --- Chuẩn VietQR
                 string bankBin = "970432"; // Mã BIN ngân hàng (VPBANK)
@@ -219,10 +223,12 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 using (var ms = new MemoryStream()) // Lưu mã QR vào MemoryStream để thêm vào PDF
                 {
                     qrBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Lưu mã QR vào MemoryStream dưới dạng PNG
-                    iTextSharp.text.Image qrImage = iTextSharp.text.Image.GetInstance(ms.ToArray()); // Tạo đối tượng Image từ mảng byte của mã QR
+                    Image qrImage = Image.GetInstance(ms.ToArray()); // Tạo đối tượng Image từ mảng byte của mã QR
                     qrImage.Alignment = Element.ALIGN_CENTER; 
-                    qrImage.ScaleAbsolute(120, 120); // Kích thước QR 
-                    doc.Add(new Paragraph("Quét mã QR để thanh toán:", fontNormal)); 
+                    qrImage.ScaleAbsolute(150, 159); // Kích thước QR 
+                    // Thêm dòng Quét mã QR để thanh toán ở giữa
+                    doc.Add(new Paragraph(" ", fontNormal));
+                    doc.Add(new Paragraph("Quét mã QR để thanh toán", fontNormal) { Alignment = Element.ALIGN_CENTER });
                     doc.Add(qrImage);
                 }
 
