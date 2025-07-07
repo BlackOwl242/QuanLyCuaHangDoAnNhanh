@@ -11,6 +11,11 @@ using System.IO;
 using System.Xml;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using RestSharp;
+using System.Text.Json.Serialization;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
@@ -112,6 +117,12 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 (0, 0, btnDiscount.Width, btnDiscount.Height, 15, 15));
             btnSwitchTable.Region = Region.FromHrgn(CreateRoundRectRgn
                 (0, 0, btnSwitchTable.Width, btnSwitchTable.Height, 15, 15));
+            using (WebClient client = new WebClient())
+            {
+                var htmlData = client.DownloadData("https://api.vietqr.io/v2/banks");
+                var bankRawJson = Encoding.UTF8.GetString(htmlData);
+                var listBankData = JsonConvert.DeserializeObject<Bank>(bankRawJson);
+            }
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -184,6 +195,8 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             double totalPrice = double.Parse(txtTotalPrice.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("vi-VN"));
             double finalPrice;
 
+            var (image, dataResult) = tableBLL.GenerateQrImage(table, totalPrice);
+
             if (isDiscountApplied)
             {
                 discount = appliedDiscount;
@@ -202,23 +215,20 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     string.Format("Bạn có chắc muốn thanh toán & in hóa đơn cho bàn {0}?", table.Name),
                     "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    // Lấy thông tin bàn, tổng tiền, sinh qrContent như đã làm ở InvoiceExporter
-                    string bankBin = "970432";
-                    string bankAccount = "263696255";
-                    string accountName = "LE QUOC HUY";
+                    // Lấy thông tin bàn, tổng tiền, sinh qr
                     double amount = finalPrice; // tổng tiền
                     string description = $"BAN {table.Name} {DateTime.Now:yyyyMMddHHmmss}";
 
-                    string qrContent = InvoiceExporter.GenerateVietQRContent(bankBin, bankAccount, accountName, amount, description);
 
                     // Hiển thị form QR
-                    using (var frm = new fPaymentQR(table.Name, amount, qrContent))
+                    using (var frm = new fPaymentQR(table.Name, amount, image))
                     {
+                        // Tạo QR code từ dữ liệu
                         if (frm.ShowDialog() == DialogResult.OK && frm.PaymentConfirmed)
                         {
                             var billInfo = tableBLL.GetMenuByTable(table.ID);
                             // Sau khi xác nhận đã thanh toán, in hóa đơn
-                            InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice, employeeName);
+                            InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice, employeeName, image);
                             InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice, employeeName);
                             tableBLL.CheckOut(idBill, discount, totalPrice);
                             ShowBill(table.ID);

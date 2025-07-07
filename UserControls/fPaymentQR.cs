@@ -14,18 +14,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
     public partial class fPaymentQR: Form
     {
         public bool PaymentConfirmed { get; private set; } = false;
-        public fPaymentQR(string tableName, double totalAmount, string qrContent)
+        public fPaymentQR(string tableName, double totalAmount, Image qrImage)
         {
             InitializeComponent();
 
             lblTable.Text = $"Bàn: {tableName}";
             lblTotal.Text = $"Tổng tiền: {totalAmount:N0} VNĐ";
-
-            // Sinh mã QR
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrContent, QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
-            pictureBoxQR.Image = qrCode.GetGraphic(10);
+            pictureBoxQR.Image = qrImage;
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
