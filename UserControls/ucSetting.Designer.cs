@@ -46,24 +46,24 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnToggleOldPassword = new System.Windows.Forms.Button();
             this.txtOldPassword = new System.Windows.Forms.TextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.btnToggleNewPassword = new System.Windows.Forms.Button();
-            this.txtNewPassword = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnToggleConfirmPassword = new System.Windows.Forms.Button();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
-            this.EditPassword = new System.Windows.Forms.Button();
             this.btnEditDisplayName = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.txtNewPassword = new System.Windows.Forms.TextBox();
+            this.btnToggleNewPassword = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.EditPassword = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlBottom.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAccountDetail
@@ -99,7 +99,7 @@
             this.btnSignOut.Location = new System.Drawing.Point(877, 15);
             this.btnSignOut.Name = "btnSignOut";
             this.btnSignOut.Size = new System.Drawing.Size(144, 43);
-            this.btnSignOut.TabIndex = 10;
+            this.btnSignOut.TabIndex = 0;
             this.btnSignOut.Text = "Đăng xuất";
             this.btnSignOut.UseVisualStyleBackColor = false;
             this.btnSignOut.Click += new System.EventHandler(this.btnSignOut_Click);
@@ -275,50 +275,13 @@
             this.txtOldPassword.TabIndex = 0;
             this.txtOldPassword.UseSystemPasswordChar = true;
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
-            this.panel5.Controls.Add(this.btnToggleNewPassword);
-            this.panel5.Controls.Add(this.txtNewPassword);
-            this.panel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
-            this.panel5.Location = new System.Drawing.Point(221, 404);
-            this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(1);
-            this.panel5.Size = new System.Drawing.Size(232, 35);
-            this.panel5.TabIndex = 20;
-            // 
-            // btnToggleNewPassword
-            // 
-            this.btnToggleNewPassword.BackColor = System.Drawing.Color.LavenderBlush;
-            this.btnToggleNewPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnToggleNewPassword.ForeColor = System.Drawing.Color.Transparent;
-            this.btnToggleNewPassword.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.view1;
-            this.btnToggleNewPassword.Location = new System.Drawing.Point(199, 1);
-            this.btnToggleNewPassword.Name = "btnToggleNewPassword";
-            this.btnToggleNewPassword.Size = new System.Drawing.Size(32, 30);
-            this.btnToggleNewPassword.TabIndex = 2;
-            this.btnToggleNewPassword.UseVisualStyleBackColor = false;
-            this.btnToggleNewPassword.Click += new System.EventHandler(this.btnToggleNewPassword_Click);
-            // 
-            // txtNewPassword
-            // 
-            this.txtNewPassword.BackColor = System.Drawing.Color.LavenderBlush;
-            this.txtNewPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
-            this.txtNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
-            this.txtNewPassword.Location = new System.Drawing.Point(1, 1);
-            this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.Size = new System.Drawing.Size(230, 32);
-            this.txtNewPassword.TabIndex = 0;
-            this.txtNewPassword.UseSystemPasswordChar = true;
-            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
             this.panel6.Controls.Add(this.btnToggleConfirmPassword);
             this.panel6.Controls.Add(this.txtConfirmPassword);
             this.panel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
-            this.panel6.Location = new System.Drawing.Point(221, 454);
+            this.panel6.Location = new System.Drawing.Point(222, 407);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(1);
             this.panel6.Size = new System.Drawing.Size(232, 35);
@@ -333,7 +296,7 @@
             this.btnToggleConfirmPassword.Location = new System.Drawing.Point(199, 1);
             this.btnToggleConfirmPassword.Name = "btnToggleConfirmPassword";
             this.btnToggleConfirmPassword.Size = new System.Drawing.Size(32, 30);
-            this.btnToggleConfirmPassword.TabIndex = 21;
+            this.btnToggleConfirmPassword.TabIndex = 1;
             this.btnToggleConfirmPassword.UseVisualStyleBackColor = false;
             this.btnToggleConfirmPassword.Click += new System.EventHandler(this.btnToggleConfirmPassword_Click);
             // 
@@ -348,23 +311,6 @@
             this.txtConfirmPassword.Size = new System.Drawing.Size(230, 32);
             this.txtConfirmPassword.TabIndex = 0;
             this.txtConfirmPassword.UseSystemPasswordChar = true;
-            // 
-            // EditPassword
-            // 
-            this.EditPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
-            this.EditPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditPassword.ForeColor = System.Drawing.Color.White;
-            this.EditPassword.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.edit;
-            this.EditPassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.EditPassword.Location = new System.Drawing.Point(222, 509);
-            this.EditPassword.Name = "EditPassword";
-            this.EditPassword.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.EditPassword.Size = new System.Drawing.Size(233, 44);
-            this.EditPassword.TabIndex = 9;
-            this.EditPassword.Text = "Đổi mật khẩu";
-            this.EditPassword.UseVisualStyleBackColor = false;
-            this.EditPassword.Click += new System.EventHandler(this.EditPassword_Click);
             // 
             // btnEditDisplayName
             // 
@@ -405,7 +351,7 @@
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1040, 654);
-            this.pnlMain.TabIndex = 21;
+            this.pnlMain.TabIndex = 0;
             // 
             // pnlBottom
             // 
@@ -415,6 +361,60 @@
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1040, 73);
             this.pnlBottom.TabIndex = 22;
+            // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.BackColor = System.Drawing.Color.LavenderBlush;
+            this.txtNewPassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.txtNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
+            this.txtNewPassword.Location = new System.Drawing.Point(1, 1);
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.Size = new System.Drawing.Size(230, 32);
+            this.txtNewPassword.TabIndex = 0;
+            this.txtNewPassword.UseSystemPasswordChar = true;
+            // 
+            // btnToggleNewPassword
+            // 
+            this.btnToggleNewPassword.BackColor = System.Drawing.Color.LavenderBlush;
+            this.btnToggleNewPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToggleNewPassword.ForeColor = System.Drawing.Color.Transparent;
+            this.btnToggleNewPassword.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.view1;
+            this.btnToggleNewPassword.Location = new System.Drawing.Point(199, 1);
+            this.btnToggleNewPassword.Name = "btnToggleNewPassword";
+            this.btnToggleNewPassword.Size = new System.Drawing.Size(32, 30);
+            this.btnToggleNewPassword.TabIndex = 1;
+            this.btnToggleNewPassword.UseVisualStyleBackColor = false;
+            this.btnToggleNewPassword.Click += new System.EventHandler(this.btnToggleNewPassword_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
+            this.panel5.Controls.Add(this.btnToggleNewPassword);
+            this.panel5.Controls.Add(this.txtNewPassword);
+            this.panel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
+            this.panel5.Location = new System.Drawing.Point(222, 460);
+            this.panel5.Name = "panel5";
+            this.panel5.Padding = new System.Windows.Forms.Padding(1);
+            this.panel5.Size = new System.Drawing.Size(232, 35);
+            this.panel5.TabIndex = 20;
+            // 
+            // EditPassword
+            // 
+            this.EditPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
+            this.EditPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EditPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditPassword.ForeColor = System.Drawing.Color.White;
+            this.EditPassword.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.edit;
+            this.EditPassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.EditPassword.Location = new System.Drawing.Point(222, 509);
+            this.EditPassword.Name = "EditPassword";
+            this.EditPassword.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.EditPassword.Size = new System.Drawing.Size(233, 44);
+            this.EditPassword.TabIndex = 9;
+            this.EditPassword.Text = "Đổi mật khẩu";
+            this.EditPassword.UseVisualStyleBackColor = false;
+            this.EditPassword.Click += new System.EventHandler(this.EditPassword_Click);
             // 
             // ucSetting
             // 
@@ -433,13 +433,13 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             this.pnlBottom.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -463,15 +463,15 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox txtOldPassword;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox txtNewPassword;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.TextBox txtConfirmPassword;
-        private System.Windows.Forms.Button EditPassword;
         private System.Windows.Forms.Button btnToggleOldPassword;
-        private System.Windows.Forms.Button btnToggleNewPassword;
         private System.Windows.Forms.Button btnToggleConfirmPassword;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel pnlBottom;
+        private System.Windows.Forms.Button EditPassword;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button btnToggleNewPassword;
+        private System.Windows.Forms.TextBox txtNewPassword;
     }
 }
