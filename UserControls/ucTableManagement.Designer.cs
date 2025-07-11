@@ -44,11 +44,12 @@
             this.txtTotalPrice = new System.Windows.Forms.TextBox();
             this.cbSwitchTable = new System.Windows.Forms.ComboBox();
             this.nmDiscount = new System.Windows.Forms.NumericUpDown();
-            this.btnDiscount = new System.Windows.Forms.Button();
             this.btnSwitchTable = new System.Windows.Forms.Button();
             this.btnPay = new System.Windows.Forms.Button();
             this.pnlTable = new System.Windows.Forms.Panel();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblDiscount = new System.Windows.Forms.Label();
+            this.lblTotalMoney = new System.Windows.Forms.Label();
             this.pnlContent.SuspendLayout();
             this.pnlBill.SuspendLayout();
             this.pnlOrder.SuspendLayout();
@@ -185,10 +186,11 @@
             // 
             // pnlCash
             // 
+            this.pnlCash.Controls.Add(this.lblTotalMoney);
+            this.pnlCash.Controls.Add(this.lblDiscount);
             this.pnlCash.Controls.Add(this.txtTotalPrice);
             this.pnlCash.Controls.Add(this.cbSwitchTable);
             this.pnlCash.Controls.Add(this.nmDiscount);
-            this.pnlCash.Controls.Add(this.btnDiscount);
             this.pnlCash.Controls.Add(this.btnSwitchTable);
             this.pnlCash.Controls.Add(this.btnPay);
             this.pnlCash.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -200,10 +202,10 @@
             // txtTotalPrice
             // 
             this.txtTotalPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalPrice.Location = new System.Drawing.Point(337, 60);
+            this.txtTotalPrice.Location = new System.Drawing.Point(365, 22);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.ReadOnly = true;
-            this.txtTotalPrice.Size = new System.Drawing.Size(157, 29);
+            this.txtTotalPrice.Size = new System.Drawing.Size(129, 29);
             this.txtTotalPrice.TabIndex = 9;
             this.txtTotalPrice.Text = "0";
             this.txtTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -222,32 +224,18 @@
             // 
             this.nmDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nmDiscount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.nmDiscount.Location = new System.Drawing.Point(176, 60);
+            this.nmDiscount.Location = new System.Drawing.Point(153, 60);
             this.nmDiscount.Name = "nmDiscount";
-            this.nmDiscount.Size = new System.Drawing.Size(112, 29);
+            this.nmDiscount.Size = new System.Drawing.Size(88, 29);
             this.nmDiscount.TabIndex = 7;
             this.nmDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnDiscount
-            // 
-            this.btnDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
-            this.btnDiscount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDiscount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDiscount.ForeColor = System.Drawing.Color.White;
-            this.btnDiscount.Location = new System.Drawing.Point(176, 17);
-            this.btnDiscount.Name = "btnDiscount";
-            this.btnDiscount.Size = new System.Drawing.Size(112, 37);
-            this.btnDiscount.TabIndex = 6;
-            this.btnDiscount.Text = "Giảm giá";
-            this.btnDiscount.UseVisualStyleBackColor = false;
-            this.btnDiscount.Click += new System.EventHandler(this.btnDiscount_Click);
             // 
             // btnSwitchTable
             // 
             this.btnSwitchTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(110)))));
             this.btnSwitchTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSwitchTable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnSwitchTable.ForeColor = System.Drawing.Color.White;
+            this.btnSwitchTable.ForeColor = System.Drawing.Color.Transparent;
             this.btnSwitchTable.Location = new System.Drawing.Point(16, 17);
             this.btnSwitchTable.Name = "btnSwitchTable";
             this.btnSwitchTable.Size = new System.Drawing.Size(112, 37);
@@ -262,9 +250,9 @@
             this.btnPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnPay.ForeColor = System.Drawing.Color.White;
-            this.btnPay.Location = new System.Drawing.Point(337, 17);
+            this.btnPay.Location = new System.Drawing.Point(266, 59);
             this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(157, 37);
+            this.btnPay.Size = new System.Drawing.Size(228, 30);
             this.btnPay.TabIndex = 4;
             this.btnPay.Text = "Thanh toán";
             this.btnPay.UseVisualStyleBackColor = false;
@@ -290,6 +278,26 @@
             this.flpTable.Name = "flpTable";
             this.flpTable.Size = new System.Drawing.Size(514, 622);
             this.flpTable.TabIndex = 0;
+            // 
+            // lblDiscount
+            // 
+            this.lblDiscount.AutoSize = true;
+            this.lblDiscount.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiscount.Location = new System.Drawing.Point(148, 22);
+            this.lblDiscount.Name = "lblDiscount";
+            this.lblDiscount.Size = new System.Drawing.Size(93, 25);
+            this.lblDiscount.TabIndex = 10;
+            this.lblDiscount.Text = "Giảm giá:";
+            // 
+            // lblTotalMoney
+            // 
+            this.lblTotalMoney.AutoSize = true;
+            this.lblTotalMoney.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalMoney.Location = new System.Drawing.Point(261, 22);
+            this.lblTotalMoney.Name = "lblTotalMoney";
+            this.lblTotalMoney.Size = new System.Drawing.Size(98, 25);
+            this.lblTotalMoney.TabIndex = 11;
+            this.lblTotalMoney.Text = "Tổng tiền:";
             // 
             // ucTableManagement
             // 
@@ -329,12 +337,13 @@
         private System.Windows.Forms.FlowLayoutPanel flpTable;
         private System.Windows.Forms.ComboBox cbSwitchTable;
         private System.Windows.Forms.NumericUpDown nmDiscount;
-        private System.Windows.Forms.Button btnDiscount;
         private System.Windows.Forms.Button btnSwitchTable;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.TextBox txtTotalPrice;
+        private System.Windows.Forms.Label lblDiscount;
+        private System.Windows.Forms.Label lblTotalMoney;
     }
 }

@@ -113,8 +113,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 (0, 0, btnAdd.Width, btnAdd.Height, 20, 20));
             btnPay.Region = Region.FromHrgn(CreateRoundRectRgn
                 (0, 0, btnPay.Width, btnPay.Height, 15, 15));
-            btnDiscount.Region = Region.FromHrgn(CreateRoundRectRgn
-                (0, 0, btnDiscount.Width, btnDiscount.Height, 15, 15));
             btnSwitchTable.Region = Region.FromHrgn(CreateRoundRectRgn
                 (0, 0, btnSwitchTable.Width, btnSwitchTable.Height, 15, 15));
             using (WebClient client = new WebClient())
@@ -243,26 +241,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                         }
                     }
                 }
-            }
-        }
-
-        private void btnDiscount_Click(object sender, EventArgs e)
-        {
-            Table table = lsvBill.Tag as Table;
-            int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
-            if (idBill != -1)
-            {
-                int discount = (int)nmDiscount.Value;
-                double totalPrice = double.Parse(txtTotalPrice.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("vi-VN"));
-                double finalPrice = totalPrice - (totalPrice * discount / 100);
-                txtTotalPrice.Text = finalPrice.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
-                MessageBox.Show(string.Format("Giảm giá {0}% cho bàn {1} thành công!", discount, table.Name));
-                isDiscountApplied = true;
-                appliedDiscount = discount;
-            }
-            else
-            {
-                MessageBox.Show("Bàn này chưa có hóa đơn để áp dụng giảm giá!");
             }
         }
 
