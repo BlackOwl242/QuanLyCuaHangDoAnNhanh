@@ -26,7 +26,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
             List<Menu> listMenu = new List<Menu>();
 
             string query = "SELECT f.name AS foodName, bi.count, f.price, f.price* bi.count AS totalPrice\r\n" +
-                "FROM dbo.BillInfo AS bi, dbo.Bill AS b, dbo.Food AS f\r\n" +
+                "FROM dbo.BillInfo AS bi, dbo.Bill AS b, dbo.FoodAndDrinks AS f\r\n" +
                 "WHERE bi.idBill = b.id AND bi.idFood = f.id AND b.status = 0 AND b.idTable =" + id;
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 

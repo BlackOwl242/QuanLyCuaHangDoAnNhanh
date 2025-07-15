@@ -169,16 +169,16 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 return;
             }
             // Lấy ID món ăn và số lượng từ các điều khiển
-            if (!(cbFoodAndDrinks.SelectedItem is Food))
+            if (!(cbFoodAndDrinks.SelectedItem is FoodAndDrinks ))
             {
                 MessageBox.Show("Vui lòng chọn món ăn hợp lệ.");
                 return;
             }
             // Thêm món ăn vào hóa đơn
-            tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as Food).ID, (int)nmFoodCount.Value);
+            tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as FoodAndDrinks).ID, (int)nmFoodCount.Value);
 
             // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
-            int foodID = (cbFoodAndDrinks.SelectedItem as Food).ID;
+            int foodID = (cbFoodAndDrinks.SelectedItem as FoodAndDrinks).ID;
             int count = (int)nmFoodCount.Value;
             
             ShowBill(table.ID);

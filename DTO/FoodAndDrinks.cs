@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace QuanLyCuaHangDoAnNhanh.DTO
 {
-    public class Food
+    public class FoodAndDrinks
     {
         public string ImagePath { get; set; }
-        public Food(int id, string name, int categoryID, float price, string imagePath = null)
+        public FoodAndDrinks(int id, string name, int categoryID, float price, string imagePath = null)
         {
             this.ID = id;
             this.Name = name;
@@ -19,7 +19,7 @@ namespace QuanLyCuaHangDoAnNhanh.DTO
             this.ImagePath = imagePath;
         }
 
-        public Food(DataRow row)
+        public FoodAndDrinks(DataRow row)
         {
             this.ID = (int)row["id"];
             this.Name = row["name"].ToString();

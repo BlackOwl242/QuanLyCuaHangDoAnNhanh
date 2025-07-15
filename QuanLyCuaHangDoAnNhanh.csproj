@@ -215,7 +215,7 @@
     <Compile Include="DAO\BillInfoDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
-    <Compile Include="DAO\FoodDAO.cs" />
+    <Compile Include="DAO\FoodAndDrinksDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
     <Compile Include="DAO\TableDAO.cs" />
     <Compile Include="DTO\ApiRequest.cs" />
@@ -223,7 +223,7 @@
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\BillInfo.cs" />
     <Compile Include="DTO\Category.cs" />
-    <Compile Include="DTO\Food.cs" />
+    <Compile Include="DTO\FoodAndDrinks.cs" />
     <Compile Include="DTO\Menu.cs" />
     <Compile Include="DTO\Table.cs" />
     <Compile Include="fLogin.cs">

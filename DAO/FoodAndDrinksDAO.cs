@@ -24,7 +24,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         {
             List<FoodAndDrinks> list = new List<FoodAndDrinks>();
 
-            string query = "SELECT * FROM dbo.Food WHERE idCategory = " + id;
+            string query = "SELECT * FROM dbo.FoodAndDrinks WHERE idCategory = " + id;
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -47,7 +47,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                     fc.name AS TenDanhMuc, 
                     f.price AS Gia,
                     f.ImagePath
-                FROM dbo.Food AS f
+                FROM dbo.FoodAndDrinks AS f
                 INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id";
             return DataProvider.Instance.ExecuteQuery(query);
         }
@@ -55,20 +55,20 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         public bool InsertFood(string name, int idCategory, float price, string imagePath)
         {
             // Kiểm tra xem tên món ăn có hợp lệ không
-            string query = "INSERT dbo.Food (name, idCategory, price, ImagePath) VALUES ( @name , @idCategory , @price , @imagePath )";
+            string query = "INSERT dbo.FoodAndDrinks (name, idCategory, price, ImagePath) VALUES ( @name , @idCategory , @price , @imagePath )";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price, imagePath });
             return result > 0;
         }
         public bool UpdateFood(int idFood, string name, int idCategory, float price, string imagePath)
         {
-            string query = "UPDATE dbo.Food SET name = @name, idCategory = @idCategory, price = @price, ImagePath = @imagePath WHERE id = @id";
+            string query = "UPDATE dbo.FoodAndDrinks SET name = @name, idCategory = @idCategory, price = @price, ImagePath = @imagePath WHERE id = @id";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, idCategory, price, imagePath, idFood });
             return result > 0;
         }
         public bool UpdateImageFood(int idFood, string imagePath)
         {
             // Cập nhật đường dẫn hình ảnh của món ăn
-            string query = "UPDATE dbo.Food SET ImagePath = @imagePath WHERE id = @id";
+            string query = "UPDATE dbo.FoodAndDrinks SET ImagePath = @imagePath WHERE id = @id";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { imagePath, idFood });
             return result > 0;
         }
@@ -95,7 +95,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
                     fc.name AS TenDanhMuc, 
                     f.price AS Gia,
                     f.ImagePath
-                FROM dbo.Food AS f 
+                FROM dbo.FoodAndDrinks AS f 
                 INNER JOIN dbo.FoodCategory AS fc ON f.idCategory = fc.id
                 WHERE f.name LIKE N'%' + @name + '%'
                    OR dbo.fuConvertToUnsign1(f.name) LIKE N'%' + dbo.fuConvertToUnsign1(@name) + '%'";
