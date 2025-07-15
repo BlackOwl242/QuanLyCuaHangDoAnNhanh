@@ -34,11 +34,14 @@
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlTopMenu = new System.Windows.Forms.Panel();
+            this.lblDisplayName = new System.Windows.Forms.Label();
             this.pbToggleMenu = new System.Windows.Forms.PictureBox();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlTableManagement = new System.Windows.Forms.Panel();
             this.btnTableManagement = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.pnlRevenue = new System.Windows.Forms.Panel();
+            this.btnRevenue = new System.Windows.Forms.Button();
             this.pnlAccountManagement = new System.Windows.Forms.Panel();
             this.btnAccountManager = new System.Windows.Forms.Button();
             this.pnlCategory = new System.Windows.Forms.Panel();
@@ -46,21 +49,18 @@
             this.pbSetting = new System.Windows.Forms.PictureBox();
             this.pnlTable = new System.Windows.Forms.Panel();
             this.btnTable = new System.Windows.Forms.Button();
-            this.pnlRevenue = new System.Windows.Forms.Panel();
-            this.btnRevenue = new System.Windows.Forms.Button();
             this.pnlFoodAndDrinks = new System.Windows.Forms.Panel();
             this.btnFoodAndDninks = new System.Windows.Forms.Button();
-            this.lblDisplayName = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             this.pnlTopMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).BeginInit();
             this.pnlTableManagement.SuspendLayout();
             this.pnlMenu.SuspendLayout();
+            this.pnlRevenue.SuspendLayout();
             this.pnlAccountManagement.SuspendLayout();
             this.pnlCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).BeginInit();
             this.pnlTable.SuspendLayout();
-            this.pnlRevenue.SuspendLayout();
             this.pnlFoodAndDrinks.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,6 +104,20 @@
             this.pnlTopMenu.Name = "pnlTopMenu";
             this.pnlTopMenu.Size = new System.Drawing.Size(239, 73);
             this.pnlTopMenu.TabIndex = 0;
+            // 
+            // lblDisplayName
+            // 
+            this.lblDisplayName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblDisplayName.AutoSize = true;
+            this.lblDisplayName.BackColor = System.Drawing.Color.Transparent;
+            this.lblDisplayName.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisplayName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
+            this.lblDisplayName.Location = new System.Drawing.Point(71, 21);
+            this.lblDisplayName.Name = "lblDisplayName";
+            this.lblDisplayName.Size = new System.Drawing.Size(165, 32);
+            this.lblDisplayName.TabIndex = 2;
+            this.lblDisplayName.Text = "DisplayName";
+            this.lblDisplayName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbToggleMenu
             // 
@@ -170,6 +184,34 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(240, 654);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // pnlRevenue
+            // 
+            this.pnlRevenue.BackColor = System.Drawing.Color.Transparent;
+            this.pnlRevenue.Controls.Add(this.btnRevenue);
+            this.pnlRevenue.Location = new System.Drawing.Point(1, 219);
+            this.pnlRevenue.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlRevenue.Name = "pnlRevenue";
+            this.pnlRevenue.Size = new System.Drawing.Size(239, 73);
+            this.pnlRevenue.TabIndex = 2;
+            // 
+            // btnRevenue
+            // 
+            this.btnRevenue.BackColor = System.Drawing.Color.Transparent;
+            this.btnRevenue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnRevenue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRevenue.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.btnRevenue.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Revenue;
+            this.btnRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRevenue.Location = new System.Drawing.Point(-10, -10);
+            this.btnRevenue.Name = "btnRevenue";
+            this.btnRevenue.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.btnRevenue.Size = new System.Drawing.Size(258, 93);
+            this.btnRevenue.TabIndex = 0;
+            this.btnRevenue.Text = "  Doanh thu";
+            this.btnRevenue.UseVisualStyleBackColor = false;
+            this.btnRevenue.Click += new System.EventHandler(this.btnRevenue_Click);
             // 
             // pnlAccountManagement
             // 
@@ -271,34 +313,6 @@
             this.btnTable.UseVisualStyleBackColor = false;
             this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
             // 
-            // pnlRevenue
-            // 
-            this.pnlRevenue.BackColor = System.Drawing.Color.Transparent;
-            this.pnlRevenue.Controls.Add(this.btnRevenue);
-            this.pnlRevenue.Location = new System.Drawing.Point(1, 219);
-            this.pnlRevenue.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlRevenue.Name = "pnlRevenue";
-            this.pnlRevenue.Size = new System.Drawing.Size(239, 73);
-            this.pnlRevenue.TabIndex = 2;
-            // 
-            // btnRevenue
-            // 
-            this.btnRevenue.BackColor = System.Drawing.Color.Transparent;
-            this.btnRevenue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnRevenue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRevenue.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnRevenue.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Revenue;
-            this.btnRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRevenue.Location = new System.Drawing.Point(-10, -10);
-            this.btnRevenue.Name = "btnRevenue";
-            this.btnRevenue.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.btnRevenue.Size = new System.Drawing.Size(258, 93);
-            this.btnRevenue.TabIndex = 0;
-            this.btnRevenue.Text = "  Doanh thu";
-            this.btnRevenue.UseVisualStyleBackColor = false;
-            this.btnRevenue.Click += new System.EventHandler(this.btnRevenue_Click);
-            // 
             // pnlFoodAndDrinks
             // 
             this.pnlFoodAndDrinks.BackColor = System.Drawing.Color.Transparent;
@@ -328,20 +342,6 @@
             this.btnFoodAndDninks.UseVisualStyleBackColor = false;
             this.btnFoodAndDninks.Click += new System.EventHandler(this.btnFoodAndDninks_Click);
             // 
-            // lblDisplayName
-            // 
-            this.lblDisplayName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblDisplayName.AutoSize = true;
-            this.lblDisplayName.BackColor = System.Drawing.Color.Transparent;
-            this.lblDisplayName.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDisplayName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(10)))), ((int)(((byte)(5)))));
-            this.lblDisplayName.Location = new System.Drawing.Point(71, 21);
-            this.lblDisplayName.Name = "lblDisplayName";
-            this.lblDisplayName.Size = new System.Drawing.Size(165, 32);
-            this.lblDisplayName.TabIndex = 2;
-            this.lblDisplayName.Text = "DisplayName";
-            this.lblDisplayName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,6 +353,7 @@
             this.Controls.Add(this.pnlTop);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -365,11 +366,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).EndInit();
             this.pnlTableManagement.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
+            this.pnlRevenue.ResumeLayout(false);
             this.pnlAccountManagement.ResumeLayout(false);
             this.pnlCategory.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).EndInit();
             this.pnlTable.ResumeLayout(false);
-            this.pnlRevenue.ResumeLayout(false);
             this.pnlFoodAndDrinks.ResumeLayout(false);
             this.ResumeLayout(false);
 

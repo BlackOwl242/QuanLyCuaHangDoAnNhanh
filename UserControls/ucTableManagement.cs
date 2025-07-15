@@ -187,6 +187,11 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnPay_Click(object sender, EventArgs e)
         {
+            if (lsvBill.Tag == null)
+            {
+                MessageBox.Show("Không có bàn nào được chọn.");
+                return;
+            }
             Table table = lsvBill.Tag as Table;
             int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
             int discount;
