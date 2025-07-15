@@ -169,7 +169,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             }
 
             // Kiểm tra ràng buộc khóa ngoại trước khi xóa
-            if (FoodDAO.Instance.GetFoodByCategoryID(id).Count > 0)
+            if (FoodAndDrinksDAO.Instance.GetFoodByCategoryID(id).Count > 0)
             {
                 MessageBox.Show("Không thể xóa danh mục này vì vẫn còn món ăn thuộc danh mục.", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

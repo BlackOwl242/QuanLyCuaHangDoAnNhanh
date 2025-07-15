@@ -18,7 +18,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
 
         public List<Food> GetFoodsByCategory(int categoryId)
         {
-            return FoodDAO.Instance.GetFoodByCategoryID(categoryId);
+            return FoodAndDrinksDAO.Instance.GetFoodByCategoryID(categoryId);
         }
 
         public List<Table> GetTables()

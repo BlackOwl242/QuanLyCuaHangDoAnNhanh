@@ -74,7 +74,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
         public bool IsFoodExists(string name, int idFood)
         {
             // Convert the DataTable to an enumerable collection using AsEnumerable()
-            var foodTable = FoodDAO.Instance.GetListFood();
+            var foodTable = FoodAndDrinksDAO.Instance.GetListFood();
             return foodTable.AsEnumerable().Any(row =>
                 row.Field<string>("TenMon").Equals(name, StringComparison.OrdinalIgnoreCase) &&
                 row.Field<int>("ID") == idFood);

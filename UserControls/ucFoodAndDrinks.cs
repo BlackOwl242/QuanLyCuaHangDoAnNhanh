@@ -167,7 +167,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         }
         void LoadFoodList()
         {
-            foodList.DataSource = FoodDAO.Instance.GetListFood();
+            foodList.DataSource = FoodAndDrinksDAO.Instance.GetListFood();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -224,7 +224,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     MessageBox.Show("Vui lòng tải lên ảnh cho món ăn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (FoodDAO.Instance.InsertFood(name, categoryID, price, _currentImagePath))
+                if (FoodAndDrinksDAO.Instance.InsertFood(name, categoryID, price, _currentImagePath))
                 {
                     MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadFoodList();
@@ -280,7 +280,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     return;
                 }
                 // Cập nhật món ăn với đường dẫn ảnh
-                if (FoodDAO.Instance.UpdateFood(id, name, categoryID, price, _currentImagePath))
+                if (FoodAndDrinksDAO.Instance.UpdateFood(id, name, categoryID, price, _currentImagePath))
                 {
                     MessageBox.Show("Cập nhật món ăn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadFoodList();
@@ -309,7 +309,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             {
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa món này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (FoodDAO.Instance.DeleteFood(id))
+                    if (FoodAndDrinksDAO.Instance.DeleteFood(id))
                     {
                         MessageBox.Show("Xóa món ăn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadFoodList();
@@ -328,7 +328,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            foodList.DataSource = FoodDAO.Instance.SearchFoodByName(txtSearch.Text);
+            foodList.DataSource = FoodAndDrinksDAO.Instance.SearchFoodByName(txtSearch.Text);
         }
 
         private void dgvFoodAndDrinks_CellClick(object sender, DataGridViewCellEventArgs e)

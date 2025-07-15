@@ -8,21 +8,21 @@ using QuanLyCuaHangDoAnNhanh.DTO;
 
 namespace QuanLyCuaHangDoAnNhanh.DAO
 {
-    public class FoodDAO
+    public class FoodAndDrinksDAO
     {
-        private static FoodDAO instance;
+        private static FoodAndDrinksDAO instance;
 
-        public static FoodDAO Instance
+        public static FoodAndDrinksDAO Instance
         {
-            get { if (instance == null) instance = new FoodDAO(); return FoodDAO.instance; }
-            private set { FoodDAO.instance = value; }
+            get { if (instance == null) instance = new FoodAndDrinksDAO(); return FoodAndDrinksDAO.instance; }
+            private set { FoodAndDrinksDAO.instance = value; }
         }
 
-        private FoodDAO() { }
+        private FoodAndDrinksDAO() { }
 
-        public List<Food> GetFoodByCategoryID(int id)
+        public List<FoodAndDrinks> GetFoodByCategoryID(int id)
         {
-            List<Food> list = new List<Food>();
+            List<FoodAndDrinks> list = new List<FoodAndDrinks>();
 
             string query = "SELECT * FROM dbo.Food WHERE idCategory = " + id;
 
@@ -30,7 +30,7 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
 
             foreach (DataRow item in data.Rows)
             {
-                Food food = new Food(item);
+                FoodAndDrinks food = new FoodAndDrinks(item);
                 list.Add(food);
             }
             return list;
