@@ -91,11 +91,19 @@ namespace QuanLyCuaHangDoAnNhanh.DAO
         {
             using (SHA256 sha256 = SHA256.Create())
             {
+                // Chuyển đổi chuỗi mật khẩu thành mảng byte sử dụng mã hóa UTF8
                 byte[] bytes = Encoding.UTF8.GetBytes(password);
+                // Tính toán hash SHA256 từ mảng byte
                 byte[] hash = sha256.ComputeHash(bytes);
+
+                // Xây dựng chuỗi kết quả từ mảng byte hash
                 StringBuilder builder = new StringBuilder();
                 foreach (byte b in hash)
+                {
+                    // Chuyển đổi mỗi byte thành chuỗi thập lục phân (hexadecimal) 2 chữ số
                     builder.Append(b.ToString("x2"));
+                }
+                // Trả về chuỗi hash cuối cùng
                 return builder.ToString();
             }
         }
