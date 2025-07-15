@@ -41,6 +41,8 @@
             this.cbFoodAndDrinks = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.pnlCash = new System.Windows.Forms.Panel();
+            this.lblTotalMoney = new System.Windows.Forms.Label();
+            this.lblDiscount = new System.Windows.Forms.Label();
             this.txtTotalPrice = new System.Windows.Forms.TextBox();
             this.cbSwitchTable = new System.Windows.Forms.ComboBox();
             this.nmDiscount = new System.Windows.Forms.NumericUpDown();
@@ -48,8 +50,6 @@
             this.btnPay = new System.Windows.Forms.Button();
             this.pnlTable = new System.Windows.Forms.Panel();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblDiscount = new System.Windows.Forms.Label();
-            this.lblTotalMoney = new System.Windows.Forms.Label();
             this.pnlContent.SuspendLayout();
             this.pnlBill.SuspendLayout();
             this.pnlOrder.SuspendLayout();
@@ -166,6 +166,7 @@
             // cbFoodAndDrinks
             // 
             this.cbFoodAndDrinks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbFoodAndDrinks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFoodAndDrinks.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
             this.cbFoodAndDrinks.FormattingEnabled = true;
             this.cbFoodAndDrinks.Location = new System.Drawing.Point(16, 56);
@@ -176,6 +177,7 @@
             // cbCategory
             // 
             this.cbCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(16, 14);
@@ -198,6 +200,26 @@
             this.pnlCash.Name = "pnlCash";
             this.pnlCash.Size = new System.Drawing.Size(510, 106);
             this.pnlCash.TabIndex = 0;
+            // 
+            // lblTotalMoney
+            // 
+            this.lblTotalMoney.AutoSize = true;
+            this.lblTotalMoney.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalMoney.Location = new System.Drawing.Point(261, 22);
+            this.lblTotalMoney.Name = "lblTotalMoney";
+            this.lblTotalMoney.Size = new System.Drawing.Size(98, 25);
+            this.lblTotalMoney.TabIndex = 11;
+            this.lblTotalMoney.Text = "Tổng tiền:";
+            // 
+            // lblDiscount
+            // 
+            this.lblDiscount.AutoSize = true;
+            this.lblDiscount.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiscount.Location = new System.Drawing.Point(148, 22);
+            this.lblDiscount.Name = "lblDiscount";
+            this.lblDiscount.Size = new System.Drawing.Size(93, 25);
+            this.lblDiscount.TabIndex = 10;
+            this.lblDiscount.Text = "Giảm giá:";
             // 
             // txtTotalPrice
             // 
@@ -278,26 +300,6 @@
             this.flpTable.Name = "flpTable";
             this.flpTable.Size = new System.Drawing.Size(514, 622);
             this.flpTable.TabIndex = 0;
-            // 
-            // lblDiscount
-            // 
-            this.lblDiscount.AutoSize = true;
-            this.lblDiscount.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiscount.Location = new System.Drawing.Point(148, 22);
-            this.lblDiscount.Name = "lblDiscount";
-            this.lblDiscount.Size = new System.Drawing.Size(93, 25);
-            this.lblDiscount.TabIndex = 10;
-            this.lblDiscount.Text = "Giảm giá:";
-            // 
-            // lblTotalMoney
-            // 
-            this.lblTotalMoney.AutoSize = true;
-            this.lblTotalMoney.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalMoney.Location = new System.Drawing.Point(261, 22);
-            this.lblTotalMoney.Name = "lblTotalMoney";
-            this.lblTotalMoney.Size = new System.Drawing.Size(98, 25);
-            this.lblTotalMoney.TabIndex = 11;
-            this.lblTotalMoney.Text = "Tổng tiền:";
             // 
             // ucTableManagement
             // 
