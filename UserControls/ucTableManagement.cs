@@ -162,28 +162,53 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 tableBLL.CreateBill(table.ID);
                 idBill = tableBLL.GetMaxBillId();
             }
-            // Thêm món ăn vào hóa đơn
+            // Thêm/xoá món ăn vào hóa đơn
             if (cbFoodAndDrinks.SelectedItem == null)
             {
                 MessageBox.Show("Vui lòng chọn món ăn trước.");
                 return;
             }
-            // Lấy ID món ăn và số lượng từ các điều khiển
-            if (!(cbFoodAndDrinks.SelectedItem is FoodAndDrinks ))
+            if (!(cbFoodAndDrinks.SelectedItem is FoodAndDrinks))
             {
                 MessageBox.Show("Vui lòng chọn món ăn hợp lệ.");
                 return;
             }
-            // Thêm món ăn vào hóa đơn
-            tableBLL.AddFoodToBill(idBill, (cbFoodAndDrinks.SelectedItem as FoodAndDrinks).ID, (int)nmFoodCount.Value);
 
-            // Nếu đã có hóa đơn thì thêm món vào hóa đơn đó
             int foodID = (cbFoodAndDrinks.SelectedItem as FoodAndDrinks).ID;
             int count = (int)nmFoodCount.Value;
-            
+
+            // Lấy danh sách món hiện tại trên bill
+            var billInfoList = tableBLL.GetMenuByTable(table.ID);
+            var foodInBill = billInfoList.Find(m => m.FoodName == (cbFoodAndDrinks.SelectedItem as FoodAndDrinks).Name);
+
+            if (count < 0)
+            {
+                // Nếu món không tồn tại thì không làm gì
+                if (foodInBill == null)
+                {
+                    MessageBox.Show("Không thể xoá món chưa có trong hóa đơn.");
+                    return;
+                }
+                // Nếu số lượng xoá vượt quá số lượng hiện có thì không cho xoá
+                if (foodInBill.Count + count < 0)
+                {
+                    MessageBox.Show("Không thể xoá quá số lượng hiện có.");
+                    return;
+                }
+            }
+            else if (count == 0)
+            {
+                MessageBox.Show("Số lượng phải khác 0.");
+                return;
+            }
+
+            // Nếu thêm mới món (count > 0) hoặc giảm số lượng hợp lệ (count < 0)
+            tableBLL.AddFoodToBill(idBill, foodID, count);
+
             ShowBill(table.ID);
             LoadTable();
         }
+
 
         private void btnPay_Click(object sender, EventArgs e)
         {
@@ -291,6 +316,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             ShowBill(targetTable.ID);
             lsvBill.Tag = targetTable;
         }
-        #endregion
+        #endregion    
     }
 }

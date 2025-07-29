@@ -157,7 +157,7 @@
             this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(312, 14);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(116, 75);
+            this.btnAdd.Size = new System.Drawing.Size(116, 73);
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Thêm món";
             this.btnAdd.UseVisualStyleBackColor = false;
