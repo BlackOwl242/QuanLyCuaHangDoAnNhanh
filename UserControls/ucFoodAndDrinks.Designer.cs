@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucFoodAndDrinks));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlLeft = new System.Windows.Forms.Panel();
             this.numpPrice = new System.Windows.Forms.NumericUpDown();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.btnUpload = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnView = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlContent.SuspendLayout();
@@ -63,24 +63,24 @@
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlLeft
             // 
-            this.panel1.BackColor = System.Drawing.Color.LavenderBlush;
-            this.panel1.Controls.Add(this.numpPrice);
-            this.panel1.Controls.Add(this.cbCategory);
-            this.panel1.Controls.Add(this.btnUpload);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.lbPrice);
-            this.panel1.Controls.Add(this.lbCategory);
-            this.panel1.Controls.Add(this.lbDish);
-            this.panel1.Controls.Add(this.txtDish);
-            this.panel1.Controls.Add(this.lbID);
-            this.panel1.Controls.Add(this.txtID);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(705, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(335, 654);
-            this.panel1.TabIndex = 0;
+            this.pnlLeft.BackColor = System.Drawing.Color.LavenderBlush;
+            this.pnlLeft.Controls.Add(this.numpPrice);
+            this.pnlLeft.Controls.Add(this.cbCategory);
+            this.pnlLeft.Controls.Add(this.btnUpload);
+            this.pnlLeft.Controls.Add(this.pictureBox1);
+            this.pnlLeft.Controls.Add(this.lbPrice);
+            this.pnlLeft.Controls.Add(this.lbCategory);
+            this.pnlLeft.Controls.Add(this.lbDish);
+            this.pnlLeft.Controls.Add(this.txtDish);
+            this.pnlLeft.Controls.Add(this.lbID);
+            this.pnlLeft.Controls.Add(this.txtID);
+            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlLeft.Location = new System.Drawing.Point(705, 0);
+            this.pnlLeft.Name = "pnlLeft";
+            this.pnlLeft.Size = new System.Drawing.Size(335, 654);
+            this.pnlLeft.TabIndex = 0;
             // 
             // numpPrice
             // 
@@ -196,6 +196,7 @@
             // 
             this.txtID.BackColor = System.Drawing.SystemColors.Window;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtID.Location = new System.Drawing.Point(85, 61);
             this.txtID.Margin = new System.Windows.Forms.Padding(2);
@@ -383,11 +384,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlContent);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlLeft);
             this.Name = "ucFoodAndDrinks";
             this.Size = new System.Drawing.Size(1040, 654);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlLeft.ResumeLayout(false);
+            this.pnlLeft.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numpPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlContent.ResumeLayout(false);
@@ -402,7 +403,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Panel pnlDgv;
         private System.Windows.Forms.Panel pnlTop;

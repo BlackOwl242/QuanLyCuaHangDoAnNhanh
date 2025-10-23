@@ -209,7 +209,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             LoadTable();
         }
 
-
         private void btnPay_Click(object sender, EventArgs e)
         {
             if (lsvBill.Tag == null)
@@ -316,6 +315,24 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
             ShowBill(targetTable.ID);
             lsvBill.Tag = targetTable;
         }
-        #endregion    
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            //tìm kiếm khách hàng theo số điện thoại
+            string phoneNumber = txtSearch.Text.Trim();
+            var clientBLL = new ClientBLL();
+            var clients = clientBLL.GetListClient();
+            //Hiển thị tên khách hàng nếu tìm thấy vào txtClientName
+            var client = clients.Find(c => c.PhoneNumber == phoneNumber);
+            if (client != null)
+            {
+                txtClientName.Text = client.Name;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy khách hàng với số điện thoại đã nhập, vui lòng thêm khách hàng trước.");
+            }
+        }
+        #endregion
+
     }
 }

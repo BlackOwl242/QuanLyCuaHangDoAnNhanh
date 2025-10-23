@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucTableManagement));
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlBill = new System.Windows.Forms.Panel();
             this.lsvBill = new System.Windows.Forms.ListView();
@@ -50,6 +51,10 @@
             this.btnPay = new System.Windows.Forms.Button();
             this.pnlTable = new System.Windows.Forms.Panel();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.txtClientName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlContent.SuspendLayout();
             this.pnlBill.SuspendLayout();
             this.pnlOrder.SuspendLayout();
@@ -77,7 +82,7 @@
             this.pnlBill.Location = new System.Drawing.Point(0, 93);
             this.pnlBill.Name = "pnlBill";
             this.pnlBill.Padding = new System.Windows.Forms.Padding(16, 16, 16, 0);
-            this.pnlBill.Size = new System.Drawing.Size(510, 455);
+            this.pnlBill.Size = new System.Drawing.Size(510, 372);
             this.pnlBill.TabIndex = 2;
             // 
             // lsvBill
@@ -92,7 +97,7 @@
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(16, 16);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(478, 439);
+            this.lsvBill.Size = new System.Drawing.Size(478, 356);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
@@ -188,6 +193,10 @@
             // 
             // pnlCash
             // 
+            this.pnlCash.Controls.Add(this.label1);
+            this.pnlCash.Controls.Add(this.txtClientName);
+            this.pnlCash.Controls.Add(this.btnSearch);
+            this.pnlCash.Controls.Add(this.txtSearch);
             this.pnlCash.Controls.Add(this.lblTotalMoney);
             this.pnlCash.Controls.Add(this.lblDiscount);
             this.pnlCash.Controls.Add(this.txtTotalPrice);
@@ -196,16 +205,16 @@
             this.pnlCash.Controls.Add(this.btnSwitchTable);
             this.pnlCash.Controls.Add(this.btnPay);
             this.pnlCash.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCash.Location = new System.Drawing.Point(0, 548);
+            this.pnlCash.Location = new System.Drawing.Point(0, 465);
             this.pnlCash.Name = "pnlCash";
-            this.pnlCash.Size = new System.Drawing.Size(510, 106);
+            this.pnlCash.Size = new System.Drawing.Size(510, 189);
             this.pnlCash.TabIndex = 0;
             // 
             // lblTotalMoney
             // 
             this.lblTotalMoney.AutoSize = true;
             this.lblTotalMoney.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalMoney.Location = new System.Drawing.Point(261, 22);
+            this.lblTotalMoney.Location = new System.Drawing.Point(263, 104);
             this.lblTotalMoney.Name = "lblTotalMoney";
             this.lblTotalMoney.Size = new System.Drawing.Size(98, 25);
             this.lblTotalMoney.TabIndex = 11;
@@ -215,7 +224,7 @@
             // 
             this.lblDiscount.AutoSize = true;
             this.lblDiscount.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiscount.Location = new System.Drawing.Point(148, 22);
+            this.lblDiscount.Location = new System.Drawing.Point(150, 104);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(93, 25);
             this.lblDiscount.TabIndex = 10;
@@ -224,7 +233,7 @@
             // txtTotalPrice
             // 
             this.txtTotalPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalPrice.Location = new System.Drawing.Point(365, 22);
+            this.txtTotalPrice.Location = new System.Drawing.Point(367, 104);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.ReadOnly = true;
             this.txtTotalPrice.Size = new System.Drawing.Size(129, 29);
@@ -237,7 +246,7 @@
             this.cbSwitchTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSwitchTable.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.cbSwitchTable.FormattingEnabled = true;
-            this.cbSwitchTable.Location = new System.Drawing.Point(16, 60);
+            this.cbSwitchTable.Location = new System.Drawing.Point(18, 142);
             this.cbSwitchTable.Name = "cbSwitchTable";
             this.cbSwitchTable.Size = new System.Drawing.Size(112, 29);
             this.cbSwitchTable.TabIndex = 8;
@@ -246,7 +255,7 @@
             // 
             this.nmDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nmDiscount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.nmDiscount.Location = new System.Drawing.Point(153, 60);
+            this.nmDiscount.Location = new System.Drawing.Point(155, 142);
             this.nmDiscount.Name = "nmDiscount";
             this.nmDiscount.Size = new System.Drawing.Size(88, 29);
             this.nmDiscount.TabIndex = 7;
@@ -258,7 +267,7 @@
             this.btnSwitchTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSwitchTable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnSwitchTable.ForeColor = System.Drawing.Color.Transparent;
-            this.btnSwitchTable.Location = new System.Drawing.Point(16, 17);
+            this.btnSwitchTable.Location = new System.Drawing.Point(18, 99);
             this.btnSwitchTable.Name = "btnSwitchTable";
             this.btnSwitchTable.Size = new System.Drawing.Size(112, 37);
             this.btnSwitchTable.TabIndex = 5;
@@ -272,7 +281,7 @@
             this.btnPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnPay.ForeColor = System.Drawing.Color.White;
-            this.btnPay.Location = new System.Drawing.Point(266, 59);
+            this.btnPay.Location = new System.Drawing.Point(268, 141);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(228, 30);
             this.btnPay.TabIndex = 4;
@@ -300,6 +309,51 @@
             this.flpTable.Name = "flpTable";
             this.flpTable.Size = new System.Drawing.Size(514, 622);
             this.flpTable.TabIndex = 0;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.Location = new System.Drawing.Point(16, 5);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(114, 39);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtSearch.Location = new System.Drawing.Point(155, 5);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(339, 39);
+            this.txtSearch.TabIndex = 12;
+            // 
+            // txtClientName
+            // 
+            this.txtClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtClientName.Enabled = false;
+            this.txtClientName.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtClientName.Location = new System.Drawing.Point(155, 53);
+            this.txtClientName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtClientName.Name = "txtClientName";
+            this.txtClientName.Size = new System.Drawing.Size(339, 39);
+            this.txtClientName.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(13, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 25);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Khách hàng:";
             // 
             // ucTableManagement
             // 
@@ -347,5 +401,9 @@
         private System.Windows.Forms.TextBox txtTotalPrice;
         private System.Windows.Forms.Label lblDiscount;
         private System.Windows.Forms.Label lblTotalMoney;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtClientName;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

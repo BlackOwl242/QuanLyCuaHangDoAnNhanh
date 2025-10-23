@@ -40,6 +40,8 @@
             this.pnlTableManagement = new System.Windows.Forms.Panel();
             this.btnTableManagement = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.pnlClientManagement = new System.Windows.Forms.Panel();
+            this.btnClientManagement = new System.Windows.Forms.Button();
             this.pnlRevenue = new System.Windows.Forms.Panel();
             this.btnRevenue = new System.Windows.Forms.Button();
             this.pnlAccountManagement = new System.Windows.Forms.Panel();
@@ -56,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).BeginInit();
             this.pnlTableManagement.SuspendLayout();
             this.pnlMenu.SuspendLayout();
+            this.pnlClientManagement.SuspendLayout();
             this.pnlRevenue.SuspendLayout();
             this.pnlAccountManagement.SuspendLayout();
             this.pnlCategory.SuspendLayout();
@@ -172,6 +175,7 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.pnlMenu.Controls.Add(this.pnlClientManagement);
             this.pnlMenu.Controls.Add(this.pnlRevenue);
             this.pnlMenu.Controls.Add(this.pnlAccountManagement);
             this.pnlMenu.Controls.Add(this.pnlTableManagement);
@@ -184,6 +188,36 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(240, 654);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // pnlClientManagement
+            // 
+            this.pnlClientManagement.BackColor = System.Drawing.Color.Transparent;
+            this.pnlClientManagement.Controls.Add(this.btnClientManagement);
+            this.pnlClientManagement.Location = new System.Drawing.Point(1, 441);
+            this.pnlClientManagement.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlClientManagement.Name = "pnlClientManagement";
+            this.pnlClientManagement.Size = new System.Drawing.Size(239, 73);
+            this.pnlClientManagement.TabIndex = 3;
+            // 
+            // btnClientManagement
+            // 
+            this.btnClientManagement.BackColor = System.Drawing.Color.Transparent;
+            this.btnClientManagement.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnClientManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnClientManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClientManagement.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.btnClientManagement.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Account_;
+            this.btnClientManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClientManagement.Location = new System.Drawing.Point(-10, -12);
+            this.btnClientManagement.Name = "btnClientManagement";
+            this.btnClientManagement.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.btnClientManagement.Size = new System.Drawing.Size(258, 93);
+            this.btnClientManagement.TabIndex = 1;
+            this.btnClientManagement.Text = "          Quản lý \r\n          khách hàng";
+            this.btnClientManagement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClientManagement.UseMnemonic = false;
+            this.btnClientManagement.UseVisualStyleBackColor = false;
+            this.btnClientManagement.Click += new System.EventHandler(this.btnClientManagement_Click);
             // 
             // pnlRevenue
             // 
@@ -366,6 +400,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).EndInit();
             this.pnlTableManagement.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
+            this.pnlClientManagement.ResumeLayout(false);
             this.pnlRevenue.ResumeLayout(false);
             this.pnlAccountManagement.ResumeLayout(false);
             this.pnlCategory.ResumeLayout(false);
@@ -398,5 +433,7 @@
         private System.Windows.Forms.PictureBox pbSetting;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblDisplayName;
+        private System.Windows.Forms.Button btnClientManagement;
+        private System.Windows.Forms.Panel pnlClientManagement;
     }
 }

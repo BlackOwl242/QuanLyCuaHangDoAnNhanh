@@ -203,6 +203,7 @@
   <ItemGroup>
     <Compile Include="BLL\AccountBLL.cs" />
     <Compile Include="BLL\CategoryBLL.cs" />
+    <Compile Include="BLL\ClientBLL.cs" />
     <Compile Include="BLL\FoodAndDrinksBLL.cs" />
     <Compile Include="BLL\TableBLL.cs" />
     <Compile Include="BLL\TableManagementBLL.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="BLL\RevenueBLL.cs" />
     <Compile Include="BLL\SettingBLL.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\ClientDAO.cs" />
     <Compile Include="DTO\Account.cs" />
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillInfoDAO.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\BillInfo.cs" />
     <Compile Include="DTO\Category.cs" />
+    <Compile Include="DTO\Client.cs" />
     <Compile Include="DTO\FoodAndDrinks.cs" />
     <Compile Include="DTO\Menu.cs" />
     <Compile Include="DTO\Table.cs" />
@@ -257,6 +260,12 @@
     </Compile>
     <Compile Include="UserControls\ucCategory.Designer.cs">
       <DependentUpon>ucCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucClient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucClient.Designer.cs">
+      <DependentUpon>ucClient.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucFoodAndDrinks.cs">
       <SubType>UserControl</SubType>
@@ -313,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucCategory.resx">
       <DependentUpon>ucCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucClient.resx">
+      <DependentUpon>ucClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucSetting.resx">
       <DependentUpon>ucSetting.cs</DependentUpon>

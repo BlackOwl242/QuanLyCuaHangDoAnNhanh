@@ -138,6 +138,11 @@ namespace QuanLyCuaHangDoAnNhanh
             OpenChildUserControl(new ucSetting(), "Cài đặt");
         }
 
+        private void btnClientManagement_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucClient(), "Quản lý khách hàng");
+        }
+
         private void fMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Bạn có thật sự muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
