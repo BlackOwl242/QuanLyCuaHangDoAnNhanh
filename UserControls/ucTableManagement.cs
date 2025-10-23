@@ -216,6 +216,15 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 MessageBox.Show("Không có bàn nào được chọn.");
                 return;
             }
+
+            // Kiểm tra bắt buộc phải có khách hàng để tích điểm
+            if (string.IsNullOrWhiteSpace(txtClientName.Text))
+            {
+                MessageBox.Show("Vui lòng tìm kiếm và chọn khách hàng trước khi thanh toán để tích điểm!");
+                return;
+            }
+            string clientName = txtClientName.Text.Trim(); 
+
             Table table = lsvBill.Tag as Table;
             int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
             int discount;
@@ -246,7 +255,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     double amount = finalPrice; // tổng tiền
                     string description = $"BAN {table.Name} {DateTime.Now:yyyyMMddHHmmss}";
 
-
                     // Hiển thị form QR
                     using (var frm = new fPaymentQR(table.Name, amount, image))
                     {
@@ -255,14 +263,47 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                         {
                             var billInfo = tableBLL.GetMenuByTable(table.ID);
                             // Sau khi xác nhận đã thanh toán, in hóa đơn
-                            InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice, employeeName, image);
-                            InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice, employeeName);
+                            InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice, employeeName, image, clientName);
+                            InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice, employeeName, clientName);
                             tableBLL.CheckOut(idBill, discount, totalPrice);
+
+                            // Cộng điểm thưởng cho khách hàng
+                            string phoneNumber = txtSearch.Text.Trim();
+                            if (!string.IsNullOrWhiteSpace(phoneNumber))
+                            {
+                                var clientBLL = new ClientBLL();
+                                Client client;
+                                if (clientBLL.GetClientByPhoneNumber(phoneNumber, out client))
+                                {
+                                    int bonusPoints = clientBLL.CalculateBonusPointsByAmount(finalPrice);
+
+                                    if (clientBLL.AddBonusPoint(client.ID, bonusPoints))
+                                    {
+                                        MessageBox.Show($"Thanh toán & in hóa đơn thành công!\nĐã cộng {bonusPoints} điểm thưởng cho khách hàng {client.Name}!");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Thanh toán & in hóa đơn thành công!\nTuy nhiên không thể cộng điểm thưởng cho khách hàng.");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Thanh toán & in hóa đơn thành công!\nKhông tìm thấy thông tin khách hàng để cộng điểm.");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Thanh toán & in hóa đơn thành công!");
+                            }
+
                             ShowBill(table.ID);
-                            MessageBox.Show("Thanh toán & in hóa đơn thành công!");
                             LoadTable();
                             isDiscountApplied = false;
                             appliedDiscount = 0;
+
+                            // Clear thông tin khách hàng sau khi thanh toán
+                            txtSearch.Text = "";
+                            txtClientName.Text = "";
                         }
                         else
                         {

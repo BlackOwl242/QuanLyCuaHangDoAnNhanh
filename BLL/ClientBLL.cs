@@ -23,6 +23,10 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             {
                 return false;
             }
+            if (bonusPoint < 0)
+            {
+                bonusPoint = 0;
+            }
             return ClientDAO.Instance.InsertClient(name, email, phoneNumber, bonusPoint);
         }
 
@@ -31,6 +35,10 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(phoneNumber))
             {
                 return false;
+            }
+            if (bonusPoint < 0)
+            {
+                bonusPoint = 0;
             }
             return ClientDAO.Instance.UpdateClient(id, name, email, phoneNumber, bonusPoint);
         }
@@ -42,6 +50,10 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
 
         public bool UpdateBonusPoint(int id, int bonusPoint)
         {
+            if (bonusPoint < 0)
+            {
+                bonusPoint = 0;
+            }
             return ClientDAO.Instance.UpdateBonusPoint(id, bonusPoint);
         }
 
@@ -51,6 +63,11 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             if (client != null)
             {
                 int newBonusPoint = client.BonusPoint + additionalPoints;
+                // Đảm bảo điểm thưởng không bao giờ xuống dưới 0
+                if (newBonusPoint < 0)
+                {
+                    newBonusPoint = 0;
+                }
                 return UpdateBonusPoint(id, newBonusPoint);
             }
             return false;
@@ -69,6 +86,30 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 }
             }
             return false;
+        }
+
+        public int CalculateBonusPointsByAmount(double totalAmount)
+        {
+            if (totalAmount <= 50000)
+            {
+                return 1; // <= 50,000 VND = 1 điểm
+            }
+            else if (totalAmount <= 100000)
+            {
+                return 2; // <= 100,000 VND = 2 điểm
+            }
+            else if (totalAmount < 300000)
+            {
+                return 5; // < 300,000 VND = 5 điểm
+            }
+            else if (totalAmount < 500000)
+            {
+                return 10; // < 500,000 VND = 10 điểm
+            }
+            else
+            {
+                return 20; // >= 500,000 VND = 20 điểm
+            }
         }
     }
 }

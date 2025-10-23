@@ -94,7 +94,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 txtClientName.ReadOnly = false;
                 txtEmail.ReadOnly = false;
                 txtPhoneNum.ReadOnly = false;
-                txtBonusPoint.Enabled = true;
+                txtBonusPoint.Enabled = false;
                 btnEdit.Enabled = false;
                 btnAdd.Text = "Lưu";
                 return;
@@ -106,7 +106,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 string name = txtClientName.Text.Trim();
                 string email = txtEmail.Text.Trim();
                 string phoneNumber = txtPhoneNum.Text.Trim();
-                int bonusPoint = (string.IsNullOrWhiteSpace(txtBonusPoint.Text)) ? 0 : int.Parse(txtBonusPoint.Text.Trim());
+                int bonusPoint = 0;
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
@@ -120,6 +120,29 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     return;
                 }
 
+                if (!int.TryParse(phoneNumber, out _))
+                {
+                    MessageBox.Show("Số điện thoại không được bao gồm chữ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (!(phoneNumber.StartsWith("0") || phoneNumber.StartsWith("+")))
+                {
+                    MessageBox.Show("Số điện thoại không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (int.TryParse(name, out _))
+                {
+                    MessageBox.Show("Tên khách hàng không được là số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var addr = new System.Net.Mail.MailAddress(email);
+                if (addr.Address != email)
+                {
+                    MessageBox.Show("Email không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 if (clientBLL.InsertClient(name, email, phoneNumber, bonusPoint))
                 {
                     MessageBox.Show("Thêm khách hàng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -197,6 +220,41 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 if (string.IsNullOrWhiteSpace(phoneNumber))
                 {
                     MessageBox.Show("Số điện thoại không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(phoneNumber, out _))
+                {
+                    MessageBox.Show("Số điện thoại không được bao gồm chữ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (!(phoneNumber.StartsWith("0") || phoneNumber.StartsWith("+")))
+                {
+                    MessageBox.Show("Số điện thoại không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (int.TryParse(name, out _))
+                {
+                    MessageBox.Show("Tên khách hàng không được là số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(txtBonusPoint.Text, out _))
+                {
+                    MessageBox.Show("Điểm thưởng không được là chữ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (bonusPoint < 0)
+                {
+                    MessageBox.Show("Điểm thưởng không được âm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var addr = new System.Net.Mail.MailAddress(email);
+                if (addr.Address != email)
+                {
+                    MessageBox.Show("Email không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 

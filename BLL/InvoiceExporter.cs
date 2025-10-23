@@ -28,7 +28,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             return invoiceDir;
         }
 
-        public static void ExportInvoiceToXml(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal, string employeeName)
+        public static void ExportInvoiceToXml(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal, string employeeName, string clientName)
         {
             InvoiceExporter exporter = new InvoiceExporter();
             string invoiceDir = exporter.GetInvoiceDirectory();
@@ -41,6 +41,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 writer.WriteStartDocument();
                 writer.WriteStartElement("HoaDon");
                 writer.WriteElementString("MaHoaDon", invoiceCode);
+                writer.WriteElementString("KhachHang", clientName);
                 writer.WriteElementString("Ban", table.Name);
                 writer.WriteElementString("Ngay", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
                 writer.WriteStartElement("DanhSachMon");
@@ -66,7 +67,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
             }
         }
 
-        public static void ExportInvoiceToPdf(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal, string employeeName, System.Drawing.Image qrImage)
+        public static void ExportInvoiceToPdf(Table table, List<DTO.Menu> billInfo, double total, double discount, double finalTotal, string employeeName, System.Drawing.Image qrImage, string clientName)
         {
             InvoiceExporter exporter = new InvoiceExporter();
             string invoiceDir = exporter.GetInvoiceDirectory();
@@ -93,6 +94,7 @@ namespace QuanLyCuaHangDoAnNhanh.BLL
                 _invoiceCode.Alignment = Element.ALIGN_CENTER;
                 doc.Add(_invoiceCode);
 
+                doc.Add(new Paragraph($"Khách hàng: {clientName}", fontNormal));
                 doc.Add(new Paragraph($"Bàn: {table.Name}", fontNormal));
                 doc.Add(new Paragraph($"Ngày: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
                 doc.Add(new Paragraph($"Nhân viên: {employeeName}", fontNormal));
