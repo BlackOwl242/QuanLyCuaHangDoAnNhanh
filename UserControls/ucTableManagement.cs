@@ -16,6 +16,7 @@ using System.Text.Json.Serialization;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace QuanLyCuaHangDoAnNhanh.UserControls
 {
@@ -223,20 +224,25 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 MessageBox.Show("Vui lòng tìm kiếm và chọn khách hàng trước khi thanh toán để tích điểm!");
                 return;
             }
-            string clientName = txtClientName.Text.Trim(); 
+            string clientName = txtClientName.Text.Trim();
 
             Table table = lsvBill.Tag as Table;
             int idBill = tableBLL.GetUncheckBillIdByTable(table.ID);
             int discount;
-            double totalPrice = double.Parse(txtTotalPrice.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("vi-VN"));
+            double totalPrice;
             double finalPrice;
+
+            // Lấy tổng tiền gốc từ hóa đơn, không lấy từ txtTotalPrice (vì đã bị giảm)
+            var billInfo = tableBLL.GetMenuByTable(table.ID);
+            totalPrice = billInfo.Sum(item => item.TotalPrice);
 
             var (image, dataResult) = tableBLL.GenerateQrImage(table, totalPrice);
 
             if (isDiscountApplied)
             {
                 discount = appliedDiscount;
-                finalPrice = totalPrice;
+                finalPrice = totalPrice - (totalPrice * discount / 100);
+                txtTotalPrice.Text = finalPrice.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
             }
             else
             {
@@ -251,17 +257,13 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                     string.Format("Bạn có chắc muốn thanh toán & in hóa đơn cho bàn {0}?", table.Name),
                     "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    // Lấy thông tin bàn, tổng tiền, sinh qr
-                    double amount = finalPrice; // tổng tiền
+                    double amount = finalPrice;
                     string description = $"BAN {table.Name} {DateTime.Now:yyyyMMddHHmmss}";
 
-                    // Hiển thị form QR
                     using (var frm = new fPaymentQR(table.Name, amount, image))
                     {
-                        // Tạo QR code từ dữ liệu
                         if (frm.ShowDialog() == DialogResult.OK && frm.PaymentConfirmed)
                         {
-                            var billInfo = tableBLL.GetMenuByTable(table.ID);
                             // Sau khi xác nhận đã thanh toán, in hóa đơn
                             InvoiceExporter.ExportInvoiceToPdf(table, billInfo, totalPrice, discount, finalPrice, employeeName, image, clientName);
                             InvoiceExporter.ExportInvoiceToXml(table, billInfo, totalPrice, discount, finalPrice, employeeName, clientName);
@@ -301,7 +303,6 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                             isDiscountApplied = false;
                             appliedDiscount = 0;
 
-                            // Clear thông tin khách hàng sau khi thanh toán
                             txtSearch.Text = "";
                             txtClientName.Text = "";
                         }
@@ -313,6 +314,7 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
                 }
             }
         }
+
 
         private void btnSwitchTable_Click(object sender, EventArgs e)
         {
@@ -375,5 +377,53 @@ namespace QuanLyCuaHangDoAnNhanh.UserControls
         }
         #endregion
 
+        private void btnConvert_Click(object sender, EventArgs e)
+        {
+            string phoneNumber = txtSearch.Text.Trim();
+            var clientBLL = new ClientBLL();
+            Client client;
+            if (!clientBLL.GetClientByPhoneNumber(phoneNumber, out client))
+            {
+                MessageBox.Show("Không tìm thấy khách hàng với số điện thoại đã nhập.");
+                return;
+            }
+            int pointsToConvert = (int)nmPoint.Value;
+            if (pointsToConvert <= 0)
+            {
+                MessageBox.Show("Vui lòng nhập số điểm hợp lệ để đổi.");
+                return;
+            }
+            if (pointsToConvert > client.BonusPoint)
+            {
+                MessageBox.Show("Số điểm đổi vượt quá điểm hiện có của khách hàng.");
+                return;
+            }
+            // Điểm đổi không được vượt quá tiền của hoá đơn
+            double currentTotalValue = double.Parse(txtTotalPrice.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("vi-VN"));
+            if (pointsToConvert * 1000 > currentTotalValue)
+            {
+                MessageBox.Show("Số điểm đổi vượt quá tổng tiền hiện có của hóa đơn.");
+                return;
+            }
+
+            // Tính số tiền được giảm
+            int discountAmount = pointsToConvert * 1000;
+            // Cập nhật điểm thưởng của khách hàng
+            if (clientBLL.AddBonusPoint(client.ID, -pointsToConvert))
+            {
+                // Cập nhật tổng tiền hiển thị
+                double newTotal = currentTotalValue - discountAmount;
+                if (newTotal < 0) newTotal = 0;
+                txtTotalPrice.Text = newTotal.ToString("c", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
+                // Đánh dấu đã áp dụng giảm giá
+                isDiscountApplied = true;
+                appliedDiscount = (int)((discountAmount * 100) / currentTotalValue); // Tính % giảm dựa trên số tiền ban đầu
+                MessageBox.Show($"Đã đổi {pointsToConvert} điểm thành {discountAmount.ToString("c", CultureInfo.GetCultureInfo("vi-VN"))} giảm giá!");
+            }
+            else
+            {
+                MessageBox.Show("Không thể cập nhật điểm thưởng cho khách hàng.");
+            }
+        }
     }
 }

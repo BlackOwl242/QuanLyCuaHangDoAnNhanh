@@ -42,6 +42,10 @@
             this.cbFoodAndDrinks = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.pnlCash = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtClientName = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblTotalMoney = new System.Windows.Forms.Label();
             this.lblDiscount = new System.Windows.Forms.Label();
             this.txtTotalPrice = new System.Windows.Forms.TextBox();
@@ -51,10 +55,9 @@
             this.btnPay = new System.Windows.Forms.Button();
             this.pnlTable = new System.Windows.Forms.Panel();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.txtClientName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnConvert = new System.Windows.Forms.Button();
+            this.nmPoint = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.pnlContent.SuspendLayout();
             this.pnlBill.SuspendLayout();
             this.pnlOrder.SuspendLayout();
@@ -62,6 +65,7 @@
             this.pnlCash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).BeginInit();
             this.pnlTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPoint)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlContent
@@ -193,6 +197,9 @@
             // 
             // pnlCash
             // 
+            this.pnlCash.Controls.Add(this.label2);
+            this.pnlCash.Controls.Add(this.nmPoint);
+            this.pnlCash.Controls.Add(this.btnConvert);
             this.pnlCash.Controls.Add(this.label1);
             this.pnlCash.Controls.Add(this.txtClientName);
             this.pnlCash.Controls.Add(this.btnSearch);
@@ -209,6 +216,51 @@
             this.pnlCash.Name = "pnlCash";
             this.pnlCash.Size = new System.Drawing.Size(510, 189);
             this.pnlCash.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(13, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 25);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Khách hàng:";
+            // 
+            // txtClientName
+            // 
+            this.txtClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtClientName.Enabled = false;
+            this.txtClientName.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtClientName.Location = new System.Drawing.Point(136, 53);
+            this.txtClientName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtClientName.Name = "txtClientName";
+            this.txtClientName.Size = new System.Drawing.Size(225, 39);
+            this.txtClientName.TabIndex = 14;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.Location = new System.Drawing.Point(16, 5);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(46, 39);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtSearch.Location = new System.Drawing.Point(73, 5);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(288, 39);
+            this.txtSearch.TabIndex = 12;
             // 
             // lblTotalMoney
             // 
@@ -310,50 +362,45 @@
             this.flpTable.Size = new System.Drawing.Size(514, 622);
             this.flpTable.TabIndex = 0;
             // 
-            // btnSearch
+            // btnConvert
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(16, 5);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(114, 39);
-            this.btnSearch.TabIndex = 13;
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConvert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(92)))), ((int)(((byte)(199)))));
+            this.btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConvert.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnConvert.ForeColor = System.Drawing.Color.White;
+            this.btnConvert.Location = new System.Drawing.Point(372, 6);
+            this.btnConvert.Name = "btnConvert";
+            this.btnConvert.Size = new System.Drawing.Size(66, 38);
+            this.btnConvert.TabIndex = 4;
+            this.btnConvert.Text = "Đổi";
+            this.btnConvert.UseVisualStyleBackColor = false;
+            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
             // 
-            // txtSearch
+            // nmPoint
             // 
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtSearch.Location = new System.Drawing.Point(155, 5);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(339, 39);
-            this.txtSearch.TabIndex = 12;
+            this.nmPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nmPoint.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold);
+            this.nmPoint.Location = new System.Drawing.Point(444, 8);
+            this.nmPoint.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nmPoint.Name = "nmPoint";
+            this.nmPoint.Size = new System.Drawing.Size(50, 34);
+            this.nmPoint.TabIndex = 16;
+            this.nmPoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtClientName
+            // label2
             // 
-            this.txtClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtClientName.Enabled = false;
-            this.txtClientName.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtClientName.Location = new System.Drawing.Point(155, 53);
-            this.txtClientName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtClientName.Name = "txtClientName";
-            this.txtClientName.Size = new System.Drawing.Size(339, 39);
-            this.txtClientName.TabIndex = 14;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 25);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Khách hàng:";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(376, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 19);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "(1 điểm = 1000đ)";
             // 
             // ucTableManagement
             // 
@@ -373,6 +420,7 @@
             this.pnlCash.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).EndInit();
             this.pnlTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nmPoint)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -405,5 +453,8 @@
         private System.Windows.Forms.TextBox txtClientName;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown nmPoint;
+        private System.Windows.Forms.Button btnConvert;
     }
 }
