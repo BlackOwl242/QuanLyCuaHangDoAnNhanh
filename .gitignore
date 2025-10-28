@@ -364,6 +364,7 @@ FodyWeavers.xsd
 App.config
 Properties/Settings.Designer.cs
 Properties/Settings.settings
+credentials.json
 
 /Images/Food And Drinks
 *.config
