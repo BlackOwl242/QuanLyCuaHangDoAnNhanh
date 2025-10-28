@@ -142,6 +142,10 @@ namespace QuanLyCuaHangDoAnNhanh
         {
             OpenChildUserControl(new ucClient(), "Quản lý khách hàng");
         }
+        private void btnEvent_Click(object sender, EventArgs e)
+        {
+            OpenChildUserControl(new ucEvent(), "Sự kiện");
+        }
 
         private void fMain_FormClosing(object sender, FormClosingEventArgs e)
         {

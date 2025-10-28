@@ -40,31 +40,34 @@
             this.pnlTableManagement = new System.Windows.Forms.Panel();
             this.btnTableManagement = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.pnlClientManagement = new System.Windows.Forms.Panel();
-            this.btnClientManagement = new System.Windows.Forms.Button();
-            this.pnlRevenue = new System.Windows.Forms.Panel();
-            this.btnRevenue = new System.Windows.Forms.Button();
+            this.pnlFoodAndDrinks = new System.Windows.Forms.Panel();
+            this.btnFoodAndDninks = new System.Windows.Forms.Button();
+            this.pnlEvent = new System.Windows.Forms.Panel();
+            this.btnEvent = new System.Windows.Forms.Button();
             this.pnlAccountManagement = new System.Windows.Forms.Panel();
             this.btnAccountManager = new System.Windows.Forms.Button();
             this.pnlCategory = new System.Windows.Forms.Panel();
             this.btnCategory = new System.Windows.Forms.Button();
+            this.pnlClientManagement = new System.Windows.Forms.Panel();
+            this.btnClientManagement = new System.Windows.Forms.Button();
+            this.pnlRevenue = new System.Windows.Forms.Panel();
+            this.btnRevenue = new System.Windows.Forms.Button();
             this.pbSetting = new System.Windows.Forms.PictureBox();
             this.pnlTable = new System.Windows.Forms.Panel();
             this.btnTable = new System.Windows.Forms.Button();
-            this.pnlFoodAndDrinks = new System.Windows.Forms.Panel();
-            this.btnFoodAndDninks = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.pnlTopMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).BeginInit();
             this.pnlTableManagement.SuspendLayout();
             this.pnlMenu.SuspendLayout();
-            this.pnlClientManagement.SuspendLayout();
-            this.pnlRevenue.SuspendLayout();
+            this.pnlFoodAndDrinks.SuspendLayout();
+            this.pnlEvent.SuspendLayout();
             this.pnlAccountManagement.SuspendLayout();
             this.pnlCategory.SuspendLayout();
+            this.pnlClientManagement.SuspendLayout();
+            this.pnlRevenue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).BeginInit();
             this.pnlTable.SuspendLayout();
-            this.pnlFoodAndDrinks.SuspendLayout();
             this.SuspendLayout();
             // 
             // timerMenu
@@ -147,7 +150,7 @@
             // 
             this.pnlTableManagement.BackColor = System.Drawing.Color.Transparent;
             this.pnlTableManagement.Controls.Add(this.btnTableManagement);
-            this.pnlTableManagement.Location = new System.Drawing.Point(1, 0);
+            this.pnlTableManagement.Location = new System.Drawing.Point(0, 0);
             this.pnlTableManagement.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTableManagement.Name = "pnlTableManagement";
             this.pnlTableManagement.Size = new System.Drawing.Size(239, 73);
@@ -175,83 +178,85 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.pnlMenu.Controls.Add(this.pnlFoodAndDrinks);
+            this.pnlMenu.Controls.Add(this.pnlEvent);
+            this.pnlMenu.Controls.Add(this.pnlAccountManagement);
+            this.pnlMenu.Controls.Add(this.pnlCategory);
+            this.pnlMenu.Controls.Add(this.pnlTableManagement);
             this.pnlMenu.Controls.Add(this.pnlClientManagement);
             this.pnlMenu.Controls.Add(this.pnlRevenue);
-            this.pnlMenu.Controls.Add(this.pnlAccountManagement);
-            this.pnlMenu.Controls.Add(this.pnlTableManagement);
-            this.pnlMenu.Controls.Add(this.pnlCategory);
             this.pnlMenu.Controls.Add(this.pbSetting);
             this.pnlMenu.Controls.Add(this.pnlTable);
-            this.pnlMenu.Controls.Add(this.pnlFoodAndDrinks);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMenu.Location = new System.Drawing.Point(0, 74);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(240, 654);
             this.pnlMenu.TabIndex = 0;
             // 
-            // pnlClientManagement
+            // pnlFoodAndDrinks
             // 
-            this.pnlClientManagement.BackColor = System.Drawing.Color.Transparent;
-            this.pnlClientManagement.Controls.Add(this.btnClientManagement);
-            this.pnlClientManagement.Location = new System.Drawing.Point(1, 441);
-            this.pnlClientManagement.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlClientManagement.Name = "pnlClientManagement";
-            this.pnlClientManagement.Size = new System.Drawing.Size(239, 73);
-            this.pnlClientManagement.TabIndex = 3;
+            this.pnlFoodAndDrinks.BackColor = System.Drawing.Color.Transparent;
+            this.pnlFoodAndDrinks.Controls.Add(this.btnFoodAndDninks);
+            this.pnlFoodAndDrinks.Location = new System.Drawing.Point(0, 433);
+            this.pnlFoodAndDrinks.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlFoodAndDrinks.Name = "pnlFoodAndDrinks";
+            this.pnlFoodAndDrinks.Size = new System.Drawing.Size(239, 73);
+            this.pnlFoodAndDrinks.TabIndex = 2;
             // 
-            // btnClientManagement
+            // btnFoodAndDninks
             // 
-            this.btnClientManagement.BackColor = System.Drawing.Color.Transparent;
-            this.btnClientManagement.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnClientManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnClientManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientManagement.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnClientManagement.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Account_;
-            this.btnClientManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClientManagement.Location = new System.Drawing.Point(-10, -12);
-            this.btnClientManagement.Name = "btnClientManagement";
-            this.btnClientManagement.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.btnClientManagement.Size = new System.Drawing.Size(258, 93);
-            this.btnClientManagement.TabIndex = 1;
-            this.btnClientManagement.Text = "          Quản lý \r\n          khách hàng";
-            this.btnClientManagement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClientManagement.UseMnemonic = false;
-            this.btnClientManagement.UseVisualStyleBackColor = false;
-            this.btnClientManagement.Click += new System.EventHandler(this.btnClientManagement_Click);
+            this.btnFoodAndDninks.BackColor = System.Drawing.Color.Transparent;
+            this.btnFoodAndDninks.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnFoodAndDninks.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnFoodAndDninks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFoodAndDninks.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.btnFoodAndDninks.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Food;
+            this.btnFoodAndDninks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFoodAndDninks.Location = new System.Drawing.Point(-10, -10);
+            this.btnFoodAndDninks.Name = "btnFoodAndDninks";
+            this.btnFoodAndDninks.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.btnFoodAndDninks.Size = new System.Drawing.Size(258, 93);
+            this.btnFoodAndDninks.TabIndex = 0;
+            this.btnFoodAndDninks.Text = "          Đồ ăn và uống";
+            this.btnFoodAndDninks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFoodAndDninks.UseVisualStyleBackColor = false;
+            this.btnFoodAndDninks.Click += new System.EventHandler(this.btnFoodAndDninks_Click);
             // 
-            // pnlRevenue
+            // pnlEvent
             // 
-            this.pnlRevenue.BackColor = System.Drawing.Color.Transparent;
-            this.pnlRevenue.Controls.Add(this.btnRevenue);
-            this.pnlRevenue.Location = new System.Drawing.Point(1, 219);
-            this.pnlRevenue.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlRevenue.Name = "pnlRevenue";
-            this.pnlRevenue.Size = new System.Drawing.Size(239, 73);
-            this.pnlRevenue.TabIndex = 2;
+            this.pnlEvent.BackColor = System.Drawing.Color.Transparent;
+            this.pnlEvent.Controls.Add(this.btnEvent);
+            this.pnlEvent.Location = new System.Drawing.Point(1, 221);
+            this.pnlEvent.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlEvent.Name = "pnlEvent";
+            this.pnlEvent.Size = new System.Drawing.Size(239, 73);
+            this.pnlEvent.TabIndex = 14;
             // 
-            // btnRevenue
+            // btnEvent
             // 
-            this.btnRevenue.BackColor = System.Drawing.Color.Transparent;
-            this.btnRevenue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnRevenue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRevenue.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnRevenue.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Revenue;
-            this.btnRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRevenue.Location = new System.Drawing.Point(-10, -10);
-            this.btnRevenue.Name = "btnRevenue";
-            this.btnRevenue.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.btnRevenue.Size = new System.Drawing.Size(258, 93);
-            this.btnRevenue.TabIndex = 0;
-            this.btnRevenue.Text = "  Doanh thu";
-            this.btnRevenue.UseVisualStyleBackColor = false;
-            this.btnRevenue.Click += new System.EventHandler(this.btnRevenue_Click);
+            this.btnEvent.BackColor = System.Drawing.Color.Transparent;
+            this.btnEvent.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnEvent.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEvent.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.btnEvent.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Event;
+            this.btnEvent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEvent.Location = new System.Drawing.Point(-10, -10);
+            this.btnEvent.Name = "btnEvent";
+            this.btnEvent.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.btnEvent.Size = new System.Drawing.Size(258, 93);
+            this.btnEvent.TabIndex = 0;
+            this.btnEvent.Text = "          Sự kiện";
+            this.btnEvent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEvent.UseMnemonic = false;
+            this.btnEvent.UseVisualStyleBackColor = false;
+            this.btnEvent.Click += new System.EventHandler(this.btnEvent_Click);
             // 
             // pnlAccountManagement
             // 
             this.pnlAccountManagement.BackColor = System.Drawing.Color.Transparent;
             this.pnlAccountManagement.Controls.Add(this.btnAccountManager);
-            this.pnlAccountManagement.Location = new System.Drawing.Point(1, 365);
+            this.pnlAccountManagement.Location = new System.Drawing.Point(1, 506);
             this.pnlAccountManagement.Margin = new System.Windows.Forms.Padding(0);
             this.pnlAccountManagement.Name = "pnlAccountManagement";
             this.pnlAccountManagement.Size = new System.Drawing.Size(239, 73);
@@ -281,7 +286,7 @@
             // 
             this.pnlCategory.BackColor = System.Drawing.Color.Transparent;
             this.pnlCategory.Controls.Add(this.btnCategory);
-            this.pnlCategory.Location = new System.Drawing.Point(1, 292);
+            this.pnlCategory.Location = new System.Drawing.Point(1, 365);
             this.pnlCategory.Margin = new System.Windows.Forms.Padding(0);
             this.pnlCategory.Name = "pnlCategory";
             this.pnlCategory.Size = new System.Drawing.Size(239, 73);
@@ -304,6 +309,64 @@
             this.btnCategory.Text = "Danh mục";
             this.btnCategory.UseVisualStyleBackColor = false;
             this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
+            // 
+            // pnlClientManagement
+            // 
+            this.pnlClientManagement.BackColor = System.Drawing.Color.Transparent;
+            this.pnlClientManagement.Controls.Add(this.btnClientManagement);
+            this.pnlClientManagement.Location = new System.Drawing.Point(1, 146);
+            this.pnlClientManagement.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlClientManagement.Name = "pnlClientManagement";
+            this.pnlClientManagement.Size = new System.Drawing.Size(239, 73);
+            this.pnlClientManagement.TabIndex = 3;
+            // 
+            // btnClientManagement
+            // 
+            this.btnClientManagement.BackColor = System.Drawing.Color.Transparent;
+            this.btnClientManagement.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnClientManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnClientManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClientManagement.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.btnClientManagement.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Client1;
+            this.btnClientManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClientManagement.Location = new System.Drawing.Point(-10, -12);
+            this.btnClientManagement.Name = "btnClientManagement";
+            this.btnClientManagement.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.btnClientManagement.Size = new System.Drawing.Size(258, 93);
+            this.btnClientManagement.TabIndex = 1;
+            this.btnClientManagement.Text = "          Quản lý \r\n          khách hàng";
+            this.btnClientManagement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClientManagement.UseMnemonic = false;
+            this.btnClientManagement.UseVisualStyleBackColor = false;
+            this.btnClientManagement.Click += new System.EventHandler(this.btnClientManagement_Click);
+            // 
+            // pnlRevenue
+            // 
+            this.pnlRevenue.BackColor = System.Drawing.Color.Transparent;
+            this.pnlRevenue.Controls.Add(this.btnRevenue);
+            this.pnlRevenue.Location = new System.Drawing.Point(1, 292);
+            this.pnlRevenue.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlRevenue.Name = "pnlRevenue";
+            this.pnlRevenue.Size = new System.Drawing.Size(239, 73);
+            this.pnlRevenue.TabIndex = 2;
+            // 
+            // btnRevenue
+            // 
+            this.btnRevenue.BackColor = System.Drawing.Color.Transparent;
+            this.btnRevenue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnRevenue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
+            this.btnRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRevenue.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.btnRevenue.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Revenue;
+            this.btnRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRevenue.Location = new System.Drawing.Point(-10, -10);
+            this.btnRevenue.Name = "btnRevenue";
+            this.btnRevenue.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.btnRevenue.Size = new System.Drawing.Size(258, 93);
+            this.btnRevenue.TabIndex = 0;
+            this.btnRevenue.Text = "  Doanh thu";
+            this.btnRevenue.UseVisualStyleBackColor = false;
+            this.btnRevenue.Click += new System.EventHandler(this.btnRevenue_Click);
             // 
             // pbSetting
             // 
@@ -347,35 +410,6 @@
             this.btnTable.UseVisualStyleBackColor = false;
             this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
             // 
-            // pnlFoodAndDrinks
-            // 
-            this.pnlFoodAndDrinks.BackColor = System.Drawing.Color.Transparent;
-            this.pnlFoodAndDrinks.Controls.Add(this.btnFoodAndDninks);
-            this.pnlFoodAndDrinks.Location = new System.Drawing.Point(1, 146);
-            this.pnlFoodAndDrinks.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlFoodAndDrinks.Name = "pnlFoodAndDrinks";
-            this.pnlFoodAndDrinks.Size = new System.Drawing.Size(239, 73);
-            this.pnlFoodAndDrinks.TabIndex = 2;
-            // 
-            // btnFoodAndDninks
-            // 
-            this.btnFoodAndDninks.BackColor = System.Drawing.Color.Transparent;
-            this.btnFoodAndDninks.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnFoodAndDninks.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(145)))), ((int)(((byte)(83)))));
-            this.btnFoodAndDninks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFoodAndDninks.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.btnFoodAndDninks.Image = global::QuanLyCuaHangDoAnNhanh.Properties.Resources.Food;
-            this.btnFoodAndDninks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFoodAndDninks.Location = new System.Drawing.Point(-10, -10);
-            this.btnFoodAndDninks.Name = "btnFoodAndDninks";
-            this.btnFoodAndDninks.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.btnFoodAndDninks.Size = new System.Drawing.Size(258, 93);
-            this.btnFoodAndDninks.TabIndex = 0;
-            this.btnFoodAndDninks.Text = "          Đồ ăn và uống";
-            this.btnFoodAndDninks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFoodAndDninks.UseVisualStyleBackColor = false;
-            this.btnFoodAndDninks.Click += new System.EventHandler(this.btnFoodAndDninks_Click);
-            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,13 +434,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbToggleMenu)).EndInit();
             this.pnlTableManagement.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
-            this.pnlClientManagement.ResumeLayout(false);
-            this.pnlRevenue.ResumeLayout(false);
+            this.pnlFoodAndDrinks.ResumeLayout(false);
+            this.pnlEvent.ResumeLayout(false);
             this.pnlAccountManagement.ResumeLayout(false);
             this.pnlCategory.ResumeLayout(false);
+            this.pnlClientManagement.ResumeLayout(false);
+            this.pnlRevenue.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbSetting)).EndInit();
             this.pnlTable.ResumeLayout(false);
-            this.pnlFoodAndDrinks.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -435,5 +470,7 @@
         private System.Windows.Forms.Label lblDisplayName;
         private System.Windows.Forms.Button btnClientManagement;
         private System.Windows.Forms.Panel pnlClientManagement;
+        private System.Windows.Forms.Panel pnlEvent;
+        private System.Windows.Forms.Button btnEvent;
     }
 }
