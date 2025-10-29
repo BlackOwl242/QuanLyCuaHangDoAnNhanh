@@ -56,7 +56,6 @@ Lưu ý quan trọng:
 **5. LIÊN HỆ HỖ TRỢ**
 
 Nếu bạn có bất kỳ thắc mắc hoặc gặp vấn đề trong quá trình sử dụng, vui lòng liên hệ:
-SĐT: 0961391320
 EMAIL: lequochuy@dev.adedmusic.com
 
 ---
